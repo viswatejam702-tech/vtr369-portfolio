@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   Mic,
   MicOff,
@@ -19,33 +19,53 @@ import {
   ShieldCheck,
   Code2,
   GraduationCap,
-  Terminal,
-  Star,
-  GitFork,
   Volume2,
   VolumeX,
   Bot,
   X,
   ChevronRight,
-  Layers,
   Search,
-  CheckCircle2,
   ArrowUpRight,
   Zap,
+  Rocket,
+  Compass,
+  CheckCircle2,
+  Terminal,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import { triggerConfetti } from "@/lib/utils";
 
 // ==========================================
-// 1. CURATED FLAGSHIP STARTUPS & VENTURES
+// 1. CURATED FLAGSHIP AGENTIC PLATFORMS & PROJECTS
 // ==========================================
 const FLAGSHIP_PROJECTS = [
+  {
+    id: "vexaro-ai",
+    name: "Vexaro AI — Autonomous Agentic Platform",
+    repoName: "Vexaro-AI",
+    category: "Startups & AI",
+    badge: "FLAGSHIP PLATFORM · LAUNCHING VERY SOON",
+    badgeColor: "from-amber-400 via-yellow-300 to-amber-500",
+    isSpotlight: true,
+    description:
+      "Omni-sector autonomous multi-agent operating system designed to orchestrate specialized AI agents across every enterprise category: Legal, Outbound SDR, Clinical Triage, Financial Forecasting, and Code Engineering. Features zero-trust multi-tenancy and verifiable reasoning loops.",
+    language: "Full-Stack TypeScript / Python",
+    url: "https://github.com/viswatejam702-tech",
+    image:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    highlights: [
+      "Specialized Agents for Every Sector",
+      "Launching Very Soon",
+      "8-Layer Agent Architecture",
+      "Zero-Trust Multi-Tenancy",
+    ],
+  },
   {
     id: "nexus-v-ai",
     name: "Nexus V AI",
     repoName: "nexus-V-AI",
     category: "Startups & AI",
-    badge: "FLAGSHIP AI STARTUP",
+    badge: "AUTONOMOUS SWARM",
     description:
       "Next-generation autonomous multi-agent system designed to automate, optimize, and scale complex tasks across enterprise domains using TypeScript and adaptive AI architectures.",
     language: "TypeScript",
@@ -59,9 +79,9 @@ const FLAGSHIP_PROJECTS = [
     name: "ClauseGuard X",
     repoName: "Clause_gaurd_x_version",
     category: "Startups & AI",
-    badge: "LEGALTECH AI STARTUP",
+    badge: "LEGALTECH AI PLATFORM",
     description:
-      "AI-powered contract intelligence startup platform that analyzes legal documents, detects risky clauses, and provides actionable negotiation insights in real time.",
+      "AI-powered contract intelligence platform that analyzes legal documents, detects risky clauses, and provides actionable negotiation insights in real time.",
     language: "TypeScript",
     url: "https://github.com/viswatejam702-tech/Clause_gaurd_x_version",
     image:
@@ -73,7 +93,7 @@ const FLAGSHIP_PROJECTS = [
     name: "AI Voice Agent Pro",
     repoName: "AI-voice-agent-pro",
     category: "Startups & AI",
-    badge: "VOICE AI AUTOPILOT",
+    badge: "VOICE AI ENGINE",
     description:
       "Real-time conversational AI voice assistant and intelligent automation showcase built with Python and modern web interfaces for low-latency voice execution.",
     language: "Python",
@@ -116,13 +136,54 @@ const FLAGSHIP_PROJECTS = [
 // 2. CORE SKILLS SPECIFICATION
 // ==========================================
 const SKILLS = [
-  { name: "Autonomous AI Agents & LLM Architectures", percent: 96 },
+  { name: "Autonomous AI Agents & Multi-Agent Swarms", percent: 96 },
   { name: "Full-Stack TypeScript, React & Next.js", percent: 92 },
   { name: "Deep Learning, PyTorch & Computer Vision", percent: 90 },
-  { name: "Startup Product Engineering & VibeCoding", percent: 95 },
-  { name: "Machine Learning & Predictive Analytics (LSTM / GBDT)", percent: 93 },
+  { name: "Autonomous Systems Engineering & VibeCoding", percent: 95 },
+  { name: "Machine Learning & Predictive Systems (LSTM / GBDT)", percent: 93 },
   { name: "Quantum Computing & Mechanics Exploration", percent: 85 },
 ];
+
+// ==========================================
+// 3. MOTION VARIANTS FOR FLUID SCROLL TRANSITIONS
+// ==========================================
+const containerStagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const cardScrollFadeUp = {
+  hidden: { opacity: 0, y: 45, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 18,
+      mass: 0.7,
+    },
+  },
+};
+
+const headerFadeIn = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
 
 export default function VTR369Portfolio() {
   const [githubRepos, setGithubRepos] = useState<any[]>([]);
@@ -131,12 +192,36 @@ export default function VTR369Portfolio() {
   const [portraitSrc, setPortraitSrc] = useState(SITE_CONFIG.heroPortraitUrl);
   const [portraitAttempts, setPortraitAttempts] = useState(0);
 
+  // Scroll Progress Hooks for Page-Wide Choreography
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  // Hero Parallax Scroll Transforms
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const portraitY = useTransform(heroScroll, [0, 1], ["0%", "28%"]);
+  const portraitScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
+  const portraitOpacity = useTransform(heroScroll, [0, 0.75, 1], [0.85, 0.45, 0]);
+  const heroTextY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
+  const heroTextOpacity = useTransform(heroScroll, [0, 0.7, 1], [1, 0.5, 0]);
+
+  // Ambient Background Glowing Orbs that drift on scroll
+  const orb1Y = useTransform(scrollYProgress, [0, 1], ["0vh", "50vh"]);
+  const orb2Y = useTransform(scrollYProgress, [0, 1], ["0vh", "-40vh"]);
+
   // Autopilot State (Voice + Text)
   const [commandText, setCommandText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [autopilotStatus, setAutopilotStatus] = useState(
-    "Say or type: 'Show startups', 'Open Nexus V AI', 'Skills', or 'WhatsApp' (Cmd/Ctrl + K)"
+    "Say or type: 'Tell me about Vexaro', 'Show projects', 'Skills', or 'WhatsApp' (Cmd/Ctrl + K)"
   );
   const [swarmActive, setSwarmActive] = useState(true);
 
@@ -146,7 +231,7 @@ export default function VTR369Portfolio() {
   const [chatMessages, setChatMessages] = useState([
     {
       sender: "bot",
-      text: "Hello! I am Viswa's AI Concierge. Ask me about Nexus V AI, ClauseGuard X, Deep Learning architectures, or bridge directly to Viswa's WhatsApp!",
+      text: "Hello! I am Viswa's AI Concierge. Ask me about Vexaro AI (the autonomous agentic platform launching very soon), Nexus V AI, or connect directly with Viswa!",
     },
   ]);
 
@@ -181,7 +266,7 @@ export default function VTR369Portfolio() {
   }, []);
 
   // ==========================================
-  // 3. LIVE GITHUB API AUTO-FETCH
+  // 4. LIVE GITHUB API AUTO-FETCH
   // ==========================================
   useEffect(() => {
     fetch(
@@ -193,7 +278,7 @@ export default function VTR369Portfolio() {
           setGithubRepos(data.filter((r) => !r.fork));
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }, []);
 
   // Merge curated flagships + live repos from GitHub
@@ -209,9 +294,11 @@ export default function VTR369Portfolio() {
         repoName: r.name,
         category: "Live GitHub Feed",
         badge: r.language || "GITHUB REPO",
+        badgeColor: "from-zinc-500 to-zinc-400",
+        isSpotlight: false,
         description:
           r.description ||
-          "Production repository engineered by M. Viswa Teja Reddy on GitHub.",
+          "Autonomous repository engineered by M. Viswa Teja Reddy on GitHub.",
         language: r.language || "Code",
         stars: r.stargazers_count || 0,
         forks: r.forks_count || 0,
@@ -245,7 +332,7 @@ export default function VTR369Portfolio() {
   }, [allProjects, activeCategory, searchQuery]);
 
   // ==========================================
-  // 4. SPEECH SYNTHESIS & VOICE AUTOPILOT ENGINE
+  // 5. SPEECH SYNTHESIS & VOICE AUTOPILOT ENGINE
   // ==========================================
   const speakResponse = (text: string) => {
     setAutopilotStatus(text);
@@ -266,7 +353,14 @@ export default function VTR369Portfolio() {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
 
-    if (q.includes("nexus")) {
+    if (q.includes("vexaro") || q.includes("agentic") || q.includes("building")) {
+      scrollTo("projects");
+      setActiveCategory("Startups & AI");
+      speakResponse(
+        "Viswa is building Vexaro AI, an autonomous agentic platform featuring specialized agents for every category and industry sector, launching very soon!"
+      );
+      triggerConfetti();
+    } else if (q.includes("nexus")) {
       scrollTo("projects");
       setActiveCategory("Startups & AI");
       speakResponse("Opening Nexus V AI, Viswa's autonomous multi-agent platform.");
@@ -290,11 +384,11 @@ export default function VTR369Portfolio() {
       setActiveCategory("Deep Learning & ML");
       speakResponse("Opening Maritime Vessel Classification Deep Learning in PyTorch.");
       window.open("https://github.com/viswatejam702-tech/game-of-dl-in-ships", "_blank");
-    } else if (q.includes("startup") || q.includes("project") || q.includes("work")) {
+    } else if (q.includes("project") || q.includes("work") || q.includes("show")) {
       scrollTo("projects");
       setActiveCategory("Startups & AI");
       speakResponse(
-        `Showing Viswa's startups and AI architectures. Currently syncing ${allProjects.length} repositories.`
+        `Displaying Viswa's autonomous agentic systems and repositories. Currently syncing ${allProjects.length} projects.`
       );
     } else if (q.includes("github") || q.includes("repo") || q.includes("feed")) {
       scrollTo("projects");
@@ -303,11 +397,11 @@ export default function VTR369Portfolio() {
     } else if (q.includes("skill") || q.includes("about") || q.includes("education")) {
       scrollTo("about");
       speakResponse(
-        "Displaying Viswa's core engineering skills, research background, and startup metrics."
+        "Here are Viswa's core engineering skills as an AI Research Engineer, research background, and autonomous metrics."
       );
     } else if (q.includes("service") || q.includes("build") || q.includes("what i do")) {
       scrollTo("services");
-      speakResponse("Navigating to AI Engineering & Startup Ventures section.");
+      speakResponse("Navigating to AI Research Engineering & Autonomous Agentic Platforms.");
     } else if (q.includes("whatsapp")) {
       speakResponse("Opening official WhatsApp connection with Viswa Teja Reddy.");
       triggerConfetti();
@@ -318,7 +412,7 @@ export default function VTR369Portfolio() {
     } else if (q.includes("instagram") || q.includes("insta")) {
       speakResponse("Opening Viswa's official Instagram profile.");
       window.open(`https://instagram.com/${SITE_CONFIG.instagramHandle}`, "_blank");
-    } else if (q.includes("chat") || q.includes("contact") || q.includes("connect") || q.includes("hire")) {
+    } else if (q.includes("chat") || q.includes("contact") || q.includes("connect")) {
       scrollTo("contact");
       setChatOpen(true);
       speakResponse("Opening the live connect drawer so you can message Viswa directly.");
@@ -333,7 +427,7 @@ export default function VTR369Portfolio() {
       scrollTo("projects");
       setSearchQuery(rawInput);
       speakResponse(
-        `Searching for "${rawInput}". Filtered matching startups and GitHub repositories.`
+        `Searching for "${rawInput}". Filtered matching projects and GitHub repositories.`
       );
     }
   };
@@ -361,7 +455,7 @@ export default function VTR369Portfolio() {
 
     recognition.onstart = () => {
       setIsListening(true);
-      setAutopilotStatus("Listening... Speak a command (e.g. 'Show startups', 'Open ClauseGuard X', or 'WhatsApp')");
+      setAutopilotStatus("Listening... Speak a command (e.g. 'Tell me about Vexaro', 'Show projects', or 'WhatsApp')");
     };
 
     recognition.onresult = (event: any) => {
@@ -392,10 +486,12 @@ export default function VTR369Portfolio() {
     setTimeout(() => {
       const lower = userMsg.toLowerCase();
       let reply = `Thank you for reaching out! You can click "Bridge to WhatsApp" below to deliver your message "${userMsg}" directly to Viswa's phone!`;
-      if (lower.includes("hire") || lower.includes("role") || lower.includes("freelance")) {
-        reply = `Viswa is currently available for AI Architect roles, founding team collaborations, and high-impact freelance builds. Click "Bridge to WhatsApp" to start an immediate discussion!`;
+      if (lower.includes("vexaro") || lower.includes("agent")) {
+        reply = `Vexaro AI is Viswa's flagship autonomous agentic platform where every category and sector's agents are specialized (Legal, Sales SDR, Clinical Triage, Financial, Code). It is launching very soon!`;
+      } else if (lower.includes("hire") || lower.includes("role") || lower.includes("research")) {
+        reply = `Viswa is an AI Research Engineer focusing on autonomous agentic systems, multi-agent evaluation, and deep learning. Click "Bridge to WhatsApp" to discuss engineering collaborations!`;
       } else if (lower.includes("nexus")) {
-        reply = `Nexus V AI is Viswa's autonomous multi-agent platform for orchestrating cross-domain tasks with adaptive reasoning. Would you like me to open the repository?`;
+        reply = `Nexus V AI is Viswa's autonomous multi-agent platform for orchestrating cross-domain tasks with adaptive reasoning.`;
       } else if (lower.includes("clause")) {
         reply = `ClauseGuard X is an AI-powered legal contract risk analysis platform built with full-stack TypeScript and specialized NLP evaluators.`;
       }
@@ -404,7 +500,29 @@ export default function VTR369Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-[#08080a] text-zinc-100 selection:bg-amber-400 selection:text-black font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#08080a] text-zinc-100 selection:bg-amber-400 selection:text-black font-sans overflow-x-hidden">
+      {/* ========================================== */}
+      {/* 0. TOP SCROLL PROGRESS BAR (AWWWARDS GRADE) */}
+      {/* ========================================== */}
+      <motion.div
+        style={{ scaleX: smoothProgress }}
+        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 origin-left z-[100] shadow-[0_0_14px_rgba(245,158,11,0.85)]"
+      />
+
+      {/* ========================================== */}
+      {/* AMBIENT BACKGROUND GLOWING ORBS (SCROLL)   */}
+      {/* ========================================== */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+        <motion.div
+          style={{ y: orb1Y }}
+          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-amber-500/[0.06] blur-[140px]"
+        />
+        <motion.div
+          style={{ y: orb2Y }}
+          className="absolute top-1/2 -right-40 w-[550px] h-[550px] rounded-full bg-emerald-500/[0.04] blur-[150px]"
+        />
+      </div>
+
       {/* ========================================== */}
       {/* ANTIGRAVITY MULTI-AGENT SWARM CURSORS      */}
       {/* ========================================== */}
@@ -419,7 +537,7 @@ export default function VTR369Portfolio() {
               dur: 18,
             },
             {
-              name: "Agent-02 GitHub Sync",
+              name: "Agent-02 Vexaro Sync",
               color: "#10b981",
               x: ["82vw", "24vw", "68vw"],
               y: ["30vh", "75vh", "22vh"],
@@ -449,7 +567,7 @@ export default function VTR369Portfolio() {
               </svg>
               <span
                 style={{ backgroundColor: agent.color }}
-                className="px-2 py-0.5 rounded-full text-[10px] font-bold text-black shadow-lg tracking-wider"
+                className="px-2 py-0.5 rounded-full text-[10px] font-bold text-black shadow-lg tracking-wider font-mono"
               >
                 {agent.name}
               </span>
@@ -461,7 +579,7 @@ export default function VTR369Portfolio() {
       {/* ========================================== */}
       {/* STICKY GLASS HEADER                        */}
       {/* ========================================== */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#08080a]/80 border-b border-white/10">
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-2xl bg-[#08080a]/80 border-b border-white/10 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#home" className="flex items-center gap-2.5 font-bold tracking-tight text-lg group">
             <span className="w-2.5 h-2.5 rounded-full bg-amber-400 group-hover:scale-125 transition duration-300 animate-pulse" />
@@ -472,19 +590,19 @@ export default function VTR369Portfolio() {
           </a>
 
           <nav className="hidden md:flex items-center gap-7 text-sm text-zinc-300 font-medium">
-            <a href="#home" className="hover:text-amber-400 transition">
+            <a href="#home" className="hover:text-amber-400 transition duration-200">
               Home
             </a>
-            <a href="#about" className="hover:text-amber-400 transition">
+            <a href="#about" className="hover:text-amber-400 transition duration-200">
               About &amp; Skills
             </a>
-            <a href="#services" className="hover:text-amber-400 transition">
+            <a href="#services" className="hover:text-amber-400 transition duration-200">
               What I Build
             </a>
-            <a href="#projects" className="hover:text-amber-400 transition">
-              Startups &amp; GitHub
+            <a href="#projects" className="hover:text-amber-400 transition duration-200">
+              Vexaro &amp; Repos
             </a>
-            <a href="#contact" className="hover:text-amber-400 transition">
+            <a href="#contact" className="hover:text-amber-400 transition duration-200">
               Connect
             </a>
           </nav>
@@ -492,7 +610,7 @@ export default function VTR369Portfolio() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSwarmActive(!swarmActive)}
-              className="text-xs px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 hover:border-amber-400/50 transition hidden sm:flex items-center gap-1.5"
+              className="text-xs px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 hover:border-amber-400/50 transition hidden sm:flex items-center gap-1.5 font-mono"
               title="Toggle Multi-Agent Swarm Overlay"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -503,7 +621,7 @@ export default function VTR369Portfolio() {
                 triggerConfetti();
                 setChatOpen(true);
               }}
-              className="text-xs font-semibold px-4 py-2 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+              className="text-xs font-semibold px-4 py-2 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition shadow-[0_0_20px_rgba(245,158,11,0.3)] font-medium"
             >
               Let&apos;s Talk
             </button>
@@ -512,20 +630,19 @@ export default function VTR369Portfolio() {
       </header>
 
       {/* ========================================== */}
-      {/* 1. HERO SECTION (DARK EDITORIAL LUXURY)    */}
+      {/* 1. HERO SECTION (CINEMATIC SCROLL PARALLAX)*/}
       {/* ========================================== */}
       <section
+        ref={heroRef}
         id="home"
         className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
       >
-        {/* Cinematic Studio Portrait Background with Radial Composite Mask */}
+        {/* Parallax Studio Portrait Background */}
         <motion.div
-          initial={{ scale: 1.08, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.78 }}
-          transition={{ duration: 1.6, ease: "easeOut" }}
-          className="absolute inset-0 flex justify-center items-center pointer-events-none"
+          style={{ y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
+          className="absolute inset-0 flex justify-center items-center pointer-events-none z-0"
         >
-          <div className="relative w-full max-w-3xl h-[85vh]">
+          <div className="relative w-full max-w-3xl h-[88vh]">
             <img
               src={portraitSrc}
               onError={handlePortraitError}
@@ -542,169 +659,186 @@ export default function VTR369Portfolio() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/65 to-[#08080a]/40" />
         </motion.div>
 
-        {/* Foreground Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center mt-20">
+        {/* Foreground Hero Typography with Smooth Parallax Drift */}
+        <motion.div
+          style={{ y: heroTextY, opacity: heroTextOpacity }}
+          className="relative z-10 max-w-4xl mx-auto px-6 text-center mt-20"
+        >
+          {/* Mission / Launching Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em] mb-4"
+            initial={{ opacity: 0, y: 15, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/40 text-amber-400 text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-[0.22em] mb-5 shadow-[0_0_20px_rgba(245,158,11,0.25)]"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            HELLO, I AM
+            <span>BUILDING VEXARO AI — LAUNCHING VERY SOON</span>
           </motion.div>
 
+          {/* Monumental Name */}
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white mb-4 drop-shadow-2xl"
           >
             {SITE_CONFIG.name}
           </motion.h1>
 
+          {/* AI Research Engineer Headline */}
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-xl sm:text-2xl md:text-3xl font-light text-zinc-200 max-w-3xl mx-auto mb-6 leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="text-xl sm:text-2xl md:text-3xl font-light text-zinc-200 max-w-3xl mx-auto mb-4 leading-relaxed"
           >
-            {SITE_CONFIG.role}
+            <span className="text-amber-400 font-semibold">{SITE_CONFIG.role}</span>
+            <span className="text-zinc-500 font-normal"> · </span>
+            <span className="text-zinc-300">Autonomous Agentic Platforms &amp; Deep Tech</span>
           </motion.h2>
 
+          {/* Tagline / Mission */}
           <motion.p
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10"
           >
-            {SITE_CONFIG.tagline}
+            Engineering <strong>Vexaro AI</strong> — an omni-sector autonomous agentic platform
+            with specialized agents across every category and sector. Pioneering multi-agent systems,
+            deep learning evaluation harnesses, and quantum-inspired architectures.
           </motion.p>
 
+          {/* Dual CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.45 }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
             <a
               href="#projects"
               onClick={() => triggerConfetti()}
-              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.4)] flex items-center gap-2"
+              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.45)] flex items-center gap-2 group"
             >
-              <span>Explore Startups &amp; Work</span>
-              <ChevronRight className="w-4 h-4" />
+              <span>Explore Vexaro AI &amp; Projects</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </a>
             <a
               href="#contact"
               className="px-8 py-4 rounded-full border border-white/25 bg-white/5 hover:bg-white/15 backdrop-blur-md text-white font-semibold text-sm transition flex items-center gap-2"
             >
-              <span>Connect &amp; Chat Now</span>
+              <span>Connect &amp; Collaborate</span>
               <ArrowUpRight className="w-4 h-4 text-amber-400" />
             </a>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================== */}
-      {/* 2. ABOUT, EDUCATION & ANIMATED SKILL BARS  */}
+      {/* 2. ABOUT, RESEARCH & ANIMATED SKILL BARS   */}
       {/* ========================================== */}
-      <section id="about" className="py-24 max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column Narrative & 2x2 Stat Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="lg:col-span-6 space-y-6"
-          >
-            <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold">
+      <section id="about" className="py-28 max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          variants={containerStagger}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
+        >
+          {/* Left Column Narrative & Stat Grid */}
+          <motion.div variants={cardScrollFadeUp} className="lg:col-span-6 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em]">
+              <Terminal className="w-3.5 h-3.5" />
               WHO I AM
-            </p>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
-              Creative &amp; Autonomous AI Builder
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+              AI Research Engineer &amp; Agentic System Architect
             </h2>
+
             <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-              I engineer intelligent systems, autonomous multi-agent platforms, and high-accuracy
-              machine learning pipelines. My focus is turning cutting-edge research in AI, deep
-              learning, and quantum computing into real-world startups that scale.
+              I specialize in autonomous multi-agent systems, deep learning reliability, and
+              high-precision predictive modeling. My research sits at the intersection of agentic
+              reasoning loops, claim-level evidence verification, and scalable neural architectures.
             </p>
+
             <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-              Whether architecting legal intelligence platforms like <strong>ClauseGuard X</strong>{" "}
-              or autonomous agent swarms like <strong>Nexus V AI</strong>, I combine rapid VibeCoding
-              execution with production-grade full-stack engineering from Hyderabad, India.
+              Currently engineering <strong>Vexaro AI</strong> — an autonomous agentic platform
+              deploying category-specialized agents across every major industry sector. Combining
+              deep research rigor with rapid VibeCoding execution from Hyderabad, India.
             </p>
 
             {/* 2x2 Stat & Availability Grid */}
-            <div className="grid grid-cols-2 gap-6 pt-6 border-t border-white/10">
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Experience &amp; Output</p>
+            <motion.div
+              variants={containerStagger}
+              className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10"
+            >
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
+                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Experience &amp; Output</p>
                 <p className="text-lg font-bold text-white mt-1">
                   {Math.max(33, allProjects.length)}+ Public Repos
                 </p>
               </div>
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Flagship Ventures</p>
-                <p className="text-lg font-bold text-white mt-1">Nexus V &amp; ClauseGuard X</p>
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
+                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Flagship Platform</p>
+                <p className="text-lg font-bold text-amber-400 mt-1">Vexaro AI Platform</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Core Focus</p>
-                <p className="text-lg font-bold text-amber-400 mt-1">Agents, LLMs &amp; Quantum</p>
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
+                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Core Focus</p>
+                <p className="text-lg font-bold text-white mt-1">Autonomous Multi-Agents &amp; DL</p>
               </div>
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider">Current Status</p>
+              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-emerald-400/40 transition duration-300">
+                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Launch Status</p>
                 <p className="text-lg font-bold text-emerald-400 mt-1 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Available for Ventures
+                  Launching Very Soon
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column Education & Animated Skill Bars */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            className="lg:col-span-6 space-y-8"
-          >
+          <motion.div variants={cardScrollFadeUp} className="lg:col-span-6 space-y-8">
             {/* Education & Research Card */}
-            <div className="p-6 rounded-2xl bg-[#111116] border border-white/10 space-y-4 shadow-xl">
+            <div className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/40 transition duration-300 space-y-4 shadow-xl">
               <div className="flex items-center gap-3 text-amber-400 font-semibold">
                 <GraduationCap className="w-5 h-5" />
-                <span className="text-sm uppercase tracking-wider">Education &amp; Research Focus</span>
+                <span className="text-xs font-mono uppercase tracking-wider">
+                  Education &amp; Research Focus
+                </span>
               </div>
               <div className="space-y-4 pl-2 border-l-2 border-amber-400/40">
                 <div className="pl-4">
                   <p className="font-semibold text-white">
-                    Computer Science Engineering &amp; AI Architectures
+                    Computer Science Engineering &amp; AI Research
                   </p>
                   <p className="text-xs text-zinc-400 mt-0.5">
-                    Autonomous Multi-Agent Systems, Deep Learning (PyTorch/LSTM) &amp; Predictive Analytics
+                    Autonomous Multi-Agent Platforms, PyTorch Deep Learning &amp; Evidence-Grounded Verification
                   </p>
                 </div>
                 <div className="pl-4">
                   <p className="font-semibold text-white">
-                    Quantum Computing &amp; Mechanics Exploration
+                    Quantum Computing &amp; Mechanics Foundations
                   </p>
                   <p className="text-xs text-zinc-400 mt-0.5">
-                    Qubit State Formulations, Quantum Superposition Simulation &amp; VibeCoding Paradigms
+                    State Superposition Simulation, Qubit Logic &amp; Next-Gen Computational Architectures
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Animated Skills Progress Bars */}
-            <div className="space-y-4">
+            {/* Animated Skills Progress Bars with Scroll Trigger */}
+            <div className="space-y-4 p-6 rounded-2xl bg-[#111116]/80 border border-white/10 shadow-xl">
               <div className="flex items-center justify-between pb-2 border-b border-white/10">
                 <div className="flex items-center gap-2 text-amber-400 font-semibold">
                   <Sparkles className="w-4 h-4" />
-                  <span className="text-white text-base">Skills &amp; Mastery</span>
+                  <span className="text-white text-sm font-semibold">Technical Mastery</span>
                 </div>
                 <span className="text-xs text-zinc-500 font-mono">CALIBRATED %</span>
               </div>
 
-              <div className="space-y-3.5">
+              <div className="space-y-4">
                 {SKILLS.map((skill, i) => (
                   <div key={i} className="space-y-1.5">
                     <div className="flex justify-between text-xs sm:text-sm">
@@ -715,9 +849,9 @@ export default function VTR369Portfolio() {
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.percent}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: i * 0.1, ease: "easeOut" }}
-                        className="h-full rounded-full bg-gradient-to-r from-amber-500 to-yellow-300"
+                        viewport={{ once: false, amount: 0.5 }}
+                        transition={{ duration: 1.2, delay: i * 0.08, ease: "easeOut" }}
+                        className="h-full rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
                       />
                     </div>
                   </div>
@@ -725,59 +859,76 @@ export default function VTR369Portfolio() {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================== */}
       {/* 3. WHAT I BUILD (SERVICES & CORE PILLARS)  */}
       {/* ========================================== */}
-      <section id="services" className="py-24 bg-[#0a0a0e] border-y border-white/5">
+      <section id="services" className="py-28 bg-[#0a0a0e] border-y border-white/5 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold mb-2">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={headerFadeIn}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold mb-2 font-mono">
               WHAT I DO
             </p>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white">
-              AI Engineering &amp; Startup Ventures
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+              AI Research Engineering &amp; Agentic Platforms
             </h2>
             <p className="text-zinc-400 text-sm mt-3">
-              Architecting production-grade AI platforms, real-world SaaS startups, and high-precision deep learning.
+              Architecting production-grade multi-agent operating systems, deep learning pipelines, and research harnesses.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            variants={containerStagger}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {[
               {
-                icon: Cpu,
-                title: "Autonomous AI & Voice Agents",
-                desc: "Multi-agent orchestration, voice-to-action assistants (AI Voice Agent Pro), and autonomous workflow automation platforms like Nexus V AI.",
-                tag: "AGENTIC AI",
+                icon: Rocket,
+                title: "Vexaro AI Platform Engineering",
+                desc: "Autonomous agentic operating system deploying specialized multi-agent teams across legal, SDR, clinical triage, finance, and code execution with zero-trust safety gates.",
+                tag: "FLAGSHIP PLATFORM",
+                highlight: "Launching Very Soon",
               },
               {
-                icon: ShieldCheck,
-                title: "AI SaaS Startups & LegalTech",
-                desc: "Production full-stack SaaS startups including ClauseGuard X for real-time AI contract analysis, risk detection, and negotiation insights.",
-                tag: "STARTUPS",
+                icon: Cpu,
+                title: "Autonomous Agents & Voice Systems",
+                desc: "Low-latency bidirectional voice-to-action pipelines (AI Voice Agent Pro), swarm task decomposition, and self-healing multi-agent orchestration (Nexus V AI).",
+                tag: "MULTI-AGENT SWARMS",
+                highlight: "Real-Time VAD",
               },
               {
                 icon: Code2,
                 title: "Deep Learning & Computer Vision",
-                desc: "High-precision predictive modeling (R² > 0.90 weather forecasting) and multi-stage PyTorch maritime vessel classification pipelines.",
+                desc: "High-precision time-series forecasting (R² > 0.90 weather forecasting with LSTM/GBDT) and multi-stage PyTorch maritime vessel classification networks.",
                 tag: "DEEP LEARNING",
+                highlight: "PyTorch & CNNs",
               },
             ].map((service, idx) => {
               const Icon = service.icon;
               return (
                 <motion.div
                   key={idx}
-                  whileHover={{ y: -6 }}
-                  className="p-8 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition duration-300 text-left space-y-4 relative group"
+                  variants={cardScrollFadeUp}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/60 transition duration-300 text-left space-y-4 relative group shadow-xl"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition duration-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-mono px-2 py-1 rounded bg-white/5 text-zinc-400 border border-white/10">
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 text-amber-400/90 border border-amber-400/20">
                       {service.tag}
                     </span>
                   </div>
@@ -785,26 +936,39 @@ export default function VTR369Portfolio() {
                     {service.title}
                   </h3>
                   <p className="text-sm text-zinc-400 leading-relaxed">{service.desc}</p>
+                  <div className="pt-2">
+                    <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      {service.highlight}
+                    </span>
+                  </div>
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ========================================== */}
-      {/* 4. LIVE GITHUB STARTUPS & PORTFOLIO GRID   */}
+      {/* 4. VEXARO AI SPOTLIGHT + GITHUB REPOSITORIES */}
       {/* ========================================== */}
-      <section id="projects" className="py-24 max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold mb-2">
-            LIVE GITHUB &amp; VENTURES
-          </p>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-3">
-            Startups &amp; Latest Repositories
+      <section id="projects" className="py-28 max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={headerFadeIn}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em] mb-3">
+            <Compass className="w-3.5 h-3.5" />
+            VEXARO AI &amp; REPOSITORIES
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-3 tracking-tight">
+            Autonomous Systems &amp; Live Repositories
           </h2>
           <p className="text-sm text-zinc-400">
-            Synchronized live with{" "}
+            Featuring <strong>Vexaro AI</strong> alongside repositories synchronized live with{" "}
             <a
               href={`https://github.com/${SITE_CONFIG.githubUsername}`}
               target="_blank"
@@ -813,10 +977,10 @@ export default function VTR369Portfolio() {
             >
               @{SITE_CONFIG.githubUsername}
             </a>
-            . Any new startup or repository pushed to GitHub appears here automatically.
+            . Any new repository pushed to GitHub appears here automatically.
           </p>
 
-          {/* Search + Filter Row */}
+          {/* Search + Category Tabs */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <div className="relative w-full sm:w-72">
               <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
@@ -824,8 +988,8 @@ export default function VTR369Portfolio() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search projects..."
-                className="w-full pl-10 pr-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                placeholder="Search projects & platforms..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white/5 border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
               />
             </div>
 
@@ -834,63 +998,103 @@ export default function VTR369Portfolio() {
                 <button
                   key={tab}
                   onClick={() => setActiveCategory(tab)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition ${activeCategory === tab
-                      ? "bg-amber-400 text-black shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
+                    activeCategory === tab
+                      ? "bg-amber-400 text-black shadow-[0_0_15px_rgba(245,158,11,0.4)]"
                       : "bg-white/5 text-zinc-300 hover:bg-white/10 border border-white/10"
-                    }`}
+                  }`}
                 >
                   {tab}
                 </button>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        {/* Project Cards Grid with Buttery Smooth Scroll Reveals */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.15 }}
+          variants={containerStagger}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
+        >
           {filteredProjects.slice(0, 15).map((project) => (
             <motion.a
               key={project.id}
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -6 }}
-              className="group rounded-2xl overflow-hidden bg-[#111116] border border-white/10 hover:border-amber-400/60 transition duration-300 flex flex-col shadow-xl"
+              variants={cardScrollFadeUp}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className={`group rounded-2xl overflow-hidden bg-[#111116] border transition duration-300 flex flex-col shadow-xl relative ${
+                project.isSpotlight
+                  ? "border-amber-400/60 shadow-[0_0_30px_rgba(245,158,11,0.25)] md:col-span-2 lg:col-span-3"
+                  : "border-white/10 hover:border-amber-400/60"
+              }`}
             >
-              <div className="relative h-52 overflow-hidden bg-zinc-900">
+              <div
+                className={`relative overflow-hidden bg-zinc-900 ${
+                  project.isSpotlight ? "h-64 sm:h-80" : "h-52"
+                }`}
+              >
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500 filter brightness-90 group-hover:brightness-100"
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-700 filter brightness-90 group-hover:brightness-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-transparent to-transparent" />
-                <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/80 text-amber-400 border border-amber-400/30 backdrop-blur-md">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-[#111116]/40 to-transparent" />
+
+                {/* Badge */}
+                <span
+                  className={`absolute top-4 left-4 px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border ${
+                    project.isSpotlight
+                      ? "bg-amber-400 text-black border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                      : "bg-black/80 text-amber-400 border-amber-400/30"
+                  }`}
+                >
                   {project.badge}
                 </span>
+
+                {project.isSpotlight && (
+                  <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 backdrop-blur-md flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    OMNI-SECTOR PLATFORM
+                  </span>
+                )}
               </div>
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition">
+                    <h3
+                      className={`font-bold text-white group-hover:text-amber-400 transition ${
+                        project.isSpotlight ? "text-2xl sm:text-3xl" : "text-lg"
+                      }`}
+                    >
                       {project.name}
                     </h3>
                     <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 shrink-0 transition" />
                   </div>
-                  <p className="text-xs text-zinc-400 line-clamp-3 leading-relaxed">
+                  <p
+                    className={`text-zinc-400 leading-relaxed ${
+                      project.isSpotlight ? "text-sm sm:text-base" : "text-xs line-clamp-3"
+                    }`}
+                  >
                     {project.description}
                   </p>
                 </div>
 
                 {project.highlights && (
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2 pt-1">
                     {project.highlights.map((h: string, idx: number) => (
                       <span
                         key={idx}
-                        className="text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-300 font-mono"
+                        className={`text-[10px] px-2.5 py-1 rounded-full border font-mono ${
+                          project.isSpotlight
+                            ? "bg-amber-400/10 border-amber-400/30 text-amber-300"
+                            : "bg-white/5 border-white/10 text-zinc-300"
+                        }`}
                       >
                         {h}
                       </span>
@@ -898,8 +1102,8 @@ export default function VTR369Portfolio() {
                   </div>
                 )}
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
-                  <span className="text-amber-400/90 font-medium font-mono">{project.language}</span>
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
+                  <span className="text-amber-400/90 font-medium">{project.language}</span>
                   <span className="flex items-center gap-1 text-zinc-300 group-hover:text-amber-400 transition">
                     <Github className="w-3.5 h-3.5" /> View on GitHub
                   </span>
@@ -907,60 +1111,80 @@ export default function VTR369Portfolio() {
               </div>
             </motion.a>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================== */}
       {/* 5. CONTACT & OMNICHANNEL CONNECT SECTION   */}
       {/* ========================================== */}
-      <section id="contact" className="py-24 bg-[#0a0a0e] border-t border-white/10 pb-36">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
-          <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold">
-            CONTACT &amp; COLLABORATION
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Let&apos;s Build Together</h2>
+      <section id="contact" className="py-28 bg-[#0a0a0e] border-t border-white/10 pb-36 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={headerFadeIn}
+          className="max-w-4xl mx-auto px-6 text-center space-y-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em]">
+            <Zap className="w-3.5 h-3.5" />
+            CONNECT &amp; COLLABORATE
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Let&apos;s Build the Future of AI Together
+          </h2>
           <p className="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Building an AI startup, seeking a Principal AI Engineer, or want to collaborate on
-            autonomous systems? Connect directly via WhatsApp, Instagram, or the live chat below.
+            Interested in <strong>Vexaro AI</strong>, seeking an AI Research Engineer, or looking to collaborate
+            on autonomous multi-agent systems and deep learning architectures? Connect directly via WhatsApp, Instagram, or live chat.
           </p>
 
           {/* 3 Contact Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6">
-            <div className="p-6 rounded-2xl bg-[#111116] border border-white/10 flex flex-col items-center gap-2">
+          <motion.div
+            variants={containerStagger}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6"
+          >
+            <motion.div
+              variants={cardScrollFadeUp}
+              whileHover={{ y: -6 }}
+              className="p-6 rounded-2xl bg-[#111116] border border-white/10 flex flex-col items-center gap-2 shadow-lg"
+            >
               <MapPin className="w-6 h-6 text-amber-400" />
               <h4 className="font-bold text-sm text-white">Location</h4>
               <p className="text-xs text-zinc-400">{SITE_CONFIG.location}</p>
-            </div>
+            </motion.div>
 
-            <a
+            <motion.a
+              variants={cardScrollFadeUp}
+              whileHover={{ y: -6 }}
               href={`mailto:${SITE_CONFIG.email}`}
-              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2"
+              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2 shadow-lg"
             >
               <Mail className="w-6 h-6 text-amber-400" />
               <h4 className="font-bold text-sm text-white">Email</h4>
               <p className="text-xs text-zinc-400">{SITE_CONFIG.email}</p>
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
+              variants={cardScrollFadeUp}
+              whileHover={{ y: -6 }}
               href={`https://instagram.com/${SITE_CONFIG.instagramHandle}`}
               target="_blank"
               rel="noreferrer"
-              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2"
+              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2 shadow-lg"
             >
               <Instagram className="w-6 h-6 text-amber-400" />
               <h4 className="font-bold text-sm text-white">Instagram</h4>
               <p className="text-xs text-zinc-400">@{SITE_CONFIG.instagramHandle}</p>
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
 
           {/* Primary Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4 pt-6">
             <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20I%20saw%20your%20VTR369%20portfolio%20and%20want%20to%20connect.`}
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20your%20VTR369%20portfolio%20regarding%20Vexaro%20AI.`}
               target="_blank"
               rel="noreferrer"
               onClick={() => triggerConfetti()}
-              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.4)] flex items-center gap-2"
+              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.45)] flex items-center gap-2"
             >
               <MessageCircle className="w-4 h-4" />
               Connect on Official WhatsApp
@@ -971,7 +1195,7 @@ export default function VTR369Portfolio() {
                 triggerConfetti();
                 setChatOpen(true);
               }}
-              className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm transition flex items-center gap-2"
+              className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm transition flex items-center gap-2 backdrop-blur-md"
             >
               <Bot className="w-4 h-4 text-amber-400" />
               Open Live Connect Drawer
@@ -1008,20 +1232,27 @@ export default function VTR369Portfolio() {
               <Twitter className="w-5 h-5" />
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================== */}
       {/* 6. FLOATING VOICE + TEXT AI AUTOPILOT DOCK */}
       {/* ========================================== */}
       <div className="fixed bottom-4 inset-x-0 z-50 px-4 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto w-full max-w-2xl rounded-2xl bg-[#111116]/95 backdrop-blur-2xl border border-amber-400/30 shadow-[0_10px_40px_rgba(0,0,0,0.8)] p-3 space-y-2">
+        <motion.div
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="pointer-events-auto w-full max-w-2xl rounded-2xl bg-[#111116]/95 backdrop-blur-2xl border border-amber-400/35 shadow-[0_10px_40px_rgba(0,0,0,0.85)] p-3 space-y-2"
+        >
           <div className="flex items-center justify-between px-2 text-[11px] text-zinc-400">
             <span className="flex items-center gap-1.5 text-amber-400 font-semibold font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               VTR369 AI AUTOPILOT
             </span>
-            <span className="truncate max-w-xs sm:max-w-md text-zinc-300">{autopilotStatus}</span>
+            <span className="truncate max-w-xs sm:max-w-md text-zinc-300 font-medium">
+              {autopilotStatus}
+            </span>
             <button
               onClick={() => setVoiceEnabled(!voiceEnabled)}
               className="text-zinc-400 hover:text-white transition"
@@ -1045,10 +1276,11 @@ export default function VTR369Portfolio() {
             <button
               type="button"
               onClick={toggleVoiceListening}
-              className={`p-3 rounded-xl font-semibold transition flex items-center justify-center ${isListening
+              className={`p-3 rounded-xl font-semibold transition flex items-center justify-center ${
+                isListening
                   ? "bg-red-500 text-white animate-pulse"
                   : "bg-amber-400/15 text-amber-400 hover:bg-amber-400/25 border border-amber-400/30"
-                }`}
+              }`}
               title="Speak Command"
             >
               {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
@@ -1059,8 +1291,8 @@ export default function VTR369Portfolio() {
               type="text"
               value={commandText}
               onChange={(e) => setCommandText(e.target.value)}
-              placeholder="Speak or type: 'Show startups', 'Open ClauseGuard X', 'Skills', 'WhatsApp'..."
-              className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+              placeholder="Speak or type: 'Tell me about Vexaro', 'Show projects', 'Skills', 'WhatsApp'..."
+              className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
             />
 
             <button
@@ -1071,7 +1303,7 @@ export default function VTR369Portfolio() {
               <Send className="w-3.5 h-3.5" />
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
 
       {/* ========================================== */}
@@ -1080,10 +1312,11 @@ export default function VTR369Portfolio() {
       <AnimatePresence>
         {chatOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            className="fixed bottom-28 right-6 z-50 w-80 sm:w-96 rounded-2xl bg-[#14141b] border border-amber-400/40 shadow-2xl overflow-hidden backdrop-blur-xl"
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 120, damping: 20 }}
+            className="fixed bottom-28 right-6 z-50 w-80 sm:w-96 rounded-2xl bg-[#14141b] border border-amber-400/40 shadow-2xl overflow-hidden backdrop-blur-2xl"
           >
             <div className="p-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black flex items-center justify-between font-bold text-sm">
               <div className="flex items-center gap-2">
@@ -1102,10 +1335,11 @@ export default function VTR369Portfolio() {
               {chatMessages.map((m, i) => (
                 <div
                   key={i}
-                  className={`p-3 rounded-xl max-w-[85%] leading-relaxed ${m.sender === "user"
+                  className={`p-3 rounded-xl max-w-[85%] leading-relaxed ${
+                    m.sender === "user"
                       ? "bg-amber-400 text-black ml-auto font-medium"
                       : "bg-white/10 text-zinc-200"
-                    }`}
+                  }`}
                 >
                   {m.text}
                 </div>
@@ -1119,7 +1353,7 @@ export default function VTR369Portfolio() {
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   placeholder="Write a message to Viswa..."
-                  className="flex-1 bg-black/50 border border-white/15 rounded-lg px-3 py-2 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400"
+                  className="flex-1 bg-black/50 border border-white/15 rounded-lg px-3 py-2 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
                 />
                 <button
                   type="submit"
@@ -1132,12 +1366,12 @@ export default function VTR369Portfolio() {
               <div className="grid grid-cols-2 gap-2 pt-1">
                 <a
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                    chatInput || "Hi Viswa! Reaching out from your VTR369 website."
+                    chatInput || "Hi Viswa! Reaching out from your VTR369 website regarding Vexaro AI."
                   )}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => triggerConfetti()}
-                  className="text-center py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-semibold hover:bg-emerald-500/30 transition flex items-center justify-center gap-1"
+                  className="text-center py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-semibold hover:bg-emerald-500/30 transition flex items-center justify-center gap-1 font-mono"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   Bridge to WhatsApp
@@ -1146,7 +1380,7 @@ export default function VTR369Portfolio() {
                   href={`https://instagram.com/${SITE_CONFIG.instagramHandle}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-center py-2 rounded-lg bg-pink-500/20 border border-pink-500/40 text-pink-300 text-[11px] font-semibold hover:bg-pink-500/30 transition flex items-center justify-center gap-1"
+                  className="text-center py-2 rounded-lg bg-pink-500/20 border border-pink-500/40 text-pink-300 text-[11px] font-semibold hover:bg-pink-500/30 transition flex items-center justify-center gap-1 font-mono"
                 >
                   <Instagram className="w-3.5 h-3.5" />
                   DM on Instagram

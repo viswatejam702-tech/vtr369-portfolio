@@ -16,23 +16,28 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_CONFIG.name} — ${SITE_CONFIG.brand} | AI Architect & Startup Founder`,
+  title: `${SITE_CONFIG.name} — ${SITE_CONFIG.brand} | AI Research Engineer · Building Vexaro AI`,
   description: SITE_CONFIG.tagline,
   metadataBase: new URL("https://vtr369.dev"),
   keywords: [
-    "AI Architect",
-    "Startup Founder",
+    "AI Research Engineer",
+    "Vexaro AI",
+    "Autonomous Agentic Platform",
     "Nexus V AI",
     "ClauseGuard X",
     "Autonomous Agents",
     "Quantum Computing",
-    "Full-Stack",
     "Deep Learning",
     "Hyderabad",
   ],
-  authors: [{ name: SITE_CONFIG.name, url: `https://github.com/${SITE_CONFIG.githubUsername}` }],
+  authors: [
+    {
+      name: SITE_CONFIG.name,
+      url: `https://github.com/${SITE_CONFIG.githubUsername}`,
+    },
+  ],
   openGraph: {
-    title: `${SITE_CONFIG.name} (${SITE_CONFIG.brand})`,
+    title: `${SITE_CONFIG.name} (${SITE_CONFIG.brand}) — AI Research Engineer`,
     description: SITE_CONFIG.tagline,
     type: "website",
     images: [
@@ -40,22 +45,31 @@ export const metadata: Metadata = {
         url: SITE_CONFIG.heroPortraitUrl,
         width: 1200,
         height: 630,
-        alt: SITE_CONFIG.name,
+        alt: `${SITE_CONFIG.name} - AI Research Engineer`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CONFIG.name} — ${SITE_CONFIG.brand}`,
+    title: `${SITE_CONFIG.name} — AI Research Engineer · Building Vexaro AI`,
     description: SITE_CONFIG.tagline,
     images: [SITE_CONFIG.heroPortraitUrl],
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="grain font-body bg-[#08080a] text-zinc-100">{children}</body>
+    <html
+      lang="en"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+    >
+      <body className="grain font-body bg-[#08080a] text-zinc-100 overflow-x-hidden selection:bg-amber-400 selection:text-black">
+        {children}
+      </body>
     </html>
   );
 }

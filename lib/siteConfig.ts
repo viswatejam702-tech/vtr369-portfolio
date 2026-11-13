@@ -7,6 +7,7 @@ export interface SiteConfig {
   brand: string;
   monogram: string;
   role: string;
+  mission: string;
   tagline: string;
   headline: string;
   location: string;
@@ -21,7 +22,7 @@ export interface SiteConfig {
   status: string;
   stats: {
     repos: string;
-    flagships: string;
+    flagship: string;
     focus: string;
     availability: string;
   };
@@ -31,11 +32,13 @@ export const SITE_CONFIG: SiteConfig = {
   name: "M. Viswa Teja Reddy",
   brand: "VTR369",
   monogram: "VTR.369",
-  role: "AI Architect, Startup Founder & Quantum-Tech Innovator",
+  role: "AI Research Engineer",
+  mission:
+    "Building Vexaro AI — Autonomous Agentic Platform (Specialized Agents Across Every Category & Sector · Launching Very Soon)",
   tagline:
-    "Chasing greatness to engineer monumentally impactful AI architectures, autonomous multi-agent systems, legal & enterprise SaaS startups, and high-precision deep learning models.",
+    "AI Research Engineer pioneering autonomous multi-agent systems, evaluation harnesses, deep learning architectures, and quantum computing foundations. Currently building Vexaro AI — the omni-sector autonomous agentic platform launching very soon.",
   headline:
-    "AI Architect, Startup Founder & Full-Stack Innovator based in Hyderabad, India.",
+    "AI Research Engineer · Building Vexaro AI Autonomous Agentic Platform",
   location: "Hyderabad / Andhra Pradesh, India",
   githubUsername: "viswatejam702-tech",
   heroPortraitUrl: "/viswa-portrait.png",
@@ -45,12 +48,12 @@ export const SITE_CONFIG: SiteConfig = {
   instagramHandle: "vtr_.369", // Viswa's official Instagram handle
   linkedinUrl: "https://www.linkedin.com/in/m-viswa-teja-reddy-1234g",
   twitterUrl: "https://x.com/MViswateja1",
-  status: "Available for Startups, Founding Roles & Collabs",
+  status: "Building Vexaro AI · Launching Very Soon",
   stats: {
-    repos: "33+ Public AI & Full-Stack Repositories",
-    flagships: "Nexus V AI & ClauseGuard X",
-    focus: "Autonomous Agents, LLMs, DL & Quantum Tech",
-    availability: "Available for Startups & Ventures",
+    repos: "33+ Public AI & Deep Tech Repositories",
+    flagship: "Vexaro AI & Nexus V",
+    focus: "Autonomous Agents, LLMs & Quantum Mechanics",
+    availability: "Building Vexaro AI (Launching Very Soon)",
   },
 };
 
