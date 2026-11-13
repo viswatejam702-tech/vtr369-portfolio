@@ -186,3 +186,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ verified: false, error: err?.message || "Verification failed" }, { status: 500 });
   }
 }
+
