@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: vtr369-portfolio
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
