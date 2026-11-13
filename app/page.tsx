@@ -61,6 +61,71 @@ const FLAGSHIP_PROJECTS = [
     ],
   },
   {
+    id: "verified-rag",
+    name: "Verified RAG — Evidence & Claim NLI Platform",
+    repoName: "verified-rag",
+    category: "AI Research & Systems",
+    badge: "LEWIS ET AL. RAG · LIVE ON RENDER",
+    badgeColor: "from-blue-400 via-cyan-300 to-emerald-400",
+    description:
+      "End-to-end parametric/non-parametric Retrieval-Augmented Generation system grounded in Lewis et al. (2020). Features dense MIPS vector search, Cross-Encoder reranking (MS-MARCO), and DeBERTa-v3 claim-level NLI verification to detect and eliminate hallucinations.",
+    language: "Python / FastAPI / Next.js",
+    url: "https://verified-rag.onrender.com",
+    image:
+      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+    highlights: [
+      "Dense MIPS Retrieval",
+      "Cross-Encoder Reranking",
+      "Atomic Claim Decomposition",
+      "DeBERTa NLI Verification",
+    ],
+  },
+  {
+    id: "aegis-safety-harness",
+    name: "Aegis — LLM Safety & Red-Teaming Harness",
+    repoName: "llm-eval-harness",
+    category: "AI Research & Systems",
+    badge: "SAFETY HARNESS · LIVE ON RENDER",
+    badgeColor: "from-rose-500 via-red-400 to-amber-500",
+    description:
+      "Comprehensive adversarial red-teaming evaluation harness testing frontier LLMs across 1,000+ jailbreak vectors, prompt injections, and safety boundary benchmarks with automated guardrail scoring.",
+    language: "Python / PyTorch / Next.js",
+    url: "https://llm-eval-harness.onrender.com",
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80",
+    highlights: ["1,000+ Jailbreak Vectors", "Automated Red-Teaming", "Guardrail Telemetry"],
+  },
+  {
+    id: "vastcare-vernacular-llm",
+    name: "VastCare — Vernacular Healthcare LLM",
+    repoName: "vastcare-vernacular-llm",
+    category: "AI Research & Systems",
+    badge: "CLINICAL AI · LIVE ON RENDER",
+    badgeColor: "from-emerald-400 via-teal-300 to-cyan-500",
+    description:
+      "Multilingual clinical intelligence model fine-tuned for low-resource regional Indian languages (Telugu, Hindi, Tamil) with clinical accuracy benchmarks and emergency patient triage routing.",
+    language: "PyTorch / Transformers",
+    url: "https://vastcare-vernacular-llm.onrender.com",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
+    highlights: ["Vernacular Medical QA", "Clinical Triage", "Low-Resource Transfer"],
+  },
+  {
+    id: "synthesizer-ai",
+    name: "Synthesizer AI — Differential Privacy Data Engine",
+    repoName: "dp-synth-health",
+    category: "AI Research & Systems",
+    badge: "DIFFERENTIAL PRIVACY · LIVE ON RENDER",
+    badgeColor: "from-purple-400 via-violet-300 to-indigo-500",
+    description:
+      "Mathematical privacy-preserving generative system providing provable (ε, δ)-Differential Privacy guarantees to synthesize synthetic clinical and tabular datasets without data leakage.",
+    language: "Python / PyTorch / DP-SGD",
+    url: "https://dp-synth-health.onrender.com",
+    image:
+      "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1000&q=80",
+    highlights: ["(ε, δ)-DP Guarantees", "Generative Tabular Models", "Zero Leakage"],
+  },
+  {
     id: "nexus-v-ai",
     name: "Nexus V AI",
     repoName: "nexus-V-AI",
@@ -890,7 +955,7 @@ export default function VTR369Portfolio() {
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
             variants={containerStagger}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {[
               {
@@ -899,6 +964,13 @@ export default function VTR369Portfolio() {
                 desc: "Autonomous agentic operating system deploying specialized multi-agent teams across legal, SDR, clinical triage, finance, and code execution with zero-trust safety gates.",
                 tag: "FLAGSHIP PLATFORM",
                 highlight: "Launching Very Soon",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Verified RAG & Research Systems",
+                desc: "Parametric/non-parametric retrieval engines grounded in Lewis et al. with dense MIPS, Cross-Encoder reranking, and DeBERTa claim-level NLI verification to eliminate hallucinations.",
+                tag: "AI RESEARCH ENGINE",
+                highlight: "Live on Render",
               },
               {
                 icon: Cpu,
@@ -910,7 +982,7 @@ export default function VTR369Portfolio() {
               {
                 icon: Code2,
                 title: "Deep Learning & Computer Vision",
-                desc: "High-precision time-series forecasting (R² > 0.90 weather forecasting with LSTM/GBDT) and multi-stage PyTorch maritime vessel classification networks.",
+                desc: "High-precision time-series forecasting (R² > 0.90 weather forecasting with LSTM/GBDT), PyTorch maritime CNNs, and (ε, δ)-Differential Privacy tabular generators.",
                 tag: "DEEP LEARNING",
                 highlight: "PyTorch & CNNs",
               },
@@ -922,20 +994,22 @@ export default function VTR369Portfolio() {
                   variants={cardScrollFadeUp}
                   whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
-                  className="p-8 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/60 transition duration-300 text-left space-y-4 relative group shadow-xl"
+                  className="p-8 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/60 transition duration-300 text-left space-y-4 relative group shadow-xl flex flex-col justify-between"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition duration-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                      <Icon className="w-6 h-6" />
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition duration-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 text-amber-400/90 border border-amber-400/20">
+                        {service.tag}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 text-amber-400/90 border border-amber-400/20">
-                      {service.tag}
-                    </span>
+                    <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed">{service.desc}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-zinc-400 leading-relaxed">{service.desc}</p>
                   <div className="pt-2">
                     <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -994,7 +1068,7 @@ export default function VTR369Portfolio() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-2">
-              {["All", "Startups & AI", "Deep Learning & ML", "Live GitHub Feed"].map((tab) => (
+              {["All", "Startups & AI", "AI Research & Systems", "Deep Learning & ML", "Live GitHub Feed"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveCategory(tab)}
