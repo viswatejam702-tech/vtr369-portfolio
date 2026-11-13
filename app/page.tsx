@@ -31,6 +31,14 @@ import {
   Compass,
   CheckCircle2,
   Terminal,
+  Award,
+  Sliders,
+  Copy,
+  Check,
+  Radio,
+  FileCheck,
+  Activity,
+  Key,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import { triggerConfetti } from "@/lib/utils";
@@ -293,15 +301,77 @@ export default function VTR369Portfolio() {
   // Instant On-Site Chat Drawer State
   const [chatOpen, setChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     {
       sender: "bot",
-      text: "Hello! I am Viswa's AI Concierge. Ask me about Vexaro AI (the autonomous agentic platform launching very soon), Nexus V AI, or connect directly with Viswa!",
+      text: "Hello! I am Viswa's AI Concierge. Ask me about Vexaro AI (the autonomous agentic platform launching very soon), Verified RAG, his LOR credentials, or connect directly with Viswa on WhatsApp!",
     },
   ]);
 
+  // Live ElevenLabs Voice & Gemini Autopilot State
+  const [elevenLabsApiKey, setElevenLabsApiKey] = useState("");
+  const [elevenLabsVoiceId, setElevenLabsVoiceId] = useState("21m00Tcm4TlvDq8ikWAM");
+  const [geminiApiKey, setGeminiApiKey] = useState("");
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // LOR ID Cryptographic Proof Engine State
+  const [lorModalOpen, setLorModalOpen] = useState(false);
+  const [lorInputId, setLorInputId] = useState("LOR-VTR-2024-AI01");
+  const [lorData, setLorData] = useState<any>(null);
+  const [lorLoading, setLorLoading] = useState(false);
+  const [copiedHash, setCopiedHash] = useState(false);
+
   const recognitionRef = useRef<any>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
+
+  // Load client-persisted keys on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedEleven = localStorage.getItem("vtr_elevenlabs_key") || "";
+      const storedVoice = localStorage.getItem("vtr_elevenlabs_voice") || "21m00Tcm4TlvDq8ikWAM";
+      const storedGemini = localStorage.getItem("vtr_gemini_key") || "";
+      if (storedEleven) setElevenLabsApiKey(storedEleven);
+      if (storedVoice) setElevenLabsVoiceId(storedVoice);
+      if (storedGemini) setGeminiApiKey(storedGemini);
+    }
+  }, []);
+
+  // Cryptographic LOR Verifier function
+  const verifyLorId = async (idToVerify: string) => {
+    setLorLoading(true);
+    setLorInputId(idToVerify);
+    try {
+      const res = await fetch(`/api/verify-lor?id=${encodeURIComponent(idToVerify)}`);
+      const data = await res.json();
+      if (res.ok && data.verified) {
+        setLorData(data.credential);
+      } else {
+        setLorData({ error: data.message || "Credential ID not found in cryptographic registry." });
+      }
+    } catch {
+      setLorData({ error: "Network error reaching cryptographic registry." });
+    } finally {
+      setLorLoading(false);
+    }
+  };
+
+  // Save API Settings handler
+  const saveApiSettings = (elevenKey: string, voiceId: string, geminiKey: string) => {
+    setElevenLabsApiKey(elevenKey);
+    setElevenLabsVoiceId(voiceId);
+    setGeminiApiKey(geminiKey);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("vtr_elevenlabs_key", elevenKey);
+      localStorage.setItem("vtr_elevenlabs_voice", voiceId);
+      localStorage.setItem("vtr_gemini_key", geminiKey);
+    }
+    setSettingsModalOpen(false);
+    triggerConfetti();
+    speakResponse("API settings saved successfully. ElevenLabs Studio Voice active.");
+  };
 
   // Handle portrait fallback smoothly
   const handlePortraitError = () => {
@@ -397,103 +467,134 @@ export default function VTR369Portfolio() {
   }, [allProjects, activeCategory, searchQuery]);
 
   // ==========================================
-  // 5. SPEECH SYNTHESIS & VOICE AUTOPILOT ENGINE
+  // 5. ELEVENLABS & WEB SPEECH VOICE AUTOPILOT
   // ==========================================
-  const speakResponse = (text: string) => {
-    setAutopilotStatus(text);
-    if (!voiceEnabled || typeof window === "undefined" || !("speechSynthesis" in window))
+  const fallbackWebSpeech = (text: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      setIsPlayingAudio(false);
       return;
+    }
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 1.05;
     utterance.pitch = 1.0;
+    utterance.onend = () => setIsPlayingAudio(false);
+    utterance.onerror = () => setIsPlayingAudio(false);
     window.speechSynthesis.speak(utterance);
   };
 
-  const executeAutopilotCommand = (rawInput: string) => {
-    const q = rawInput.toLowerCase().trim();
+  const speakResponse = async (text: string) => {
+    setAutopilotStatus(text);
+    if (!voiceEnabled || typeof window === "undefined") return;
+
+    // Try ElevenLabs Voice API
+    try {
+      setIsPlayingAudio(true);
+      const res = await fetch("/api/voice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text,
+          apiKey: elevenLabsApiKey || undefined,
+          voiceId: elevenLabsVoiceId || undefined,
+        }),
+      });
+
+      const contentType = res.headers.get("content-type") || "";
+      if (res.ok && contentType.includes("audio/mpeg")) {
+        const audioBlob = await res.blob();
+        const url = URL.createObjectURL(audioBlob);
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
+        const audio = new Audio(url);
+        audioRef.current = audio;
+        audio.onended = () => setIsPlayingAudio(false);
+        audio.onerror = () => {
+          setIsPlayingAudio(false);
+          fallbackWebSpeech(text);
+        };
+        await audio.play();
+        return;
+      }
+    } catch {
+      // Fallback below
+    }
+
+    fallbackWebSpeech(text);
+  };
+
+  const executeAutopilotCommand = async (rawInput: string) => {
+    const q = rawInput.trim();
     if (!q) return;
 
     const scrollTo = (id: string) => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
 
-    if (q.includes("vexaro") || q.includes("agentic") || q.includes("building")) {
+    const lower = q.toLowerCase();
+
+    // Direct client trigger for LOR / credentials
+    if (lower.includes("lor") || lower.includes("recommendation") || lower.includes("credential")) {
+      setLorModalOpen(true);
+      verifyLorId("LOR-VTR-2024-AI01");
+      speakResponse("Opening Viswa's Cryptographic LOR & Credentials Registry.");
+      triggerConfetti();
+      return;
+    }
+
+    // Call live Autopilot API
+    try {
+      const res = await fetch("/api/autopilot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ command: q }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.action?.type === "SCROLL" && data.action.target) {
+          const targetId = data.action.target.replace("#", "");
+          scrollTo(targetId);
+        } else if (data.action?.type === "OPEN_MODAL" && data.action.target === "lor-verifier") {
+          setLorModalOpen(true);
+          verifyLorId("LOR-VTR-2024-AI01");
+        }
+
+        if (lower.includes("vexaro") || lower.includes("verified rag")) {
+          triggerConfetti();
+        }
+
+        speakResponse(data.speechText || data.displayText);
+        return;
+      }
+    } catch {
+      // Fallback
+    }
+
+    if (lower.includes("vexaro") || lower.includes("agentic")) {
       scrollTo("projects");
       setActiveCategory("Startups & AI");
       speakResponse(
         "Viswa is building Vexaro AI, an autonomous agentic platform featuring specialized agents for every category and industry sector, launching very soon!"
       );
       triggerConfetti();
-    } else if (q.includes("nexus")) {
+    } else if (lower.includes("rag") || lower.includes("verified")) {
       scrollTo("projects");
-      setActiveCategory("Startups & AI");
-      speakResponse("Opening Nexus V AI, Viswa's autonomous multi-agent platform.");
+      setActiveCategory("AI Research & Systems");
+      speakResponse("Showing Verified RAG, Viswa's end-to-end evidence retrieval and claim-level NLI verification system.");
       triggerConfetti();
-      window.open("https://github.com/viswatejam702-tech/nexus-V-AI", "_blank");
-    } else if (q.includes("clause") || q.includes("legal") || q.includes("contract")) {
-      scrollTo("projects");
-      setActiveCategory("Startups & AI");
-      speakResponse("Launching ClauseGuard X, Viswa's AI contract intelligence platform.");
-      triggerConfetti();
-      window.open(
-        "https://github.com/viswatejam702-tech/Clause_gaurd_x_version",
-        "_blank"
-      );
-    } else if (q.includes("weather") || q.includes("lstm")) {
-      scrollTo("projects");
-      setActiveCategory("Deep Learning & ML");
-      speakResponse("Showing Weather Prediction with Gradient Boosting and LSTM Deep Learning.");
-    } else if (q.includes("ship") || q.includes("maritime") || q.includes("vessel")) {
-      scrollTo("projects");
-      setActiveCategory("Deep Learning & ML");
-      speakResponse("Opening Maritime Vessel Classification Deep Learning in PyTorch.");
-      window.open("https://github.com/viswatejam702-tech/game-of-dl-in-ships", "_blank");
-    } else if (q.includes("project") || q.includes("work") || q.includes("show")) {
-      scrollTo("projects");
-      setActiveCategory("Startups & AI");
-      speakResponse(
-        `Displaying Viswa's autonomous agentic systems and repositories. Currently syncing ${allProjects.length} projects.`
-      );
-    } else if (q.includes("github") || q.includes("repo") || q.includes("feed")) {
-      scrollTo("projects");
-      setActiveCategory("Live GitHub Feed");
-      speakResponse("Filtering live repositories directly from Viswa's GitHub account.");
-    } else if (q.includes("skill") || q.includes("about") || q.includes("education")) {
-      scrollTo("about");
-      speakResponse(
-        "Here are Viswa's core engineering skills as an AI Research Engineer, research background, and autonomous metrics."
-      );
-    } else if (q.includes("service") || q.includes("build") || q.includes("what i do")) {
-      scrollTo("services");
-      speakResponse("Navigating to AI Research Engineering & Autonomous Agentic Platforms.");
-    } else if (q.includes("whatsapp")) {
+    } else if (lower.includes("whatsapp")) {
       speakResponse("Opening official WhatsApp connection with Viswa Teja Reddy.");
       triggerConfetti();
       window.open(
         `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20your%20VTR369%20Portfolio.`,
         "_blank"
       );
-    } else if (q.includes("instagram") || q.includes("insta")) {
-      speakResponse("Opening Viswa's official Instagram profile.");
-      window.open(`https://instagram.com/${SITE_CONFIG.instagramHandle}`, "_blank");
-    } else if (q.includes("chat") || q.includes("contact") || q.includes("connect")) {
-      scrollTo("contact");
-      setChatOpen(true);
-      speakResponse("Opening the live connect drawer so you can message Viswa directly.");
-    } else if (q.includes("swarm") || q.includes("agent") || q.includes("antigravity")) {
-      setSwarmActive((prev) => !prev);
-      speakResponse(
-        !swarmActive
-          ? "Activated Antigravity multi-agent cursor swarm."
-          : "Deactivated multi-agent swarm."
-      );
     } else {
       scrollTo("projects");
-      setSearchQuery(rawInput);
-      speakResponse(
-        `Searching for "${rawInput}". Filtered matching projects and GitHub repositories.`
-      );
+      setSearchQuery(q);
+      speakResponse(`Searching for "${q}". Showing matching projects and systems.`);
     }
   };
 
@@ -520,7 +621,7 @@ export default function VTR369Portfolio() {
 
     recognition.onstart = () => {
       setIsListening(true);
-      setAutopilotStatus("Listening... Speak a command (e.g. 'Tell me about Vexaro', 'Show projects', or 'WhatsApp')");
+      setAutopilotStatus("Listening... Speak a command (e.g. 'Tell me about Vexaro', 'Verify LOR', or 'WhatsApp')");
     };
 
     recognition.onresult = (event: any) => {
@@ -541,27 +642,44 @@ export default function VTR369Portfolio() {
     recognition.start();
   };
 
-  const handleChatSend = (e: React.FormEvent) => {
+  const handleChatSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!chatInput.trim()) return;
+    if (!chatInput.trim() || chatLoading) return;
     const userMsg = chatInput.trim();
-    setChatMessages((prev) => [...prev, { sender: "user", text: userMsg }]);
+    const updatedHistory = [...chatMessages, { sender: "user", text: userMsg }];
+    setChatMessages(updatedHistory);
     setChatInput("");
+    setChatLoading(true);
 
-    setTimeout(() => {
-      const lower = userMsg.toLowerCase();
-      let reply = `Thank you for reaching out! You can click "Bridge to WhatsApp" below to deliver your message "${userMsg}" directly to Viswa's phone!`;
-      if (lower.includes("vexaro") || lower.includes("agent")) {
-        reply = `Vexaro AI is Viswa's flagship autonomous agentic platform where every category and sector's agents are specialized (Legal, Sales SDR, Clinical Triage, Financial, Code). It is launching very soon!`;
-      } else if (lower.includes("hire") || lower.includes("role") || lower.includes("research")) {
-        reply = `Viswa is an AI Research Engineer focusing on autonomous agentic systems, multi-agent evaluation, and deep learning. Click "Bridge to WhatsApp" to discuss engineering collaborations!`;
-      } else if (lower.includes("nexus")) {
-        reply = `Nexus V AI is Viswa's autonomous multi-agent platform for orchestrating cross-domain tasks with adaptive reasoning.`;
-      } else if (lower.includes("clause")) {
-        reply = `ClauseGuard X is an AI-powered legal contract risk analysis platform built with full-stack TypeScript and specialized NLP evaluators.`;
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: updatedHistory.map((m) => ({
+            role: m.sender === "user" ? "user" : "assistant",
+            content: m.text,
+          })),
+          apiKey: geminiApiKey || undefined,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const replyText = data.reply || "Thank you for reaching out! Viswa will reply shortly.";
+        setChatMessages((prev) => [...prev, { sender: "bot", text: replyText }]);
+        speakResponse(replyText);
+        return;
       }
-      setChatMessages((prev) => [...prev, { sender: "bot", text: reply }]);
-    }, 400);
+    } catch {
+      // Fallback
+    } finally {
+      setChatLoading(false);
+    }
+
+    const fallbackReply = `Thank you for your message! You can bridge directly to WhatsApp at wa.me/${SITE_CONFIG.whatsappNumber} to talk with Viswa directly.`;
+    setChatMessages((prev) => [...prev, { sender: "bot", text: fallbackReply }]);
+    speakResponse(fallbackReply);
   };
 
   return (
@@ -673,6 +791,17 @@ export default function VTR369Portfolio() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                setLorModalOpen(true);
+                verifyLorId("LOR-VTR-2024-AI01");
+              }}
+              className="text-xs px-3.5 py-1.5 rounded-full border border-amber-400/35 bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 transition flex items-center gap-1.5 font-mono shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+              title="Verify Letters of Recommendation & Credentials"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Verify LOR</span>
+            </button>
             <button
               onClick={() => setSwarmActive(!swarmActive)}
               className="text-xs px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 hover:border-amber-400/50 transition hidden sm:flex items-center gap-1.5 font-mono"
@@ -789,6 +918,17 @@ export default function VTR369Portfolio() {
               <span>Explore Vexaro AI &amp; Projects</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
             </a>
+            <button
+              onClick={() => {
+                setLorModalOpen(true);
+                verifyLorId("LOR-VTR-2024-AI01");
+                triggerConfetti();
+              }}
+              className="px-7 py-4 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400/20 backdrop-blur-md text-amber-300 font-semibold text-sm transition flex items-center gap-2 group shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+            >
+              <Award className="w-4 h-4 text-amber-400 group-hover:scale-110 transition" />
+              <span>Verify LOR &amp; Credentials</span>
+            </button>
             <a
               href="#contact"
               className="px-8 py-4 rounded-full border border-white/25 bg-white/5 hover:bg-white/15 backdrop-blur-md text-white font-semibold text-sm transition flex items-center gap-2"
@@ -1320,24 +1460,54 @@ export default function VTR369Portfolio() {
           className="pointer-events-auto w-full max-w-2xl rounded-2xl bg-[#111116]/95 backdrop-blur-2xl border border-amber-400/35 shadow-[0_10px_40px_rgba(0,0,0,0.85)] p-3 space-y-2"
         >
           <div className="flex items-center justify-between px-2 text-[11px] text-zinc-400">
-            <span className="flex items-center gap-1.5 text-amber-400 font-semibold font-mono">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              VTR369 AI AUTOPILOT
-            </span>
-            <span className="truncate max-w-xs sm:max-w-md text-zinc-300 font-medium">
-              {autopilotStatus}
-            </span>
-            <button
-              onClick={() => setVoiceEnabled(!voiceEnabled)}
-              className="text-zinc-400 hover:text-white transition"
-              title="Toggle Voice Output"
-            >
-              {voiceEnabled ? (
-                <Volume2 className="w-4 h-4 text-amber-400" />
-              ) : (
-                <VolumeX className="w-4 h-4 text-zinc-600" />
+            <div className="flex items-center gap-2">
+              <span className="flex items-center gap-1.5 text-amber-400 font-semibold font-mono">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                VTR369 AI AUTOPILOT
+              </span>
+              {isPlayingAudio && (
+                <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 animate-pulse">
+                  <Radio className="w-3 h-3" />
+                  <span>ElevenLabs Audio</span>
+                </span>
               )}
-            </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="truncate max-w-xs sm:max-w-sm text-zinc-300 font-medium hidden sm:inline">
+                {autopilotStatus}
+              </span>
+              <button
+                onClick={() => {
+                  setLorModalOpen(true);
+                  verifyLorId("LOR-VTR-2024-AI01");
+                }}
+                className="text-zinc-400 hover:text-amber-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-md bg-white/5"
+                title="Verify LOR / Credentials"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>LOR</span>
+              </button>
+              <button
+                onClick={() => setSettingsModalOpen(true)}
+                className="text-zinc-400 hover:text-amber-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-md bg-white/5"
+                title="API Settings (ElevenLabs & Gemini)"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                <span>APIs</span>
+              </button>
+              <button
+                onClick={() => setVoiceEnabled(!voiceEnabled)}
+                className="text-zinc-400 hover:text-white transition"
+                title="Toggle Voice Output"
+              >
+                {voiceEnabled ? (
+                  <Volume2 className="w-4 h-4 text-amber-400" />
+                ) : (
+                  <VolumeX className="w-4 h-4 text-zinc-600" />
+                )}
+              </button>
+            </div>
           </div>
 
           <form
@@ -1365,7 +1535,7 @@ export default function VTR369Portfolio() {
               type="text"
               value={commandText}
               onChange={(e) => setCommandText(e.target.value)}
-              placeholder="Speak or type: 'Tell me about Vexaro', 'Show projects', 'Skills', 'WhatsApp'..."
+              placeholder="Speak or type: 'Tell me about Vexaro', 'Verify LOR', 'Verified RAG', 'WhatsApp'..."
               className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
             />
 
@@ -1418,6 +1588,12 @@ export default function VTR369Portfolio() {
                   {m.text}
                 </div>
               ))}
+              {chatLoading && (
+                <div className="p-3 rounded-xl max-w-[85%] bg-white/10 text-amber-400 flex items-center gap-2 font-mono">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                  <span>Thinking...</span>
+                </div>
+              )}
             </div>
 
             <form onSubmit={handleChatSend} className="p-3 border-t border-white/10 space-y-2">
@@ -1431,7 +1607,8 @@ export default function VTR369Portfolio() {
                 />
                 <button
                   type="submit"
-                  className="px-3.5 py-2 rounded-lg bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition"
+                  disabled={chatLoading}
+                  className="px-3.5 py-2 rounded-lg bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition disabled:opacity-50"
                 >
                   Send
                 </button>
@@ -1462,6 +1639,301 @@ export default function VTR369Portfolio() {
               </div>
             </form>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ========================================== */}
+      {/* 8. CRYPTOGRAPHIC LOR & CREDENTIAL PROOF MODAL */}
+      {/* ========================================== */}
+      <AnimatePresence>
+        {lorModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              transition={{ type: "spring", stiffness: 120, damping: 20 }}
+              className="w-full max-w-2xl rounded-2xl bg-[#111116] border border-amber-400/40 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col max-h-[90vh]"
+            >
+              {/* Header */}
+              <div className="p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+                      <span>Cryptographic LOR &amp; Credential Registry</span>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        LIVE API
+                      </span>
+                    </h3>
+                    <p className="text-xs text-zinc-400 font-mono">
+                      Endpoint: /api/verify-lor · SHA-256 Tamper-Proof
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setLorModalOpen(false)}
+                  className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/5 transition"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="p-6 overflow-y-auto space-y-6">
+                {/* ID Search Input & Quick Select Pills */}
+                <div className="space-y-3">
+                  <label className="text-xs font-mono text-zinc-300 uppercase tracking-wider block">
+                    Verify Credential / LOR ID:
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={lorInputId}
+                      onChange={(e) => setLorInputId(e.target.value)}
+                      placeholder="e.g. LOR-VTR-2024-AI01"
+                      className="flex-1 bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 font-mono uppercase"
+                    />
+                    <button
+                      onClick={() => verifyLorId(lorInputId)}
+                      disabled={lorLoading}
+                      className="px-5 py-2.5 rounded-xl bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition disabled:opacity-50 font-mono flex items-center gap-1.5"
+                    >
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>{lorLoading ? "Verifying..." : "Verify"}</span>
+                    </button>
+                  </div>
+
+                  {/* Preset Pills */}
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {[
+                      { id: "LOR-VTR-2024-AI01", label: "Academic AI LOR" },
+                      { id: "LOR-VTR-2024-SYS02", label: "Vexaro AI Endorsement" },
+                      { id: "LOR-VTR-2025-QUANT369", label: "Quantum Exploration" },
+                      { id: "LOR-VTR-2025-DP04", label: "Verified RAG & DP" },
+                    ].map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => verifyLorId(item.id)}
+                        className={`text-[11px] font-mono px-3 py-1 rounded-full border transition flex items-center gap-1.5 ${
+                          lorInputId === item.id
+                            ? "bg-amber-400 text-black border-amber-400 font-semibold shadow-[0_0_12px_rgba(245,158,11,0.3)]"
+                            : "bg-white/5 text-zinc-300 border-white/10 hover:border-amber-400/50"
+                        }`}
+                      >
+                        <span>{item.id}</span>
+                        <span className="text-[9px] opacity-70 hidden sm:inline">({item.label})</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Verification Result Card */}
+                {lorData && !lorData.error ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-5 rounded-2xl bg-black/40 border border-emerald-500/40 space-y-4 relative overflow-hidden"
+                  >
+                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                          {lorData.status}
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-mono text-zinc-400">{lorData.issueDate}</span>
+                    </div>
+
+                    <div>
+                      <h4 className="text-base font-bold text-white">{lorData.title}</h4>
+                      <p className="text-xs text-amber-400/90 font-mono mt-0.5">
+                        Candidate: {lorData.candidate}
+                      </p>
+                      <p className="text-xs text-zinc-400 mt-1">
+                        Issuer: <strong>{lorData.issuer}</strong> ({lorData.role} · {lorData.organization})
+                      </p>
+                    </div>
+
+                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 text-xs text-zinc-300 leading-relaxed italic">
+                      &ldquo;{lorData.endorsement}&rdquo;
+                    </div>
+
+                    {/* Verified Competencies */}
+                    {lorData.verifiedCompetencies && (
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">
+                          Verified Technical Competencies:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {lorData.verifiedCompetencies.map((comp: string, i: number) => (
+                            <span
+                              key={i}
+                              className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200"
+                            >
+                              ✓ {comp}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Cryptographic SHA-256 Proof */}
+                    <div className="p-3 rounded-xl bg-black/80 border border-white/10 space-y-1">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                        <span>SHA-256 Cryptographic Verification Fingerprint:</span>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(lorData.verificationHash || "");
+                            setCopiedHash(true);
+                            setTimeout(() => setCopiedHash(false), 2000);
+                          }}
+                          className="text-amber-400 hover:underline flex items-center gap-1"
+                        >
+                          {copiedHash ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedHash ? "Copied Proof" : "Copy Proof"}</span>
+                        </button>
+                      </div>
+                      <p className="font-mono text-[11px] text-emerald-400 break-all select-all">
+                        {lorData.verificationHash}
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : lorData?.error ? (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono">
+                    ⚠️ {lorData.error}
+                  </div>
+                ) : null}
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 border-t border-white/10 bg-white/[0.02] flex items-center justify-between text-xs text-zinc-400">
+                <span className="font-mono text-[11px]">VTR369 Credential Verification Engine</span>
+                <button
+                  onClick={() => setLorModalOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ========================================== */}
+      {/* 9. LIVE API SETTINGS MODAL (ELEVENLABS + GEMINI) */}
+      {/* ========================================== */}
+      <AnimatePresence>
+        {settingsModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              transition={{ type: "spring", stiffness: 120, damping: 20 }}
+              className="w-full max-w-lg rounded-2xl bg-[#111116] border border-amber-400/40 shadow-2xl overflow-hidden p-6 space-y-5"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <Sliders className="w-5 h-5 text-amber-400" />
+                  <h3 className="text-base font-bold text-white">Live API Gateway Settings</h3>
+                </div>
+                <button
+                  onClick={() => setSettingsModalOpen(false)}
+                  className="p-1.5 text-zinc-400 hover:text-white rounded-lg transition"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-4 text-xs">
+                {/* ElevenLabs API Key */}
+                <div className="space-y-1.5">
+                  <label className="font-mono text-zinc-300 font-semibold block flex items-center justify-between">
+                    <span>ElevenLabs Voice API Key (Optional Client Override):</span>
+                    <span className="text-[10px] text-amber-400">xi-...</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={elevenLabsApiKey}
+                    onChange={(e) => setElevenLabsApiKey(e.target.value)}
+                    placeholder="Enter your ElevenLabs API Key (or leave empty to use server/browser TTS)"
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400 font-mono"
+                  />
+                  <p className="text-[10px] text-zinc-500">
+                    Enables ultra-realistic studio speech in the Autopilot dock and Chat Concierge.
+                  </p>
+                </div>
+
+                {/* ElevenLabs Voice Selector */}
+                <div className="space-y-1.5">
+                  <label className="font-mono text-zinc-300 font-semibold block">
+                    ElevenLabs Studio Voice:
+                  </label>
+                  <select
+                    value={elevenLabsVoiceId}
+                    onChange={(e) => setElevenLabsVoiceId(e.target.value)}
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 font-mono"
+                  >
+                    <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Warm Studio-Grade (Default)</option>
+                    <option value="pNInz6obpgDQGcFmaJgB">Adam — Deep Authoritative</option>
+                    <option value="ErXwobaYiN019PkySvjV">Antoni — Technical Executive</option>
+                    <option value="custom">Custom Voice ID...</option>
+                  </select>
+                </div>
+
+                {/* Gemini API Key */}
+                <div className="space-y-1.5">
+                  <label className="font-mono text-zinc-300 font-semibold block flex items-center justify-between">
+                    <span>Google Gemini API Key (Optional Client Override):</span>
+                    <span className="text-[10px] text-amber-400">AIza...</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={geminiApiKey}
+                    onChange={(e) => setGeminiApiKey(e.target.value)}
+                    placeholder="Enter free Gemini API Key from aistudio.google.com"
+                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400 font-mono"
+                  />
+                  <p className="text-[10px] text-zinc-500">
+                    Powers dynamic generative chat turns. Zero downtime fallback active if empty.
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => speakResponse("Testing ElevenLabs studio voice output.")}
+                  className="px-4 py-2 rounded-xl border border-white/15 hover:border-amber-400/50 text-zinc-300 hover:text-white transition font-mono text-xs flex items-center gap-1.5"
+                >
+                  <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Test Audio</span>
+                </button>
+
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setSettingsModalOpen(false)}
+                    className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white transition font-medium text-xs"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => saveApiSettings(elevenLabsApiKey, elevenLabsVoiceId, geminiApiKey)}
+                    className="px-5 py-2 rounded-xl bg-amber-400 text-black hover:bg-amber-300 transition font-bold text-xs shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                  >
+                    Save &amp; Activate
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>

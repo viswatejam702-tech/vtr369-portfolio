@@ -6,23 +6,22 @@
 // ============================================================================
 
 export const profile = {
-  name: "Viswa Teja Reddy",
+  name: "M. Viswa Teja Reddy",
   handle: "vtr.369",
   githubUsername: "viswatejam702-tech",
-  headline: "AI / SaaS / Data Science — Solo Founder, Building in Public",
-  tagline: "Aspiring Entrepreneur · Solo Founder · Scaling One Real Build at a Time",
+  headline: "AI Research Engineer · Building Vexaro AI Autonomous Agentic Platform",
+  tagline: "Building Vexaro AI — Autonomous Agentic Platform (Specialized Agents Across Every Category & Sector · Launching Very Soon)",
   bio:
-    "AI · SaaS · real executions, real builds · Data Science · Freelancing · Website building. " +
-    "AI-tech / quantum computing & mechanics enthusiast, and a lifelong space nerd. " +
-    "Bachelor's in Computer Science Engineering. Currently building in AI, applied data science " +
-    "and SaaS products — validating ideas in public instead of waiting for permission.",
+    "AI Research Engineer pioneering autonomous multi-agent systems, evaluation harnesses, deep learning architectures, and quantum computing foundations. " +
+    "Currently building Vexaro AI — the omni-sector autonomous multi-agent operating system launching very soon. " +
+    "Bachelor's in Computer Science Engineering. Architecting production systems with zero-trust multi-tenancy and verifiable reasoning loops.",
   bioLong: [
-    "I'm Viswa Teja Reddy — a computer science engineering graduate who builds real, working software instead of talking about it. My focus sits at the intersection of AI, data science, and SaaS: taking messy real-world problems (semiconductor defects, crypto market regimes, weather signals, compliance risk) and turning them into working, research-grade systems.",
-    "Outside of shipped projects, I'm an AI-tech, quantum computing & mechanics enthusiast — I read about qubits and orbital mechanics for fun, and it shows up in how I think about systems: as things with state, uncertainty, and emergent behavior.",
-    "Right now I'm solo-founding and validating two SaaS ideas in public — vitro.ai and MindBridge AI — while freelancing on AI/data/web projects and slowly scaling what's working. No stealth mode. No fake traction. Just real builds, shipped and shown.",
+    "I'm M. Viswa Teja Reddy — an AI Research Engineer who architects and builds production-ready autonomous multi-agent systems and deep learning engines. My work centers on autonomous multi-agent orchestration, evidence-grounded RAG verification, and high-precision deep learning.",
+    "Outside of shipped systems, I explore quantum computing, quantum mechanics, and frontier theoretical physics — bringing rigorous mathematical state and uncertainty modeling into modern distributed AI architectures.",
+    "Currently, I am building Vexaro AI — an omni-sector autonomous multi-agent operating system deploying specialized agents across every enterprise sector, launching very soon.",
   ],
   designation: "B.E. / B.Tech, Computer Science Engineering",
-  focusAreas: ["Applied AI", "Data Science", "SaaS Product Building", "Full-Stack / Vibe Coding"],
+  focusAreas: ["Autonomous Multi-Agent Systems", "RAG & Evidence Verification", "Deep Learning & PyTorch", "Quantum Computing Foundations"],
   favoriteNumber: 369,
 };
 
@@ -94,18 +93,32 @@ export const projects = [
 // ----------------------------------------------------------------------------
 export const saasProducts = [
   {
-    name: "vitro.ai",
-    url: "https://vitro.ai",
-    status: "Validating",
+    name: "Vexaro AI",
+    url: "https://github.com/viswatejam702-tech",
+    status: "Launching Very Soon",
     description:
-      "An AI-native product currently in validation — built to test a real workflow problem with a small group of early users before scaling.",
+      "Omni-sector autonomous multi-agent operating system orchestrating specialized AI agent fleets across legal, clinical, financial, and SDR domains.",
   },
   {
-    name: "MindBridge AI",
-    url: "#",
-    status: "Validating",
+    name: "Verified RAG",
+    url: "https://verified-rag.onrender.com",
+    status: "Live on Render",
     description:
-      "A mental wellness platform using AI to give people an accessible first step toward support — currently being validated with early users and clinical-style feedback loops.",
+      "Enterprise Retrieval-Augmented Generation system with dense vector MIPS, Cross-Encoder reranking, and DeBERTa claim-level NLI verification.",
+  },
+  {
+    name: "Nexus V AI",
+    url: "https://github.com/viswatejam702-tech/nexus-V-AI",
+    status: "Active System",
+    description:
+      "Adaptive autonomous multi-agent swarm framework executing multi-step enterprise reasoning, tool execution, and self-healing tasks.",
+  },
+  {
+    name: "ClauseGuard X",
+    url: "https://github.com/viswatejam702-tech/Clause_gaurd_x_version",
+    status: "Active System",
+    description:
+      "AI contract risk intelligence engine performing real-time clause extraction, risk scoring, and DPDP compliance auditing.",
   },
 ];
 
