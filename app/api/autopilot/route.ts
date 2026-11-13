@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
         speechText:
           "Viswa is building Vexaro AI, an omni-sector autonomous multi-agent operating system with specialized agents across legal, outbound SDR, clinical triage, finance, and code engineering. It is launching very soon.",
         displayText:
-          "🚀 **Vexaro AI — Autonomous Agentic Platform**\n\n• **Core**: Omni-sector multi-agent operating system.\n• **Specialized Workforces**: Legal, Outbound SDR, Clinical Triage, Financial Forecasting, and Code Execution.\n• **Architecture**: 8-Layer Agent Architecture with zero-trust multi-tenancy.\n• **Status**: Launching very soon.",
+          "🚀 **Vexaro AI — Autonomous Agentic Platform**\n\n• **Core**: Omni-sector multi-agent operating system.\n• **Specialized Workforces**: Legal, Outbound SDR, Clinical Triage, Financial Forecasting, and Code Execution.\n• **Architecture**: 8-Layer Agent Architecture with zero-trust multi-tenancy.\n• **Live Website**: [vexaro-app.web.app](https://vexaro-app.web.app/)\n• **Status**: Launching very soon.",
         action: {
           type: "SCROLL",
           target: "#projects",

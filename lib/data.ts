@@ -94,7 +94,7 @@ export const projects = [
 export const saasProducts = [
   {
     name: "Vexaro AI",
-    url: "https://github.com/viswatejam702-tech",
+    url: "https://vexaro-app.web.app/",
     status: "Launching Very Soon",
     description:
       "Omni-sector autonomous multi-agent operating system orchestrating specialized AI agent fleets across legal, clinical, financial, and SDR domains.",

@@ -58,9 +58,8 @@ const FLAGSHIP_PROJECTS = [
     description:
       "Omni-sector autonomous multi-agent operating system designed to orchestrate specialized AI agents across every enterprise category: Legal, Outbound SDR, Clinical Triage, Financial Forecasting, and Code Engineering. Features zero-trust multi-tenancy and verifiable reasoning loops.",
     language: "Full-Stack TypeScript / Python",
-    url: "https://github.com/viswatejam702-tech",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+    url: "https://vexaro-app.web.app/",
+    image: "/vexaro-logo.png",
     highlights: [
       "Specialized Agents for Every Sector",
       "Launching Very Soon",
@@ -1248,16 +1247,28 @@ export default function VTR369Portfolio() {
               }`}
             >
               <div
-                className={`relative overflow-hidden bg-zinc-900 ${
+                className={`relative overflow-hidden bg-[#0a0a0e] ${
                   project.isSpotlight ? "h-64 sm:h-80" : "h-52"
                 }`}
               >
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-700 filter brightness-90 group-hover:brightness-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-[#111116]/40 to-transparent" />
+                {project.id === "vexaro-ai" ? (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#0e0e14] via-[#09090c] to-[#111116] relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.22),transparent_70%)]" />
+                    <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:18px_18px]" />
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="relative z-10 w-44 h-44 sm:w-56 sm:h-56 object-contain drop-shadow-[0_0_35px_rgba(245,158,11,0.55)] group-hover:scale-110 transition duration-700"
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700 filter brightness-90 group-hover:brightness-100"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-[#111116]/40 to-transparent pointer-events-none" />
 
                 {/* Badge */}
                 <span
@@ -1318,9 +1329,19 @@ export default function VTR369Portfolio() {
 
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span className="text-amber-400/90 font-medium">{project.language}</span>
-                  <span className="flex items-center gap-1 text-zinc-300 group-hover:text-amber-400 transition">
-                    <Github className="w-3.5 h-3.5" /> View on GitHub
-                  </span>
+                  {project.id === "vexaro-ai" || project.url.includes("vexaro-app.web.app") ? (
+                    <span className="flex items-center gap-1.5 text-amber-400 font-semibold group-hover:underline">
+                      <ExternalLink className="w-3.5 h-3.5" /> Visit Live Website
+                    </span>
+                  ) : project.url.includes("onrender.com") ? (
+                    <span className="flex items-center gap-1.5 text-emerald-400 font-semibold group-hover:underline">
+                      <ExternalLink className="w-3.5 h-3.5" /> Launch on Render
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-1 text-zinc-300 group-hover:text-amber-400 transition">
+                      <Github className="w-3.5 h-3.5" /> View on GitHub
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.a>

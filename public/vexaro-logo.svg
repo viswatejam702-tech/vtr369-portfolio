@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="512" height="512">
+  <defs>
+    <radialGradient id="ambGlow" cx="50%" cy="85%" r="45%">
+      <stop offset="0%" stop-color="#ff6a00" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#ff6a00" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#ff6a00" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="sparkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="35%" stop-color="#ffb066" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#ff6a00" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#ff6a00" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="facetWhite" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#c9c9c9" />
+    </linearGradient>
+    <linearGradient id="facetOrange" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffb066" />
+      <stop offset="55%" stop-color="#ff6a00" />
+      <stop offset="100%" stop-color="#b83d00" />
+    </linearGradient>
+    <filter id="glowDrop" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#ff6a00" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  
+
+  <!-- Ambient Underglow -->
+  <ellipse cx="100" cy="155" rx="52" ry="12" fill="url(#ambGlow)" />
+
+  <!-- Extruded 3D Layers -->
+  <g filter="url(#glowDrop)">
+    
+      <g transform="translate(32.36, 59.24)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.03">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(33.620000000000005, 58.58)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.09">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(34.88, 57.92)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.15">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(36.14, 57.26)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.21">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(37.4, 56.6)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.28">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(38.66, 55.94)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.34">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(39.92, 55.28)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.40">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(41.18, 54.62)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.46">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(42.44, 53.96)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.53">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(43.7, 53.3)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.59">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(44.96, 52.64)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.65">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(46.22, 51.98)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.71">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(47.48, 51.32)" fill="#0d0d0d" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.78">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+      <g transform="translate(48.74, 50.66)" fill="#2a1100" stroke="#ff6a00" stroke-width="0.8" stroke-opacity="0.84">
+        <polygon points="6,10 31,10 50,58 50,92" />
+        <polygon points="94,10 69,10 50,58 50,92" />
+      </g>
+
+    <!-- Top Cap (Front Facets) -->
+    <g transform="translate(50, 50)">
+      <polygon points="6,10 31,10 50,58 50,92" fill="url(#facetWhite)" />
+      <polygon points="94,10 69,10 50,58 50,92" fill="url(#facetOrange)" />
+      <!-- Specular Highlights -->
+      <polygon points="6,10 31,10 50,58" fill="#ffffff" opacity="0.4" />
+      <polygon points="94,10 69,10 50,58" fill="#ffffff" opacity="0.2" />
+    </g>
+
+    <!-- Notch Spark Aura & Core -->
+    <circle cx="100" cy="84" r="9" fill="url(#sparkGlow)" />
+    <circle cx="100" cy="84" r="4.5" fill="#ffffff">
+      <animate attributeName="r" values="3.5;5.5;3.5" dur="2.4s" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>

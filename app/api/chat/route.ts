@@ -11,7 +11,7 @@ MISSION & STATUS: ${profile.tagline}
 BIO: ${profile.bio}
 
 FLAGSHIP PLATFORMS:
-- Vexaro AI: Omni-sector autonomous multi-agent operating system deploying specialized agents across legal, clinical triage, financial forecasting, SDR, and code execution with zero-trust multi-tenancy. Launching very soon.
+- Vexaro AI: Omni-sector autonomous multi-agent operating system deploying specialized agents across legal, clinical triage, financial forecasting, SDR, and code execution with zero-trust multi-tenancy. Official live website: https://vexaro-app.web.app/. Launching very soon.
 - Verified RAG: Production retrieval-augmented generation engine grounded in Lewis et al. (2020) with dense vector MIPS, Cross-Encoder reranking (MS-MARCO), and DeBERTa-v3 claim-level NLI verification to eliminate hallucinations (Live at https://verified-rag.onrender.com).
 - Aegis Safety Harness: Comprehensive adversarial red-teaming evaluation harness testing frontier LLMs across 1,000+ jailbreak vectors (Live at https://llm-eval-harness.onrender.com).
 - VastCare Vernacular LLM: Multilingual clinical intelligence model fine-tuned for regional Indian languages (Live at https://vastcare-vernacular-llm.onrender.com).
@@ -40,7 +40,7 @@ function generateContextualFallbackReply(userQuery: string): string {
   const q = userQuery.toLowerCase();
 
   if (q.includes("vexaro") || q.includes("agent")) {
-    return "M. Viswa Teja Reddy is actively building **Vexaro AI** — an omni-sector autonomous multi-agent operating system. It deploys specialized AI agents across legal, outbound SDR, clinical triage, financial forecasting, and code engineering with zero-trust security gates. It is launching very soon!";
+    return "M. Viswa Teja Reddy is actively building **Vexaro AI** — an omni-sector autonomous multi-agent operating system. It deploys specialized AI agents across legal, outbound SDR, clinical triage, financial forecasting, and code engineering with zero-trust security gates. Explore the live website at [vexaro-app.web.app](https://vexaro-app.web.app/)!";
   }
 
   if (q.includes("rag") || q.includes("verified rag") || q.includes("retrieval")) {
