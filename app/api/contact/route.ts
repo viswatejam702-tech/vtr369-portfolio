@@ -24,10 +24,11 @@ export async function POST(req: NextRequest) {
       formattedText
     )}`;
 
-    // Optional webhook forwarding if DISCORD_WEBHOOK_URL or SLACK_WEBHOOK_URL is set in environment
-    if (process.env.NOTIFICATION_WEBHOOK_URL) {
+    // Optional webhook forwarding if valid HTTP/S webhook URL is set
+    const webhookUrl = process.env.NOTIFICATION_WEBHOOK_URL;
+    if (webhookUrl && (webhookUrl.startsWith("http://") || webhookUrl.startsWith("https://"))) {
       try {
-        await fetch(process.env.NOTIFICATION_WEBHOOK_URL, {
+        await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

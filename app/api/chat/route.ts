@@ -77,33 +77,46 @@ export async function POST(req: NextRequest) {
 
     // If Gemini API Key is available, use live Gemini model
     if (activeKey) {
-      const model = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+      const preferredModel = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+      const candidateModels = Array.from(new Set([
+        preferredModel,
+        "gemini-3.5-flash",
+        "gemini-3.1-flash-lite",
+        "gemini-3.8-flash",
+      ]));
+
       const contents = (messages ?? []).slice(-10).map((m: { role: string; content: string }) => ({
         role: m.role === "assistant" ? "model" : "user",
         parts: [{ text: m.content }],
       }));
 
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": activeKey,
-          },
-          body: JSON.stringify({
-            contents,
-            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-            generationConfig: { maxOutputTokens: 500, temperature: 0.6 },
-          }),
-        }
-      );
+      for (const model of candidateModels) {
+        try {
+          const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(activeKey)}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": activeKey,
+              },
+              body: JSON.stringify({
+                contents,
+                systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                generationConfig: { maxOutputTokens: 800, temperature: 0.6 },
+              }),
+            }
+          );
 
-      if (res.ok) {
-        const data = await res.json();
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (reply) {
-          return NextResponse.json({ reply, provider: "gemini-live" });
+          if (res.ok) {
+            const data = await res.json();
+            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (reply) {
+              return NextResponse.json({ reply, provider: `gemini-live (${model})` });
+            }
+          }
+        } catch {
+          // Continue to next model fallback
         }
       }
     }

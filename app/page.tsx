@@ -284,7 +284,7 @@ export default function VTR369Portfolio() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedEleven = localStorage.getItem("vtr_elevenlabs_key") || "";
-      const storedVoice = localStorage.getItem("vtr_elevenlabs_voice") || "21m00Tcm4TlvDq8ikWAM";
+      const storedVoice = localStorage.getItem("vtr_elevenlabs_voice") || "JBFqnCBsd6RMkjVDRZzb";
       const storedGemini = localStorage.getItem("vtr_gemini_key") || "";
       if (storedEleven) setElevenLabsApiKey(storedEleven);
       if (storedVoice) setElevenLabsVoiceId(storedVoice);
@@ -1793,9 +1793,10 @@ export default function VTR369Portfolio() {
                     onChange={(e) => setElevenLabsVoiceId(e.target.value)}
                     className="w-full bg-black/60 border border-white/[0.1] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400 font-mono"
                   >
-                    <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Studio Natural (Default)</option>
-                    <option value="pNInz6obpgDQGcFmaJgB">Adam — Deep Authoritative</option>
-                    <option value="ErXwobaYiN019PkySvjV">Antoni — Technical Executive</option>
+                    <option value="JBFqnCBsd6RMkjVDRZzb">George — Warm Storyteller (Studio Default)</option>
+                    <option value="EXAVITQu4vr4xnSDxMaL">Sarah — Reassuring &amp; Confident</option>
+                    <option value="CwhRBWXzGAHq8TQ4Fs17">Roger — Laid-Back &amp; Resonant</option>
+                    <option value="Xb7hH8MSUJpSbSDYk0k2">Alice — Clear &amp; Engaging</option>
                   </select>
                 </div>
 
