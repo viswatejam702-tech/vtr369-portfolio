@@ -6,13 +6,11 @@ import { SITE_CONFIG } from "@/lib/siteConfig";
 const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700"],
 });
 const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
