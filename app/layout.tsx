@@ -12,22 +12,22 @@ const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: `${SITE_CONFIG.name} — ${SITE_CONFIG.brand} | AI Research Engineer · Building Vexaro AI`,
+  title: `${SITE_CONFIG.name} — ${SITE_CONFIG.brand} | AI Research Engineer · Vexaro AI`,
   description: SITE_CONFIG.tagline,
   metadataBase: new URL("https://vtr369.dev"),
   keywords: [
     "AI Research Engineer",
+    "M. Viswa Teja Reddy",
     "Vexaro AI",
-    "Autonomous Agentic Platform",
-    "Nexus V AI",
-    "ClauseGuard X",
-    "Autonomous Agents",
-    "Quantum Computing",
-    "Deep Learning",
+    "Autonomous Multi-Agent Operating System",
+    "Sector Solver",
+    "Veylithra",
+    "Deep Learning Systems",
+    "LiveKit Voice Calling OS",
     "Hyderabad",
   ],
   authors: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CONFIG.name} — AI Research Engineer · Building Vexaro AI`,
+    title: `${SITE_CONFIG.name} — AI Research Engineer · Vexaro AI`,
     description: SITE_CONFIG.tagline,
     images: [SITE_CONFIG.heroPortraitUrl],
   },
@@ -65,9 +65,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable} dark`}
     >
-      <body className="grain font-body bg-[#08080a] text-zinc-100 overflow-x-hidden selection:bg-amber-400 selection:text-black">
+      <body className="grain font-body bg-[#07090E] text-[#F3F4F6] overflow-x-hidden selection:bg-blue-600/30 selection:text-white antialiased">
         {children}
       </body>
     </html>

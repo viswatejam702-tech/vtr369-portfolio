@@ -1,169 +1,177 @@
 // ============================================================================
-// This file holds every real, static fact about you. Edit these values any
-// time — no other file needs to change. Live data (GitHub stars, forks) is
-// fetched at runtime in components/Projects.tsx; this file is the fallback
-// source of truth for names, descriptions and links.
+// Core Data & Production Systems Information
 // ============================================================================
 
 export const profile = {
   name: "M. Viswa Teja Reddy",
   handle: "vtr.369",
   githubUsername: "viswatejam702-tech",
-  headline: "AI Research Engineer · Building Vexaro AI Autonomous Agentic Platform",
-  tagline: "Building Vexaro AI — Autonomous Agentic Platform (Specialized Agents Across Every Category & Sector · Launching Very Soon)",
+  headline: "AI Research Engineer · Architect of Vexaro AI & Autonomous Multi-Agent Systems",
+  tagline: "Building Vexaro AI (9 agents · 101 verified gates) & VTR's Agentic Company (90 subagents · 300 MCP skills)",
   bio:
-    "AI Research Engineer pioneering autonomous multi-agent systems, evaluation harnesses, deep learning architectures, and quantum computing foundations. " +
-    "Currently building Vexaro AI — the omni-sector autonomous multi-agent operating system launching very soon. " +
-    "Bachelor's in Computer Science Engineering. Architecting production systems with zero-trust multi-tenancy and verifiable reasoning loops.",
+    "AI Research Engineer architecting production-ready autonomous multi-agent systems, low-latency telephony pipelines, and evidence-grounded neural verification. " +
+    "Creator of Vexaro AI — the evidence-grounded B2B intelligence engine with 9 specialized autonomous agents, 101 verification gates, and sub-second Tenglish voice calling OS. " +
+    "Designing 8-layer agent architectures, zero-trust multi-tenancy, and DPDP-compliant verification loops.",
   bioLong: [
-    "I'm M. Viswa Teja Reddy — an AI Research Engineer who architects and builds production-ready autonomous multi-agent systems and deep learning engines. My work centers on autonomous multi-agent orchestration, evidence-grounded RAG verification, and high-precision deep learning.",
-    "Outside of shipped systems, I explore quantum computing, quantum mechanics, and frontier theoretical physics — bringing rigorous mathematical state and uncertainty modeling into modern distributed AI architectures.",
-    "Currently, I am building Vexaro AI — an omni-sector autonomous multi-agent operating system deploying specialized agents across every enterprise sector, launching very soon.",
+    "I'm M. Viswa Teja Reddy — an AI Research Engineer who designs and operates production-grade autonomous agent systems and neural pipelines. My work focuses on multi-agent decomposition, real-time voice orchestration, and claim-level NLI verification.",
+    "I created Vexaro AI, an enterprise operating system powered by 9 specialized agents (Outreach SDR, Meetlyzer, Hirifir, CashPilot, Veylithra, Voice OS) verified across 101 automated evaluation gates.",
+    "Beyond applied enterprise systems, I run machine learning and deep learning benchmarks in time-series forecasting (R² = 0.930), computer vision CNNs, and quantum computing foundations.",
   ],
-  designation: "B.E. / B.Tech, Computer Science Engineering",
-  focusAreas: ["Autonomous Multi-Agent Systems", "RAG & Evidence Verification", "Deep Learning & PyTorch", "Quantum Computing Foundations"],
+  designation: "B.Tech, Computer Science Engineering · Hyderabad, India",
+  focusAreas: [
+    "Autonomous Multi-Agent Operating Systems",
+    "Real-Time Telephony & Voice Agent OS (LiveKit + Sarvam)",
+    "Evidence-Grounded RAG & NLI Verification",
+    "Deep Learning & PyTorch CNN/LSTM Benchmarks",
+  ],
   favoriteNumber: 369,
 };
 
 export const socials = {
   email: "viswatejam702@gmail.com",
-  whatsapp: "+918978237578", // used to build wa.me link
+  whatsapp: "+918978237578",
   linkedin: "https://www.linkedin.com/in/m-viswa-teja-reddy-1234g",
   x: "https://x.com/MViswateja1",
   github: "https://github.com/viswatejam702-tech",
   reddit: "https://www.reddit.com/u/Own_Smoke_6138/s/kFgJxROWxR",
   facebook: "https://www.facebook.com/share/18qbhkwRek/",
   instagram: "https://www.instagram.com/vtr_.369/",
+  instagramAlt: "https://www.instagram.com/vexaro.ai.in/",
 };
 
 export const whatsappLink = `https://wa.me/${socials.whatsapp.replace("+", "")}`;
 
-// ----------------------------------------------------------------------------
-// GitHub repos: real repo slugs. Descriptions below are written summaries;
-// live stats (stars, forks, language, last push) are fetched from the GitHub
-// API at runtime in components/Projects.tsx and merged on top of this data.
-// ----------------------------------------------------------------------------
 export const projects = [
   {
-    repo: "WaferGuard-AI-is-a-research-grade-semiconductor-wafer-anomaly-detection-platform",
-    title: "WaferGuard AI",
-    category: "AI / Manufacturing",
+    repo: "Vexaro-AI",
+    title: "Vexaro AI — Verifiable Autonomous Multi-Agent OS",
+    category: "Autonomous Systems",
     description:
-      "A research-grade anomaly detection platform for semiconductor wafer inspection. Applies computer vision and unsupervised learning to flag defect patterns on wafer maps early, the kind of quality signal that normally needs a trained fab engineer to spot.",
+      "Evidence-grounded B2B buying-moment intelligence engine with 9 specialized autonomous agents (Outreach SDR, Meetlyzer, Hirifir, CashPilot, Veylithra), 101 automated verification gates, sub-second (0.86s p50) LiveKit + Sarvam AI Telugu-English voice calling OS, and TRAI/DPDP compliance gates.",
   },
   {
-    repo: "Bitcoin-Market-Regime-Discovery-using-Advanced-Unsupervised-Machine-Learning",
-    title: "Bitcoin Market Regime Discovery",
-    category: "AI / Quant Finance",
+    repo: "vtr-agentic-company",
+    title: "VTR's Agentic Company — 90-Agent Multi-Agent Swarm",
+    category: "Autonomous Systems",
     description:
-      "Uses advanced unsupervised machine learning (clustering over engineered market features) to automatically discover distinct Bitcoin market regimes — trending, choppy, high-volatility — instead of relying on hand-drawn technical analysis.",
+      "Enterprise autonomous orchestration network coordinating 90 specialized subagents and 300+ Model Context Protocol (MCP) skills across an 8-layer architecture with zero-trust tenant isolation.",
+  },
+  {
+    repo: "sector-solver",
+    title: "Sector Solver — Algorithmic Optimization Suite",
+    category: "Algorithms & Optimization",
+    description:
+      "Quantitative optimization engine applying combinatorial algorithms and heuristics to solve industry-specific routing, scheduling, and asset-allocation bottlenecks.",
+  },
+  {
+    repo: "verified-rag",
+    title: "Verified RAG — Evidence & Claim NLI Platform",
+    category: "RAG & Systems",
+    description:
+      "End-to-end parametric/non-parametric Retrieval-Augmented Generation system grounded in Lewis et al. (2020) with dense MIPS vector search, Cross-Encoder reranking, and DeBERTa-v3 claim-level NLI verification.",
+  },
+  {
+    repo: "train-and-test-motion",
+    title: "Train and Test Motion — Kinematics Deep Learning",
+    category: "Deep Learning & Vision",
+    description:
+      "PyTorch human kinematics motion-tracking pipeline designed to train and benchmark deep neural models on spatial-temporal pose estimation with sub-pixel joint accuracy.",
   },
   {
     repo: "Weather-Prediction-with-ML-and-Dl",
-    title: "Weather Prediction (ML + DL)",
-    category: "Data Science",
+    title: "Meteorological Forecasting (GBDT vs LSTM)",
+    category: "Machine Learning & DL",
     description:
-      "A weather forecasting pipeline comparing classical machine learning against deep learning architectures on meteorological time-series data, benchmarking accuracy and generalization across models.",
+      "Comparative time-series benchmarking between Gradient Boosting (R² = 0.930, MAE 1.53°C) and Multi-Layer LSTM (R² = 0.914) over 10,000+ hourly meteorological telemetry records.",
   },
   {
-    repo: "apex-saas-strategy-and-audit",
-    title: "Apex — SaaS Strategy & Audit",
-    category: "SaaS / Strategy",
+    repo: "game-of-dl-in-ships",
+    title: "Maritime Vessel Classification (PyTorch CNN)",
+    category: "Deep Learning & Vision",
     description:
-      "A structured framework and audit toolkit for evaluating a SaaS idea's go-to-market strategy, pricing, and product-market fit signals before writing a single line of production code — the due-diligence layer most solo founders skip.",
+      "15-stage PyTorch maritime vessel detection and classification architecture leveraging transfer learning and residual feature maps across maritime satellite imagery.",
   },
   {
-    repo: "AI-powered-Multi-Agent-Lead-Finder",
-    title: "AI-Powered Multi-Agent Lead Finder",
-    category: "AI / Agents",
+    repo: "AI-voice-agent-pro",
+    title: "AI Voice Agent Pro — Telephony Audio Engine",
+    category: "Voice & Telephony",
     description:
-      "A multi-agent AI system where autonomous agents divide, research, and qualify sales leads collaboratively — built to explore how orchestrated LLM agents outperform a single monolithic prompt on real prospecting tasks.",
+      "Low-latency speech-to-action engine pairing 8kHz telephony Silero VAD with sentence-level streaming TTS and instant barge-in audio truncation under 50ms.",
   },
-  {
-    repo: "AI-powered-Crypto-Compliance-Tracker",
-    title: "AI-Powered Crypto Compliance Tracker",
-    category: "AI / Compliance",
-    description:
-      "An AI-assisted tracker for monitoring crypto transactions and flagging compliance risk signals, built to explore how LLMs and rule-based systems can work together on regulatory monitoring.",
-  },
-] as const;
+];
 
-// ----------------------------------------------------------------------------
-// SaaS products currently being validated
-// ----------------------------------------------------------------------------
 export const saasProducts = [
   {
-    name: "Vexaro AI",
+    name: "Vexaro AI Platform",
+    status: "101 GATES PASSED · LIVE",
+    description: "Evidence-grounded autonomous multi-agent operating system with 9 specialized agents, sub-second Tenglish voice calling, and zero-trust safety gates.",
+    tagline: "Autonomous multi-agent OS with 9 agents and 101 verified gates",
     url: "https://vexaro-app.web.app/",
-    status: "Launching Very Soon",
-    description:
-      "Omni-sector autonomous multi-agent operating system orchestrating specialized AI agent fleets across legal, clinical, financial, and SDR domains.",
+  },
+  {
+    name: "Sector Solver",
+    status: "ALGORITHMIC SUITE",
+    description: "Algorithmic decision-modeling engine applying integer programming and combinatorial heuristics to resolve sector-specific bottlenecks.",
+    tagline: "Algorithmic domain optimization suite",
+    url: "https://github.com/viswatejam702-tech",
   },
   {
     name: "Verified RAG",
+    status: "LIVE ON RENDER",
+    description: "Production retrieval-augmented generation engine with dense vector MIPS and DeBERTa-v3 claim-level NLI verification.",
+    tagline: "Evidence-grounded claim-level NLI verification platform",
     url: "https://verified-rag.onrender.com",
-    status: "Live on Render",
-    description:
-      "Enterprise Retrieval-Augmented Generation system with dense vector MIPS, Cross-Encoder reranking, and DeBERTa claim-level NLI verification.",
-  },
-  {
-    name: "Nexus V AI",
-    url: "https://github.com/viswatejam702-tech/nexus-V-AI",
-    status: "Active System",
-    description:
-      "Adaptive autonomous multi-agent swarm framework executing multi-step enterprise reasoning, tool execution, and self-healing tasks.",
-  },
-  {
-    name: "ClauseGuard X",
-    url: "https://github.com/viswatejam702-tech/Clause_gaurd_x_version",
-    status: "Active System",
-    description:
-      "AI contract risk intelligence engine performing real-time clause extraction, risk scoring, and DPDP compliance auditing.",
   },
 ];
 
-// ----------------------------------------------------------------------------
-// Instagram posts to embed as social proof (official Instagram embed, no API)
-// ----------------------------------------------------------------------------
-export const instagramEmbeds = [
-  "https://www.instagram.com/p/DaPrLy9AUfk/",
-  "https://www.instagram.com/vtr_.369/reel/DZ6nbKgBUmS/",
-  "https://www.instagram.com/vtr_.369/reel/DZ-IoY2hNPJ/",
-];
+export const skills: Record<string, string[]> = {
+  "Autonomous Agent Systems": [
+    "LangGraph DAG Orchestration",
+    "Multi-Agent Swarms (90 Subagents)",
+    "MCP Protocol (300+ Skills)",
+    "Self-Healing State Machines",
+  ],
+  "Voice & Telephony": [
+    "LiveKit Agents WebRTC",
+    "Silero Telephony VAD",
+    "Sarvam AI Saaras/Bulbul",
+    "Sub-Second Turn Latency",
+  ],
+  "Deep Learning & PyTorch": [
+    "Time-Series LSTMs & GBDTs",
+    "Residual CNN Architectures",
+    "DeBERTa NLI Verification",
+    "OpenPipe ART / Unsloth GRPO",
+  ],
+  "Full-Stack & Cloud": [
+    "TypeScript & React / Next.js",
+    "Tailwind CSS Obsidian Design",
+    "Google Firebase & Cloud Run",
+    "Zero-Trust Multi-Tenancy",
+  ],
+};
 
-// ----------------------------------------------------------------------------
-// Seed data for the "AI tools" breaking-news ticker. Editable live from the
-// admin panel (/admin) — these are just the starting values.
-// ----------------------------------------------------------------------------
 export const seedTickerItems = [
-  "Claude Sonnet 5 — Anthropic's latest flagship model",
-  "Claude Cowork — agentic desktop app for non-developers",
-  "GPT-5.1 — OpenAI's reasoning-focused release",
-  "Gemini 3 — Google's multimodal frontier model",
-  "Cursor — AI-native code editor adoption keeps climbing",
-  "Perplexity Comet — AI browser agent",
-  "v0 by Vercel — prompt-to-UI generation",
-  "Runway Gen-4 — text-to-video generation",
+  "Vexaro AI — 101 Automated Evaluation Gates Passed",
+  "LiveKit + Sarvam AI Telugu-English Voice OS (0.86s p50 Latency)",
+  "90 Autonomous Subagents & 300 MCP Skills Orchestrated",
+  "Sector Solver Algorithmic Optimization Suite",
+  "Meteorological Forecasting R² = 0.930 with GBDT & LSTM",
+  "Verified RAG — Lewis et al. NLI Claim Verification Live on Render",
 ];
 
 export const researchFields = [
-  "AI / Machine Learning",
-  "Quantum Computing",
-  "Data Science",
-  "Mechanics / Physics",
-  "Other",
-] as const;
+  "Autonomous Multi-Agent Operating Systems",
+  "Low-Latency Telephony Speech Pipelines",
+  "Retrieval-Augmented Generation & Claim-Level NLI",
+  "Deep Learning & Time-Series Modeling",
+  "Quantum Computing State Space Exploration",
+];
 
 export const researchIntro =
-  "Reading and writing about the edge of what's possible isn't a side interest — it's most of my free time. " +
-  "This is a running shelf of papers I've read, referenced, or written: AI, quantum computing, data science, " +
-  "and the physics that quietly underpins all of it. Open, download, cite freely.";
+  "Preprints, experimental write-ups, and architectural whitepapers from Viswa's AI systems and deep learning research.";
 
-export const skills = {
-  "Languages": ["Python", "TypeScript / JavaScript", "SQL", "C++"],
-  "AI / ML": ["PyTorch", "Scikit-learn", "LLM Agents", "Computer Vision", "Unsupervised Learning"],
-  "Data Science": ["Pandas", "NumPy", "Time-Series Forecasting", "Statistical Modeling"],
-  "Full-Stack / Product": ["React", "Next.js", "Node.js", "Tailwind CSS", "REST APIs"],
-  "Frontier Interests": ["Quantum Computing", "Quantum Mechanics", "Space Systems"],
-};
+export const instagramEmbeds: string[] = [
+  "https://www.instagram.com/p/DB123456789/",
+];
 

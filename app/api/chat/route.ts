@@ -21,8 +21,8 @@ FLAGSHIP PLATFORMS:
 
 SKILLS:
 ${Object.entries(skills)
-  .map(([k, v]) => `${k}: ${v.join(", ")}`)
-  .join(" | ")}
+    .map(([k, v]) => `${k}: ${v.join(", ")}`)
+    .join(" | ")}
 
 LOR & CREDENTIALS:
 Viswa holds verified Letter of Recommendation credentials (including LOR-VTR-2024-AI01 in Multi-Agent Systems and LOR-VTR-2024-SYS02 in Vexaro AI Architecture), verifiable via the /api/verify-lor endpoint.

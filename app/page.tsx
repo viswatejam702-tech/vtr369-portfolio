@@ -38,263 +38,217 @@ import {
   Radio,
   FileCheck,
   Activity,
+  Layers,
+  Network,
+  PhoneCall,
+  GitBranch,
+  Star,
+  RefreshCw,
+  Workflow,
   Key,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import { triggerConfetti } from "@/lib/utils";
 
 // ==========================================
-// 1. CURATED FLAGSHIP AGENTIC PLATFORMS & PROJECTS
+// 1. CURATED FLAGSHIP ARCHITECTURES & LABS
 // ==========================================
-const FLAGSHIP_PROJECTS = [
+const CURATED_FLAGSHIPS = [
   {
     id: "vexaro-ai",
-    name: "Vexaro AI — Autonomous Agentic Platform",
+    name: "Vexaro AI — Verifiable Multi-Agent Operating System",
     repoName: "Vexaro-AI",
-    category: "Startups & AI",
-    badge: "FLAGSHIP PLATFORM · LAUNCHING VERY SOON",
-    badgeColor: "from-amber-400 via-yellow-300 to-amber-500",
+    category: "Autonomous Systems",
+    badge: "FLAGSHIP OPERATING SYSTEM · 101 GATES PASSED",
+    badgeColor: "from-blue-500/30 to-cyan-500/20 text-cyan-300 border-cyan-500/40",
     isSpotlight: true,
     description:
-      "Omni-sector autonomous multi-agent operating system designed to orchestrate specialized AI agents across every enterprise category: Legal, Outbound SDR, Clinical Triage, Financial Forecasting, and Code Engineering. Features zero-trust multi-tenancy and verifiable reasoning loops.",
-    language: "Full-Stack TypeScript / Python",
+      "Evidence-grounded B2B buying-moment intelligence engine orchestrating 9 specialized autonomous agents (Outreach SDR, Meetlyzer Rooms, Hirifir, CashPilot, Veylithra, Voice OS). Engineered with 101 automated evaluation gates, 0.86s p50 LiveKit + Sarvam AI Telugu-English telephony voice agent, TRAI 09:00–21:00 calling windows, and mathematical Verhoeff Aadhaar + Luhn card DPDP privacy guards.",
+    language: "TypeScript / Python / LiveKit",
     url: "https://vexaro-app.web.app/",
     image: "/vexaro-logo.png",
-    highlights: [
-      "Specialized Agents for Every Sector",
-      "Launching Very Soon",
-      "8-Layer Agent Architecture",
-      "Zero-Trust Multi-Tenancy",
+    metrics: [
+      { label: "Verified Gates", val: "101 / 101" },
+      { label: "Voice Turn p50", val: "0.86s" },
+      { label: "Agents Active", val: "9 Specialized" },
+      { label: "Architecture", val: "8-Layer Zero-Trust" },
+    ],
+  },
+  {
+    id: "vtr-agentic-company",
+    name: "VTR's Agentic Company — 90-Agent Autonomous Swarm",
+    repoName: "vtr-agentic-company",
+    category: "Autonomous Systems",
+    badge: "MULTI-AGENT SWARM · 300 MCP SKILLS",
+    badgeColor: "from-violet-500/30 to-blue-500/20 text-violet-300 border-violet-500/40",
+    description:
+      "Enterprise multi-agent orchestration network coordinating 90 specialized subagents and 300+ Model Context Protocol (MCP) skills across an 8-layer architecture with zero-trust tenant isolation, automated telemetry loops, and self-healing error recovery.",
+    language: "Python / TypeScript / LangGraph",
+    url: "https://github.com/viswatejam702-tech",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1000&q=80",
+    metrics: [
+      { label: "Subagents", val: "90 Swarm" },
+      { label: "MCP Skills", val: "300+ Tools" },
+      { label: "Architecture", val: "8-Layer" },
+      { label: "Isolation", val: "Zero-Trust" },
+    ],
+  },
+  {
+    id: "sector-solver",
+    name: "Sector Solver — Algorithmic Domain Optimization Suite",
+    repoName: "sector-solver",
+    category: "Algorithms & Optimization",
+    badge: "QUANTITATIVE OPTIMIZATION",
+    badgeColor: "from-emerald-500/30 to-teal-500/20 text-emerald-300 border-emerald-500/40",
+    description:
+      "Algorithmic decision-modeling engine applying integer programming, combinatorial heuristics, and graph optimization to resolve sector-specific resource allocation, route optimization, and operational bottlenecks.",
+    language: "Python / PyTorch / C++",
+    url: "https://github.com/viswatejam702-tech",
+    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1000&q=80",
+    metrics: [
+      { label: "Optimization", val: "Combinatorial" },
+      { label: "Heuristics", val: "Domain-Specific" },
+      { label: "Latency", val: "<12ms Solve" },
+      { label: "Scale", val: "O(n log n)" },
     ],
   },
   {
     id: "verified-rag",
     name: "Verified RAG — Evidence & Claim NLI Platform",
     repoName: "verified-rag",
-    category: "AI Research & Systems",
-    badge: "LEWIS ET AL. RAG · LIVE ON RENDER",
-    badgeColor: "from-blue-400 via-cyan-300 to-emerald-400",
+    category: "RAG & Systems",
+    badge: "LEWIS ET AL. · LIVE ON RENDER",
+    badgeColor: "from-blue-500/30 to-indigo-500/20 text-blue-300 border-blue-500/40",
     description:
-      "End-to-end parametric/non-parametric Retrieval-Augmented Generation system grounded in Lewis et al. (2020). Features dense MIPS vector search, Cross-Encoder reranking (MS-MARCO), and DeBERTa-v3 claim-level NLI verification to detect and eliminate hallucinations.",
-    language: "Python / FastAPI / Next.js",
+      "Parametric/non-parametric Retrieval-Augmented Generation system grounded in Lewis et al. (2020). Combines dense MIPS vector search, Cross-Encoder reranking (MS-MARCO), and DeBERTa-v3 claim-level NLI verification to detect and eliminate hallucinations.",
+    language: "FastAPI / Next.js / DeBERTa",
     url: "https://verified-rag.onrender.com",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
-    highlights: [
-      "Dense MIPS Retrieval",
-      "Cross-Encoder Reranking",
-      "Atomic Claim Decomposition",
-      "DeBERTa NLI Verification",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+    metrics: [
+      { label: "Retrieval", val: "Dense MIPS" },
+      { label: "Reranker", val: "Cross-Encoder" },
+      { label: "Verification", val: "DeBERTa NLI" },
+      { label: "Hosting", val: "Render Live" },
     ],
   },
   {
-    id: "aegis-safety-harness",
-    name: "Aegis — LLM Safety & Red-Teaming Harness",
-    repoName: "llm-eval-harness",
-    category: "AI Research & Systems",
-    badge: "SAFETY HARNESS · LIVE ON RENDER",
-    badgeColor: "from-rose-500 via-red-400 to-amber-500",
-    description:
-      "Comprehensive adversarial red-teaming evaluation harness testing frontier LLMs across 1,000+ jailbreak vectors, prompt injections, and safety boundary benchmarks with automated guardrail scoring.",
-    language: "Python / PyTorch / Next.js",
-    url: "https://llm-eval-harness.onrender.com",
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["1,000+ Jailbreak Vectors", "Automated Red-Teaming", "Guardrail Telemetry"],
-  },
-  {
-    id: "vastcare-vernacular-llm",
-    name: "VastCare — Vernacular Healthcare LLM",
-    repoName: "vastcare-vernacular-llm",
-    category: "AI Research & Systems",
-    badge: "CLINICAL AI · LIVE ON RENDER",
-    badgeColor: "from-emerald-400 via-teal-300 to-cyan-500",
-    description:
-      "Multilingual clinical intelligence model fine-tuned for low-resource regional Indian languages (Telugu, Hindi, Tamil) with clinical accuracy benchmarks and emergency patient triage routing.",
-    language: "PyTorch / Transformers",
-    url: "https://vastcare-vernacular-llm.onrender.com",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["Vernacular Medical QA", "Clinical Triage", "Low-Resource Transfer"],
-  },
-  {
-    id: "synthesizer-ai",
-    name: "Synthesizer AI — Differential Privacy Data Engine",
-    repoName: "dp-synth-health",
-    category: "AI Research & Systems",
-    badge: "DIFFERENTIAL PRIVACY · LIVE ON RENDER",
-    badgeColor: "from-purple-400 via-violet-300 to-indigo-500",
-    description:
-      "Mathematical privacy-preserving generative system providing provable (ε, δ)-Differential Privacy guarantees to synthesize synthetic clinical and tabular datasets without data leakage.",
-    language: "Python / PyTorch / DP-SGD",
-    url: "https://dp-synth-health.onrender.com",
-    image:
-      "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["(ε, δ)-DP Guarantees", "Generative Tabular Models", "Zero Leakage"],
-  },
-  {
-    id: "nexus-v-ai",
-    name: "Nexus V AI",
-    repoName: "nexus-V-AI",
-    category: "Startups & AI",
-    badge: "AUTONOMOUS SWARM",
-    description:
-      "Next-generation autonomous multi-agent system designed to automate, optimize, and scale complex tasks across enterprise domains using TypeScript and adaptive AI architectures.",
-    language: "TypeScript",
-    url: "https://github.com/viswatejam702-tech/nexus-V-AI",
-    image:
-      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["Autonomous Swarm", "Task Decomposition", "Tool Execution"],
-  },
-  {
-    id: "clauseguard-x",
-    name: "ClauseGuard X",
-    repoName: "Clause_gaurd_x_version",
-    category: "Startups & AI",
-    badge: "LEGALTECH AI PLATFORM",
-    description:
-      "AI-powered contract intelligence platform that analyzes legal documents, detects risky clauses, and provides actionable negotiation insights in real time.",
-    language: "TypeScript",
-    url: "https://github.com/viswatejam702-tech/Clause_gaurd_x_version",
-    image:
-      "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["Risk Scoring", "Clause Extraction", "Compliance Gates"],
-  },
-  {
-    id: "ai-voice-agent-pro",
-    name: "AI Voice Agent Pro",
-    repoName: "AI-voice-agent-pro",
-    category: "Startups & AI",
-    badge: "VOICE AI ENGINE",
-    description:
-      "Real-time conversational AI voice assistant and intelligent automation showcase built with Python and modern web interfaces for low-latency voice execution.",
-    language: "Python",
-    url: "https://github.com/viswatejam702-tech/AI-voice-agent-pro",
-    image:
-      "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["Real-Time VAD", "Speech-to-Action", "Bidirectional Audio"],
-  },
-  {
     id: "weather-prediction-ml-dl",
-    name: "Weather Forecasting (ML vs. LSTM DL)",
+    name: "Meteorological Forecasting (GBDT vs. LSTM Deep Learning)",
     repoName: "Weather-Prediction-with-ML-and-Dl",
     category: "Deep Learning & ML",
-    badge: "R² = 0.930 RESEARCH",
+    badge: "R² = 0.930 BENCHMARK",
+    badgeColor: "from-cyan-500/30 to-blue-500/20 text-cyan-300 border-cyan-500/40",
     description:
-      "Comparative Gradient Boosting (R² = 0.930, MAE 1.53°C) and LSTM Deep Learning (R² = 0.914) forecasting engine with automated feature engineering.",
-    language: "Python / LSTM",
+      "Comparative time-series benchmarking between Gradient Boosting (R² = 0.930, MAE 1.53°C) and Multi-Layer LSTM (R² = 0.914) over 10,000+ hourly meteorological telemetry records with automated feature engineering.",
+    language: "Python / PyTorch / Scikit-Learn",
     url: "https://github.com/viswatejam702-tech/Weather-Prediction-with-ML-and-Dl",
-    image:
-      "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["Gradient Boosting", "Multi-Layer LSTM", "Feature Engineering"],
+    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1000&q=80",
+    metrics: [
+      { label: "GBDT Score", val: "R² = 0.930" },
+      { label: "LSTM Score", val: "R² = 0.914" },
+      { label: "MAE", val: "1.53°C" },
+      { label: "Telemetry", val: "10K+ Records" },
+    ],
   },
   {
     id: "game-of-dl-in-ships",
-    name: "Maritime Vessel Classification DL",
+    name: "Maritime Vessel Classification (PyTorch Residual CNN)",
     repoName: "game-of-dl-in-ships",
-    category: "Deep Learning & ML",
-    badge: "PYTORCH VISION",
+    category: "Deep Learning & Vision",
+    badge: "PYTORCH VISION PIPELINE",
+    badgeColor: "from-emerald-500/30 to-teal-500/20 text-emerald-300 border-emerald-500/40",
     description:
-      "End-to-end PyTorch computer vision pipeline for ship classification featuring 15+ analytical stages, transfer learning, and deep CNN validation.",
-    language: "PyTorch / Python",
+      "15-stage PyTorch maritime vessel detection and classification architecture leveraging transfer learning and residual feature maps across maritime satellite imagery with comprehensive confusion matrix validation.",
+    language: "PyTorch / TorchVision / Python",
     url: "https://github.com/viswatejam702-tech/game-of-dl-in-ships",
-    image:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80",
-    highlights: ["CNN Architectures", "15+ Analysis Stages", "Transfer Learning"],
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80",
+    metrics: [
+      { label: "Pipeline", val: "15 Stages" },
+      { label: "Framework", val: "PyTorch" },
+      { label: "Augmentation", val: "Multi-Angle" },
+      { label: "Domain", val: "Satellite Vision" },
+    ],
   },
 ];
 
 // ==========================================
-// 2. CORE SKILLS SPECIFICATION
+// 2. TECHNICAL MASTERY CALIBRATION
 // ==========================================
 const SKILLS = [
-  { name: "Autonomous AI Agents & Multi-Agent Swarms", percent: 96 },
-  { name: "Full-Stack TypeScript, React & Next.js", percent: 92 },
-  { name: "Deep Learning, PyTorch & Computer Vision", percent: 90 },
-  { name: "Autonomous Systems Engineering & VibeCoding", percent: 95 },
-  { name: "Machine Learning & Predictive Systems (LSTM / GBDT)", percent: 93 },
-  { name: "Quantum Computing & Mechanics Exploration", percent: 85 },
+  { name: "Autonomous Multi-Agent Operating Systems (LangGraph & LiveKit)", percent: 97, focus: "DAG Orchestration & Swarms" },
+  { name: "Full-Stack TypeScript, React, Next.js & Serverless", percent: 94, focus: "Dark-Obsidian & State Machines" },
+  { name: "Deep Learning, PyTorch, CNNs & Time-Series LSTMs", percent: 92, focus: "Model Training & Evaluation" },
+  { name: "Telephony Voice Pipelines (VAD, Streaming STT/TTS & Barge-In)", percent: 95, focus: "Sub-Second Turn Latency" },
+  { name: "RAG Evidence Architecture & Claim-Level NLI Verification", percent: 93, focus: "Dense MIPS & Cross-Encoders" },
+  { name: "Compliance & Safety Gates (DPDP 2023, TRAI, Verhoeff & Luhn)", percent: 96, focus: "Zero-Trust Data Protection" },
 ];
-
-// ==========================================
-// 3. MOTION VARIANTS FOR FLUID SCROLL TRANSITIONS
-// ==========================================
-const containerStagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-const cardScrollFadeUp = {
-  hidden: { opacity: 0, y: 45, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 90,
-      damping: 18,
-      mass: 0.7,
-    },
-  },
-};
-
-const headerFadeIn = {
-  hidden: { opacity: 0, y: 25 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
 
 export default function VTR369Portfolio() {
   const [githubRepos, setGithubRepos] = useState<any[]>([]);
+  const [repoLoading, setRepoLoading] = useState(true);
+  const [repoError, setRepoError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [portraitSrc, setPortraitSrc] = useState(SITE_CONFIG.heroPortraitUrl);
   const [portraitAttempts, setPortraitAttempts] = useState(0);
 
-  // Scroll Progress Hooks for Page-Wide Choreography
+  // Top Scroll Progress (Snappy spring)
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
+    stiffness: 140,
+    damping: 24,
     restDelta: 0.001,
   });
 
-  // Hero Parallax Scroll Transforms
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
+  // =========================================================================
+  // STICKY STATE-MORPHING SCROLLYTELLING STAGE (wrkr.dev Style)
+  // Outer Track: min-h-[280vh] | Viewport: sticky top-0 h-screen
+  // =========================================================================
+  const scrollyTrackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: trackProgress } = useScroll({
+    target: scrollyTrackRef,
+    offset: ["start start", "end end"],
   });
-  const portraitY = useTransform(heroScroll, [0, 1], ["0%", "28%"]);
-  const portraitScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
-  const portraitOpacity = useTransform(heroScroll, [0, 0.75, 1], [0.85, 0.45, 0]);
-  const heroTextY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
-  const heroTextOpacity = useTransform(heroScroll, [0, 0.7, 1], [1, 0.5, 0]);
 
-  // Ambient Background Glowing Orbs that drift on scroll
-  const orb1Y = useTransform(scrollYProgress, [0, 1], ["0vh", "50vh"]);
-  const orb2Y = useTransform(scrollYProgress, [0, 1], ["0vh", "-40vh"]);
+  // Smooth scroll tracking across 4 chapters (0 to 1)
+  // Chapter 1: 0.00 - 0.25 (Identity)
+  // Chapter 2: 0.25 - 0.50 (Vexaro AI)
+  // Chapter 3: 0.50 - 0.75 (VTR's Agentic Company)
+  // Chapter 4: 0.75 - 1.00 (Sector Solver & ML/DL Lab)
+  const [activeChapter, setActiveChapter] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = trackProgress.on("change", (latest) => {
+      if (latest < 0.25) {
+        setActiveChapter(0);
+      } else if (latest < 0.5) {
+        setActiveChapter(1);
+      } else if (latest < 0.75) {
+        setActiveChapter(2);
+      } else {
+        setActiveChapter(3);
+      }
+    });
+    return () => unsubscribe();
+  }, [trackProgress]);
+
+  // Click handler to jump to chapter directly
+  const jumpToChapter = (chapterIdx: number) => {
+    if (!scrollyTrackRef.current) return;
+    const trackRect = scrollyTrackRef.current.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const trackTop = trackRect.top + scrollTop;
+    const trackHeight = trackRect.height;
+    // Map index 0..3 to fractional offset inside the track
+    const targetScroll = trackTop + (chapterIdx / 3) * (trackHeight - window.innerHeight);
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  };
 
   // Autopilot State (Voice + Text)
   const [commandText, setCommandText] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
-  const [autopilotStatus, setAutopilotStatus] = useState(
-    "Say or type: 'Tell me about Vexaro', 'Show projects', 'Skills', or 'WhatsApp' (Cmd/Ctrl + K)"
-  );
+  const [autopilotStatus, setAutopilotStatus] = useState("Autopilot Ready · Press '/' or Cmd+K to navigate");
   const [swarmActive, setSwarmActive] = useState(true);
 
   // Instant On-Site Chat Drawer State
@@ -304,7 +258,7 @@ export default function VTR369Portfolio() {
   const [chatMessages, setChatMessages] = useState([
     {
       sender: "bot",
-      text: "Hello! I am Viswa's AI Concierge. Ask me about Vexaro AI (the autonomous agentic platform launching very soon), Verified RAG, his LOR credentials, or connect directly with Viswa on WhatsApp!",
+      text: "Hello! I am Viswa's AI Concierge. Ask me about Vexaro AI (9 agents · 101 verified gates), VTR's Agentic Company, his LOR credentials, or connect with Viswa directly on WhatsApp.",
     },
   ]);
 
@@ -316,7 +270,7 @@ export default function VTR369Portfolio() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // LOR ID Cryptographic Proof Engine State
+  // LOR Cryptographic Proof State
   const [lorModalOpen, setLorModalOpen] = useState(false);
   const [lorInputId, setLorInputId] = useState("LOR-VTR-2024-AI01");
   const [lorData, setLorData] = useState<any>(null);
@@ -326,7 +280,7 @@ export default function VTR369Portfolio() {
   const recognitionRef = useRef<any>(null);
   const commandInputRef = useRef<HTMLInputElement>(null);
 
-  // Load client-persisted keys on mount
+  // Load client keys from localStorage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedEleven = localStorage.getItem("vtr_elevenlabs_key") || "";
@@ -338,88 +292,50 @@ export default function VTR369Portfolio() {
     }
   }, []);
 
-  // Cryptographic LOR Verifier function
-  const verifyLorId = async (idToVerify: string) => {
-    setLorLoading(true);
-    setLorInputId(idToVerify);
-    try {
-      const res = await fetch(`/api/verify-lor?id=${encodeURIComponent(idToVerify)}`);
-      const data = await res.json();
-      if (res.ok && data.verified) {
-        setLorData(data.credential);
-      } else {
-        setLorData({ error: data.message || "Credential ID not found in cryptographic registry." });
-      }
-    } catch {
-      setLorData({ error: "Network error reaching cryptographic registry." });
-    } finally {
-      setLorLoading(false);
-    }
-  };
-
-  // Save API Settings handler
-  const saveApiSettings = (elevenKey: string, voiceId: string, geminiKey: string) => {
-    setElevenLabsApiKey(elevenKey);
-    setElevenLabsVoiceId(voiceId);
-    setGeminiApiKey(geminiKey);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("vtr_elevenlabs_key", elevenKey);
-      localStorage.setItem("vtr_elevenlabs_voice", voiceId);
-      localStorage.setItem("vtr_gemini_key", geminiKey);
-    }
-    setSettingsModalOpen(false);
-    triggerConfetti();
-    speakResponse("API settings saved successfully. ElevenLabs Studio Voice active.");
-  };
-
-  // Handle portrait fallback smoothly
-  const handlePortraitError = () => {
-    if (portraitAttempts === 0) {
-      setPortraitSrc("/viswa-portrait.jpg");
-      setPortraitAttempts(1);
-    } else if (portraitAttempts === 1) {
-      setPortraitSrc("/images/viswa-portrait.jpg");
-      setPortraitAttempts(2);
-    } else {
-      setPortraitSrc(SITE_CONFIG.fallbackPortraitUrl);
-      setPortraitAttempts(3);
-    }
-  };
-
-  // Keyboard shortcut Cmd/Ctrl + K
+  // Keyboard shortcut listener (Cmd/Ctrl + K or '/')
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         commandInputRef.current?.focus();
-        speakResponse("Autopilot ready. Speak or type your request.");
+        speakResponse("Autopilot active. Type or speak a command.");
+      } else if (e.key === "/" && document.activeElement?.tagName !== "INPUT" && document.activeElement?.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        commandInputRef.current?.focus();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // ==========================================
-  // 4. LIVE GITHUB API AUTO-FETCH
-  // ==========================================
-  useEffect(() => {
-    fetch(
-      `https://api.github.com/users/${SITE_CONFIG.githubUsername}/repos?sort=updated&per_page=100`
-    )
-      .then((res) => res.json())
+  // Fetch GitHub repos with layout-matched skeleton and error resilience
+  const fetchGithubRepos = () => {
+    setRepoLoading(true);
+    setRepoError(null);
+    fetch(`https://api.github.com/users/${SITE_CONFIG.githubUsername}/repos?sort=updated&per_page=100`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`GitHub API HTTP ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         if (Array.isArray(data)) {
           setGithubRepos(data.filter((r) => !r.fork));
         }
+        setRepoLoading(false);
       })
-      .catch(() => {});
+      .catch((err) => {
+        setRepoError(err.message || "Could not fetch dynamic GitHub repos");
+        setRepoLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchGithubRepos();
   }, []);
 
-  // Merge curated flagships + live repos from GitHub
+  // Merge Curated Flagships + Live GitHub Repos
   const allProjects = useMemo(() => {
-    const flagshipNames = new Set(
-      FLAGSHIP_PROJECTS.map((p) => p.repoName.toLowerCase())
-    );
+    const flagshipNames = new Set(CURATED_FLAGSHIPS.map((p) => p.repoName.toLowerCase()));
     const dynamicRepos = githubRepos
       .filter((r) => !flagshipNames.has(r.name.toLowerCase()))
       .map((r) => ({
@@ -427,25 +343,23 @@ export default function VTR369Portfolio() {
         name: r.name.replace(/[-_]/g, " "),
         repoName: r.name,
         category: "Live GitHub Feed",
-        badge: r.language || "GITHUB REPO",
-        badgeColor: "from-zinc-500 to-zinc-400",
+        badge: r.language || "GITHUB REPOSITORY",
+        badgeColor: "from-zinc-500/20 to-zinc-600/10 text-zinc-300 border-zinc-700/50",
         isSpotlight: false,
-        description:
-          r.description ||
-          "Autonomous repository engineered by M. Viswa Teja Reddy on GitHub.",
+        description: r.description || "Production repository authored by M. Viswa Teja Reddy.",
         language: r.language || "Code",
         stars: r.stargazers_count || 0,
         forks: r.forks_count || 0,
         url: r.html_url,
         image: `https://opengraph.githubassets.com/1/${SITE_CONFIG.githubUsername}/${r.name}`,
-        highlights: [
-          `★ ${r.stargazers_count || 0} Stars`,
-          `⑂ ${r.forks_count || 0} Forks`,
-          r.language || "Open Source",
+        metrics: [
+          { label: "Stars", val: `★ ${r.stargazers_count || 0}` },
+          { label: "Forks", val: `⑂ ${r.forks_count || 0}` },
+          { label: "Language", val: r.language || "Open Source" },
         ],
       }));
 
-    return [...FLAGSHIP_PROJECTS, ...dynamicRepos];
+    return [...CURATED_FLAGSHIPS, ...dynamicRepos];
   }, [githubRepos]);
 
   const filteredProjects = useMemo(() => {
@@ -465,9 +379,40 @@ export default function VTR369Portfolio() {
     return list;
   }, [allProjects, activeCategory, searchQuery]);
 
-  // ==========================================
-  // 5. ELEVENLABS & WEB SPEECH VOICE AUTOPILOT
-  // ==========================================
+  // Fallback portrait handler
+  const handlePortraitError = () => {
+    if (portraitAttempts === 0) {
+      setPortraitSrc("/viswa-portrait.jpg");
+      setPortraitAttempts(1);
+    } else if (portraitAttempts === 1) {
+      setPortraitSrc("/images/viswa-portrait.jpg");
+      setPortraitAttempts(2);
+    } else {
+      setPortraitSrc(SITE_CONFIG.fallbackPortraitUrl);
+      setPortraitAttempts(3);
+    }
+  };
+
+  // Cryptographic LOR Verifier
+  const verifyLorId = async (idToVerify: string) => {
+    setLorLoading(true);
+    setLorInputId(idToVerify);
+    try {
+      const res = await fetch(`/api/verify-lor?id=${encodeURIComponent(idToVerify)}`);
+      const data = await res.json();
+      if (res.ok && data.verified) {
+        setLorData(data.credential);
+      } else {
+        setLorData({ error: data.message || "Credential ID not found in registry." });
+      }
+    } catch {
+      setLorData({ error: "Network error reaching cryptographic registry." });
+    } finally {
+      setLorLoading(false);
+    }
+  };
+
+  // Voice TTS dispatcher
   const fallbackWebSpeech = (text: string) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
       setIsPlayingAudio(false);
@@ -486,7 +431,6 @@ export default function VTR369Portfolio() {
     setAutopilotStatus(text);
     if (!voiceEnabled || typeof window === "undefined") return;
 
-    // Try ElevenLabs Voice API
     try {
       setIsPlayingAudio(true);
       const res = await fetch("/api/voice", {
@@ -519,7 +463,6 @@ export default function VTR369Portfolio() {
     } catch {
       // Fallback below
     }
-
     fallbackWebSpeech(text);
   };
 
@@ -533,7 +476,6 @@ export default function VTR369Portfolio() {
 
     const lower = q.toLowerCase();
 
-    // Direct client trigger for LOR / credentials
     if (lower.includes("lor") || lower.includes("recommendation") || lower.includes("credential")) {
       setLorModalOpen(true);
       verifyLorId("LOR-VTR-2024-AI01");
@@ -542,7 +484,6 @@ export default function VTR369Portfolio() {
       return;
     }
 
-    // Call live Autopilot API
     try {
       const res = await fetch("/api/autopilot", {
         method: "POST",
@@ -571,39 +512,34 @@ export default function VTR369Portfolio() {
       // Fallback
     }
 
-    if (lower.includes("vexaro") || lower.includes("agentic")) {
-      scrollTo("projects");
-      setActiveCategory("Startups & AI");
-      speakResponse(
-        "Viswa is building Vexaro AI, an autonomous agentic platform featuring specialized agents for every category and industry sector, launching very soon!"
-      );
+    if (lower.includes("vexaro") || lower.includes("platform")) {
+      jumpToChapter(1);
+      speakResponse("Navigating to Vexaro AI Operating System stage.");
       triggerConfetti();
-    } else if (lower.includes("rag") || lower.includes("verified")) {
-      scrollTo("projects");
-      setActiveCategory("AI Research & Systems");
-      speakResponse("Showing Verified RAG, Viswa's end-to-end evidence retrieval and claim-level NLI verification system.");
+    } else if (lower.includes("agent") || lower.includes("swarm") || lower.includes("company")) {
+      jumpToChapter(2);
+      speakResponse("Navigating to VTR's Agentic Company 90-agent swarm.");
       triggerConfetti();
+    } else if (lower.includes("solver") || lower.includes("ml") || lower.includes("dl") || lower.includes("weather")) {
+      jumpToChapter(3);
+      speakResponse("Navigating to Sector Solver & ML/DL Lab benchmarks.");
     } else if (lower.includes("whatsapp")) {
-      speakResponse("Opening official WhatsApp connection with Viswa Teja Reddy.");
+      speakResponse("Connecting to Viswa's official WhatsApp channel.");
       triggerConfetti();
-      window.open(
-        `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20your%20VTR369%20Portfolio.`,
-        "_blank"
-      );
+      window.open(`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20VTR369.`, "_blank");
     } else {
-      scrollTo("projects");
+      scrollTo("projects-grid");
       setSearchQuery(q);
-      speakResponse(`Searching for "${q}". Showing matching projects and systems.`);
+      speakResponse(`Searching for "${q}". Showing matching production systems.`);
     }
   };
 
   const toggleVoiceListening = () => {
     if (typeof window === "undefined") return;
-    const SpeechRec =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRec) {
-      speakResponse("Voice recognition is not supported in this browser. Please use text input instead.");
+      speakResponse("Voice recognition not supported in this browser. Please type your request.");
       return;
     }
 
@@ -620,7 +556,7 @@ export default function VTR369Portfolio() {
 
     recognition.onstart = () => {
       setIsListening(true);
-      setAutopilotStatus("Listening... Speak a command (e.g. 'Tell me about Vexaro', 'Verify LOR', or 'WhatsApp')");
+      setAutopilotStatus("Listening... Speak a command ('Vexaro', 'Sector Solver', 'WhatsApp')");
     };
 
     recognition.onresult = (event: any) => {
@@ -629,13 +565,8 @@ export default function VTR369Portfolio() {
       executeAutopilotCommand(transcript);
     };
 
-    recognition.onerror = () => {
-      setIsListening(false);
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
+    recognition.onerror = () => setIsListening(false);
+    recognition.onend = () => setIsListening(false);
 
     recognitionRef.current = recognition;
     recognition.start();
@@ -676,80 +607,52 @@ export default function VTR369Portfolio() {
       setChatLoading(false);
     }
 
-    const fallbackReply = `Thank you for your message! You can bridge directly to WhatsApp at wa.me/${SITE_CONFIG.whatsappNumber} to talk with Viswa directly.`;
+    const fallbackReply = `Thank you for your message! Connect directly on WhatsApp at wa.me/${SITE_CONFIG.whatsappNumber}.`;
     setChatMessages((prev) => [...prev, { sender: "bot", text: fallbackReply }]);
     speakResponse(fallbackReply);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#08080a] text-zinc-100 selection:bg-amber-400 selection:text-black font-sans overflow-x-hidden">
-      {/* ========================================== */}
-      {/* 0. TOP SCROLL PROGRESS BAR (AWWWARDS GRADE) */}
-      {/* ========================================== */}
+    <div className="relative min-h-screen bg-[#07090E] text-[#F3F4F6] font-sans overflow-x-hidden selection:bg-blue-600/30 selection:text-white">
+      {/* ========================================================================= */}
+      {/* 0. TOP HAIRLINE SCROLL PROGRESS INDICATOR                                 */}
+      {/* ========================================================================= */}
       <motion.div
         style={{ scaleX: smoothProgress }}
-        className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 origin-left z-[100] shadow-[0_0_14px_rgba(245,158,11,0.85)]"
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-blue-500 via-cyan-400 to-violet-500 origin-left z-[100] shadow-[0_0_12px_rgba(59,130,246,0.8)]"
       />
 
-      {/* ========================================== */}
-      {/* AMBIENT BACKGROUND GLOWING ORBS (SCROLL)   */}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* AMBIENT OBSIDIAN GRADIENT MESH                                            */}
+      {/* ========================================================================= */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <motion.div
-          style={{ y: orb1Y }}
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-amber-500/[0.06] blur-[140px]"
-        />
-        <motion.div
-          style={{ y: orb2Y }}
-          className="absolute top-1/2 -right-40 w-[550px] h-[550px] rounded-full bg-emerald-500/[0.04] blur-[150px]"
-        />
+        <div className="absolute top-0 left-1/4 w-[650px] h-[650px] rounded-full bg-blue-600/[0.04] blur-[160px]" />
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] rounded-full bg-cyan-500/[0.03] blur-[180px]" />
+        <div className="absolute bottom-0 left-1/3 w-[550px] h-[550px] rounded-full bg-violet-600/[0.03] blur-[170px]" />
       </div>
 
-      {/* ========================================== */}
-      {/* ANTIGRAVITY MULTI-AGENT SWARM CURSORS      */}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* MULTI-AGENT SWARM ACTIVE CURSORS (TOGGLEABLE)                             */}
+      {/* ========================================================================= */}
       {swarmActive && (
         <div className="pointer-events-none fixed inset-0 z-40 overflow-hidden">
           {[
-            {
-              name: "Agent-01 UI",
-              color: "#f59e0b",
-              x: ["12vw", "78vw", "35vw"],
-              y: ["18vh", "62vh", "28vh"],
-              dur: 18,
-            },
-            {
-              name: "Agent-02 Vexaro Sync",
-              color: "#10b981",
-              x: ["82vw", "24vw", "68vw"],
-              y: ["30vh", "75vh", "22vh"],
-              dur: 22,
-            },
-            {
-              name: "Agent-03 Motion",
-              color: "#38bdf8",
-              x: ["45vw", "18vw", "85vw"],
-              y: ["75vh", "25vh", "55vh"],
-              dur: 20,
-            },
+            { name: "Agent-01 · UI Architect", color: "#3B82F6", x: ["10vw", "75vw", "30vw"], y: ["15vh", "65vh", "25vh"], dur: 19 },
+            { name: "Agent-02 · Vexaro Engine", color: "#06B6D4", x: ["80vw", "20vw", "65vw"], y: ["28vh", "78vh", "20vh"], dur: 23 },
+            { name: "Agent-03 · Neural Benchmark", color: "#8B5CF6", x: ["40vw", "15vw", "85vw"], y: ["70vh", "22vh", "50vh"], dur: 21 },
           ].map((agent, idx) => (
             <motion.div
               key={idx}
               animate={{ x: agent.x, y: agent.y }}
-              transition={{
-                duration: agent.dur,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-              }}
+              transition={{ duration: agent.dur, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
               className="absolute flex items-center gap-1.5 opacity-60"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={agent.color}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill={agent.color}>
                 <path d="M3 2l18 9-9 2-2 9-7-20z" />
               </svg>
               <span
-                style={{ backgroundColor: agent.color }}
-                className="px-2 py-0.5 rounded-full text-[10px] font-bold text-black shadow-lg tracking-wider font-mono"
+                style={{ borderColor: agent.color, color: agent.color }}
+                className="px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#0C1018]/90 border backdrop-blur-md shadow-lg tracking-wider"
               >
                 {agent.name}
               </span>
@@ -758,34 +661,34 @@ export default function VTR369Portfolio() {
         </div>
       )}
 
-      {/* ========================================== */}
-      {/* STICKY GLASS HEADER                        */}
-      {/* ========================================== */}
-      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-2xl bg-[#08080a]/80 border-b border-white/10 transition-all duration-300">
+      {/* ========================================================================= */}
+      {/* STICKY GLASS HEADER                                                       */}
+      {/* ========================================================================= */}
+      <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-[#07090E]/80 border-b border-white/[0.07] transition-all duration-200">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-2.5 font-bold tracking-tight text-lg group">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 group-hover:scale-125 transition duration-300 animate-pulse" />
+          <a href="#showcase" className="flex items-center gap-3 font-bold tracking-tight text-base group">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 group-hover:scale-125 transition duration-200 shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
             <span className="text-white font-mono tracking-wider">{SITE_CONFIG.brand}</span>
             <span className="text-xs text-zinc-400 font-normal hidden sm:inline">
               | {SITE_CONFIG.name}
             </span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-7 text-sm text-zinc-300 font-medium">
-            <a href="#home" className="hover:text-amber-400 transition duration-200">
-              Home
-            </a>
-            <a href="#about" className="hover:text-amber-400 transition duration-200">
-              About &amp; Skills
-            </a>
-            <a href="#services" className="hover:text-amber-400 transition duration-200">
-              What I Build
-            </a>
-            <a href="#projects" className="hover:text-amber-400 transition duration-200">
-              Vexaro &amp; Repos
-            </a>
-            <a href="#contact" className="hover:text-amber-400 transition duration-200">
-              Connect
+          <nav className="hidden md:flex items-center gap-7 text-xs font-mono uppercase tracking-wider text-zinc-400">
+            <button onClick={() => jumpToChapter(0)} className="hover:text-cyan-400 transition">
+              01 Identity
+            </button>
+            <button onClick={() => jumpToChapter(1)} className="hover:text-cyan-400 transition">
+              02 Vexaro AI
+            </button>
+            <button onClick={() => jumpToChapter(2)} className="hover:text-cyan-400 transition">
+              03 Agentic Co
+            </button>
+            <button onClick={() => jumpToChapter(3)} className="hover:text-cyan-400 transition">
+              04 ML/DL Lab
+            </button>
+            <a href="#projects-grid" className="hover:text-cyan-400 transition">
+              All Repos
             </a>
           </nav>
 
@@ -795,634 +698,662 @@ export default function VTR369Portfolio() {
                 setLorModalOpen(true);
                 verifyLorId("LOR-VTR-2024-AI01");
               }}
-              className="text-xs px-3.5 py-1.5 rounded-full border border-amber-400/35 bg-amber-400/10 hover:bg-amber-400/20 text-amber-300 transition flex items-center gap-1.5 font-mono shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+              className="tactile-btn text-xs px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 transition flex items-center gap-1.5 font-mono shadow-[0_0_12px_rgba(59,130,246,0.15)]"
               title="Verify Letters of Recommendation & Credentials"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
               <span className="hidden sm:inline">Verify LOR</span>
             </button>
+
             <button
               onClick={() => setSwarmActive(!swarmActive)}
-              className="text-xs px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 hover:border-amber-400/50 transition hidden sm:flex items-center gap-1.5 font-mono"
-              title="Toggle Multi-Agent Swarm Overlay"
+              className="tactile-btn text-xs px-3 py-1.5 rounded-full border border-white/[0.08] bg-[#0C1018] hover:border-cyan-400/40 text-zinc-400 hover:text-white transition hidden sm:flex items-center gap-1.5 font-mono"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              {swarmActive ? "Swarm Active" : "Swarm Off"}
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{swarmActive ? "Swarm On" : "Swarm Off"}</span>
             </button>
+
             <button
               onClick={() => {
                 triggerConfetti();
                 setChatOpen(true);
               }}
-              className="text-xs font-semibold px-4 py-2 rounded-full bg-amber-400 text-black hover:bg-amber-300 transition shadow-[0_0_20px_rgba(245,158,11,0.3)] font-medium"
+              className="tactile-btn text-xs font-semibold px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white transition shadow-[0_0_20px_rgba(59,130,246,0.35)]"
             >
-              Let&apos;s Talk
+              Connect
             </button>
           </div>
         </div>
       </header>
 
-      {/* ========================================== */}
-      {/* 1. HERO SECTION (CINEMATIC SCROLL PARALLAX)*/}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* 1. FAST WRKR.DEV-STYLE STICKY STATE-MORPHING SCROLLYTELLING STAGE         */}
+      {/* Track: min-h-[280vh] | Viewport: sticky top-0 h-screen                     */}
+      {/* ========================================================================= */}
       <section
-        ref={heroRef}
-        id="home"
-        className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+        id="showcase"
+        ref={scrollyTrackRef}
+        className="relative min-h-[280vh] w-full"
       >
-        {/* Parallax Studio Portrait Background */}
-        <motion.div
-          style={{ y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
-          className="absolute inset-0 flex justify-center items-center pointer-events-none z-0"
-        >
-          <div className="relative w-full max-w-3xl h-[88vh]">
-            <img
-              src={portraitSrc}
-              onError={handlePortraitError}
-              alt={SITE_CONFIG.name}
-              className="w-full h-full object-cover object-top filter contrast-110 brightness-95"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 65% 75% at 50% 38%, black 35%, rgba(0,0,0,0.5) 68%, transparent 100%)",
-                maskImage:
-                  "radial-gradient(ellipse 65% 75% at 50% 38%, black 35%, rgba(0,0,0,0.5) 68%, transparent 100%)",
-              }}
-            />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/65 to-[#08080a]/40" />
-        </motion.div>
-
-        {/* Foreground Hero Typography with Smooth Parallax Drift */}
-        <motion.div
-          style={{ y: heroTextY, opacity: heroTextOpacity }}
-          className="relative z-10 max-w-4xl mx-auto px-6 text-center mt-20"
-        >
-          {/* Mission / Launching Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.94 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/40 text-amber-400 text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-[0.22em] mb-5 shadow-[0_0_20px_rgba(245,158,11,0.25)]"
-          >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>BUILDING VEXARO AI — LAUNCHING VERY SOON</span>
-          </motion.div>
-
-          {/* Monumental Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white mb-4 drop-shadow-2xl"
-          >
-            {SITE_CONFIG.name}
-          </motion.h1>
-
-          {/* AI Research Engineer Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl sm:text-2xl md:text-3xl font-light text-zinc-200 max-w-3xl mx-auto mb-4 leading-relaxed"
-          >
-            <span className="text-amber-400 font-semibold">{SITE_CONFIG.role}</span>
-            <span className="text-zinc-500 font-normal"> · </span>
-            <span className="text-zinc-300">Autonomous Agentic Platforms &amp; Deep Tech</span>
-          </motion.h2>
-
-          {/* Tagline / Mission */}
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10"
-          >
-            Engineering <strong>Vexaro AI</strong> — an omni-sector autonomous agentic platform
-            with specialized agents across every category and sector. Pioneering multi-agent systems,
-            deep learning evaluation harnesses, and quantum-inspired architectures.
-          </motion.p>
-
-          {/* Dual CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <a
-              href="#projects"
-              onClick={() => triggerConfetti()}
-              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.45)] flex items-center gap-2 group"
-            >
-              <span>Explore Vexaro AI &amp; Projects</span>
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-            </a>
-            <button
-              onClick={() => {
-                setLorModalOpen(true);
-                verifyLorId("LOR-VTR-2024-AI01");
-                triggerConfetti();
-              }}
-              className="px-7 py-4 rounded-full border border-amber-400/40 bg-amber-400/10 hover:bg-amber-400/20 backdrop-blur-md text-amber-300 font-semibold text-sm transition flex items-center gap-2 group shadow-[0_0_20px_rgba(245,158,11,0.2)]"
-            >
-              <Award className="w-4 h-4 text-amber-400 group-hover:scale-110 transition" />
-              <span>Verify LOR &amp; Credentials</span>
-            </button>
-            <a
-              href="#contact"
-              className="px-8 py-4 rounded-full border border-white/25 bg-white/5 hover:bg-white/15 backdrop-blur-md text-white font-semibold text-sm transition flex items-center gap-2"
-            >
-              <span>Connect &amp; Collaborate</span>
-              <ArrowUpRight className="w-4 h-4 text-amber-400" />
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ========================================== */}
-      {/* 2. ABOUT, RESEARCH & ANIMATED SKILL BARS   */}
-      {/* ========================================== */}
-      <section id="about" className="py-28 max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          variants={containerStagger}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
-        >
-          {/* Left Column Narrative & Stat Grid */}
-          <motion.div variants={cardScrollFadeUp} className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em]">
-              <Terminal className="w-3.5 h-3.5" />
-              WHO I AM
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
-              AI Research Engineer &amp; Agentic System Architect
-            </h2>
-
-            <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-              I specialize in autonomous multi-agent systems, deep learning reliability, and
-              high-precision predictive modeling. My research sits at the intersection of agentic
-              reasoning loops, claim-level evidence verification, and scalable neural architectures.
-            </p>
-
-            <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
-              Currently engineering <strong>Vexaro AI</strong> — an autonomous agentic platform
-              deploying category-specialized agents across every major industry sector. Combining
-              deep research rigor with rapid VibeCoding execution from Hyderabad, India.
-            </p>
-
-            {/* 2x2 Stat & Availability Grid */}
-            <motion.div
-              variants={containerStagger}
-              className="grid grid-cols-2 gap-4 pt-6 border-t border-white/10"
-            >
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Experience &amp; Output</p>
-                <p className="text-lg font-bold text-white mt-1">
-                  {Math.max(33, allProjects.length)}+ Public Repos
-                </p>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Flagship Platform</p>
-                <p className="text-lg font-bold text-amber-400 mt-1">Vexaro AI Platform</p>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-amber-400/40 transition duration-300">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Core Focus</p>
-                <p className="text-lg font-bold text-white mt-1">Autonomous Multi-Agents &amp; DL</p>
-              </div>
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-emerald-400/40 transition duration-300">
-                <p className="text-xs text-zinc-500 uppercase tracking-wider font-mono">Launch Status</p>
-                <p className="text-lg font-bold text-emerald-400 mt-1 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Launching Very Soon
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column Education & Animated Skill Bars */}
-          <motion.div variants={cardScrollFadeUp} className="lg:col-span-6 space-y-8">
-            {/* Education & Research Card */}
-            <div className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/40 transition duration-300 space-y-4 shadow-xl">
-              <div className="flex items-center gap-3 text-amber-400 font-semibold">
-                <GraduationCap className="w-5 h-5" />
-                <span className="text-xs font-mono uppercase tracking-wider">
-                  Education &amp; Research Focus
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-6 z-10 pt-16">
+          {/* Central Architectural Glass Container */}
+          <div className="relative w-full max-w-5xl h-[82vh] rounded-3xl bg-[#0C1018]/90 border border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 overflow-hidden">
+            {/* Top Stage Bar: Active Chapter Tracker & Live Badge */}
+            <div className="flex items-center justify-between border-b border-white/[0.07] pb-4 z-20">
+              <div className="flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_rgba(6,182,212,0.8)]" />
+                <span className="font-mono text-xs uppercase tracking-wider text-cyan-400">
+                  SYSTEM STAGE · CHAPTER 0{activeChapter + 1}
+                </span>
+                <span className="text-zinc-600">/</span>
+                <span className="font-mono text-xs text-zinc-400 hidden sm:inline">
+                  {activeChapter === 0
+                    ? "IDENTITY & TELEMETRY"
+                    : activeChapter === 1
+                    ? "VEXARO AI MULTI-AGENT OS"
+                    : activeChapter === 2
+                    ? "VTR AGENTIC COMPANY (90 SUBAGENTS)"
+                    : "SECTOR SOLVER & NEURAL LABS"}
                 </span>
               </div>
-              <div className="space-y-4 pl-2 border-l-2 border-amber-400/40">
-                <div className="pl-4">
-                  <p className="font-semibold text-white">
-                    Computer Science Engineering &amp; AI Research
-                  </p>
-                  <p className="text-xs text-zinc-400 mt-0.5">
-                    Autonomous Multi-Agent Platforms, PyTorch Deep Learning &amp; Evidence-Grounded Verification
-                  </p>
-                </div>
-                <div className="pl-4">
-                  <p className="font-semibold text-white">
-                    Quantum Computing &amp; Mechanics Foundations
-                  </p>
-                  <p className="text-xs text-zinc-400 mt-0.5">
-                    State Superposition Simulation, Qubit Logic &amp; Next-Gen Computational Architectures
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            {/* Animated Skills Progress Bars with Scroll Trigger */}
-            <div className="space-y-4 p-6 rounded-2xl bg-[#111116]/80 border border-white/10 shadow-xl">
-              <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                <div className="flex items-center gap-2 text-amber-400 font-semibold">
-                  <Sparkles className="w-4 h-4" />
-                  <span className="text-white text-sm font-semibold">Technical Mastery</span>
-                </div>
-                <span className="text-xs text-zinc-500 font-mono">CALIBRATED %</span>
-              </div>
-
-              <div className="space-y-4">
-                {SKILLS.map((skill, i) => (
-                  <div key={i} className="space-y-1.5">
-                    <div className="flex justify-between text-xs sm:text-sm">
-                      <span className="text-zinc-200 font-medium">{skill.name}</span>
-                      <span className="text-amber-400 font-mono font-bold">{skill.percent}%</span>
-                    </div>
-                    <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.percent}%` }}
-                        viewport={{ once: false, amount: 0.5 }}
-                        transition={{ duration: 1.2, delay: i * 0.08, ease: "easeOut" }}
-                        className="h-full rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)]"
-                      />
-                    </div>
-                  </div>
+              {/* Clickable Chapter Navigation Rail */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                {[
+                  { idx: 0, label: "01 Identity" },
+                  { idx: 1, label: "02 Vexaro AI" },
+                  { idx: 2, label: "03 Agentic Co" },
+                  { idx: 3, label: "04 ML/DL Lab" },
+                ].map((chap) => (
+                  <button
+                    key={chap.idx}
+                    onClick={() => jumpToChapter(chap.idx)}
+                    className={`tactile-btn px-2.5 sm:px-3 py-1 rounded-lg font-mono text-[11px] transition flex items-center gap-1 ${
+                      activeChapter === chap.idx
+                        ? "bg-blue-600/20 text-cyan-300 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.2)]"
+                        : "bg-white/[0.03] text-zinc-400 hover:text-white border border-white/[0.06]"
+                    }`}
+                  >
+                    <span>{chap.label}</span>
+                  </button>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
-      </section>
 
-      {/* ========================================== */}
-      {/* 3. WHAT I BUILD (SERVICES & CORE PILLARS)  */}
-      {/* ========================================== */}
-      <section id="services" className="py-28 bg-[#0a0a0e] border-y border-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={headerFadeIn}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <p className="text-amber-400 uppercase tracking-[0.25em] text-xs font-semibold mb-2 font-mono">
-              WHAT I DO
-            </p>
-            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
-              AI Research Engineering &amp; Agentic Platforms
-            </h2>
-            <p className="text-zinc-400 text-sm mt-3">
-              Architecting production-grade multi-agent operating systems, deep learning pipelines, and research harnesses.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
-            variants={containerStagger}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {[
-              {
-                icon: Rocket,
-                title: "Vexaro AI Platform Engineering",
-                desc: "Autonomous agentic operating system deploying specialized multi-agent teams across legal, SDR, clinical triage, finance, and code execution with zero-trust safety gates.",
-                tag: "FLAGSHIP PLATFORM",
-                highlight: "Launching Very Soon",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Verified RAG & Research Systems",
-                desc: "Parametric/non-parametric retrieval engines grounded in Lewis et al. with dense MIPS, Cross-Encoder reranking, and DeBERTa claim-level NLI verification to eliminate hallucinations.",
-                tag: "AI RESEARCH ENGINE",
-                highlight: "Live on Render",
-              },
-              {
-                icon: Cpu,
-                title: "Autonomous Agents & Voice Systems",
-                desc: "Low-latency bidirectional voice-to-action pipelines (AI Voice Agent Pro), swarm task decomposition, and self-healing multi-agent orchestration (Nexus V AI).",
-                tag: "MULTI-AGENT SWARMS",
-                highlight: "Real-Time VAD",
-              },
-              {
-                icon: Code2,
-                title: "Deep Learning & Computer Vision",
-                desc: "High-precision time-series forecasting (R² > 0.90 weather forecasting with LSTM/GBDT), PyTorch maritime CNNs, and (ε, δ)-Differential Privacy tabular generators.",
-                tag: "DEEP LEARNING",
-                highlight: "PyTorch & CNNs",
-              },
-            ].map((service, idx) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  variants={cardScrollFadeUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-8 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/60 transition duration-300 text-left space-y-4 relative group shadow-xl flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition duration-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                        <Icon className="w-6 h-6" />
+            {/* Morphing Stage Body: AnimatePresence crossfade between the 4 chapters */}
+            <div className="relative flex-1 py-6 flex items-center overflow-y-auto z-20">
+              <AnimatePresence mode="wait">
+                {/* ------------------------------------------------------------- */}
+                {/* CHAPTER 1: FOUNDER & AI SYSTEMS IDENTITY                      */}
+                {/* ------------------------------------------------------------- */}
+                {activeChapter === 0 && (
+                  <motion.div
+                    key="chap-0"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+                  >
+                    <div className="lg:col-span-7 space-y-5">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono">
+                        <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>AI RESEARCH ENGINEER &amp; SYSTEMS ARCHITECT</span>
                       </div>
-                      <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-white/5 text-amber-400/90 border border-amber-400/20">
-                        {service.tag}
-                      </span>
+
+                      <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                        {SITE_CONFIG.name}
+                      </h1>
+
+                      <p className="text-zinc-300 max-measure leading-relaxed text-sm sm:text-base">
+                        Architecting autonomous multi-agent systems, low-latency telephony voice engines,
+                        and evidence-grounded neural verification. Creator of <strong>Vexaro AI</strong> and
+                        the 90-agent orchestration company.
+                      </p>
+
+                      {/* Telemetry Numbers */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                        <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.07]">
+                          <span className="block text-[10px] font-mono text-zinc-400 uppercase">Public Repos</span>
+                          <span className="text-lg font-bold text-white font-mono tabular-nums">35+ Repos</span>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.07]">
+                          <span className="block text-[10px] font-mono text-zinc-400 uppercase">Test Gates</span>
+                          <span className="text-lg font-bold text-cyan-400 font-mono tabular-nums">101 Gates</span>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.07]">
+                          <span className="block text-[10px] font-mono text-zinc-400 uppercase">Voice Latency</span>
+                          <span className="text-lg font-bold text-emerald-400 font-mono tabular-nums">0.86s p50</span>
+                        </div>
+                        <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.07]">
+                          <span className="block text-[10px] font-mono text-zinc-400 uppercase">Location</span>
+                          <span className="text-lg font-bold text-zinc-200 font-mono">Hyderabad</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-3 pt-2">
+                        <button
+                          onClick={() => jumpToChapter(1)}
+                          className="tactile-btn px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition flex items-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.35)]"
+                        >
+                          <span>Explore Vexaro AI Engine</span>
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setLorModalOpen(true);
+                            verifyLorId("LOR-VTR-2024-AI01");
+                          }}
+                          className="tactile-btn px-5 py-2.5 rounded-xl bg-[#121824] hover:bg-[#1A2234] border border-white/[0.08] text-zinc-200 font-medium text-xs transition flex items-center gap-2"
+                        >
+                          <Award className="w-4 h-4 text-cyan-400" />
+                          <span>Verify LOR &amp; Credentials</span>
+                        </button>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">{service.desc}</p>
-                  </div>
-                  <div className="pt-2">
-                    <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      {service.highlight}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+
+                    {/* Portrait Frame with Obsidian Rim */}
+                    <div className="lg:col-span-5 flex justify-center">
+                      <div className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-2xl overflow-hidden border border-white/[0.09] shadow-[0_15px_40px_rgba(0,0,0,0.9)] bg-[#121824]">
+                        <img
+                          src={portraitSrc}
+                          onError={handlePortraitError}
+                          alt={SITE_CONFIG.name}
+                          className="w-full h-full object-cover object-top filter contrast-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0C1018] via-transparent to-transparent opacity-60" />
+                        <div className="absolute bottom-3 inset-x-3 p-2.5 rounded-xl bg-[#0C1018]/80 border border-white/[0.08] backdrop-blur-md flex items-center justify-between">
+                          <span className="font-mono text-[11px] text-zinc-300">Hyderabad, IN</span>
+                          <span className="flex items-center gap-1 font-mono text-[11px] text-emerald-400">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            Active On-Duty
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ------------------------------------------------------------- */}
+                {/* CHAPTER 2: VEXARO AI MULTI-AGENT OPERATING SYSTEM             */}
+                {/* ------------------------------------------------------------- */}
+                {activeChapter === 1 && (
+                  <motion.div
+                    key="chap-1"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full space-y-5"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono mb-2">
+                          <Rocket className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>FLAGSHIP OPERATING SYSTEM · 101 AUTOMATED GATES</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                          Vexaro AI — Evidence-Grounded Multi-Agent Engine
+                        </h2>
+                      </div>
+
+                      <a
+                        href="https://vexaro-app.web.app/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="tactile-btn px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow"
+                      >
+                        <span>Open Live Platform</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+
+                    <p className="text-zinc-300 max-measure text-xs sm:text-sm leading-relaxed">
+                      Enterprise multi-agent OS deploying 9 specialized autonomous agents with mathematical
+                      reasoning loops, 101 pass-fail verification gates, and Indian telephony compliance.
+                    </p>
+
+                    {/* 9 Autonomous Agent Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {[
+                        { title: "Outreach SDR Agent", desc: "Autonomous B2B buying signals & outbound qualification" },
+                        { title: "Meetlyzer Rooms", desc: "Isolated meetings workspace & 50+ participant live rooms" },
+                        { title: "Hirifir Career Ops", desc: "Automated candidate sourcing & verification pipeline" },
+                        { title: "CashPilot Finance", desc: "Ledger intelligence & financial scenario modeling" },
+                        { title: "Veylithra Ecosystem", desc: "Cross-agent collaborative orchestration & DAG loops" },
+                        { title: "Tenglish Voice Agent OS", desc: "LiveKit + Sarvam Saaras/Bulbul (0.86s p50 latency)" },
+                        { title: "Research-Orchestra", desc: "Autonomous decomposition & paper synthesis pack" },
+                        { title: "Ralph Loop Quality Gate", desc: "Unbreakable completion interceptor (zero exit on test fail)" },
+                        { title: "DPDP & TRAI Guard", desc: "Verhoeff Aadhaar + Luhn card PII redaction & 09:00-21:00 IST gate" },
+                      ].map((ag, i) => (
+                        <div key={i} className="p-3 rounded-xl bg-[#121824] border border-white/[0.07] space-y-1">
+                          <span className="text-xs font-bold text-cyan-300 font-mono block">{ag.title}</span>
+                          <span className="text-[11px] text-zinc-400 leading-snug block">{ag.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-zinc-400 border-t border-white/[0.07]">
+                      <span className="text-emerald-400 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        101 Automated Verification Gates Passed (100% Green)
+                      </span>
+                      <span className="text-zinc-500">Live on Google Firebase Hosting</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ------------------------------------------------------------- */}
+                {/* CHAPTER 3: VTR'S AGENTIC COMPANY (90 SUBAGENTS)               */}
+                {/* ------------------------------------------------------------- */}
+                {activeChapter === 2 && (
+                  <motion.div
+                    key="chap-2"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full space-y-5"
+                  >
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-mono">
+                      <Network className="w-3.5 h-3.5 text-violet-400" />
+                      <span>90-AGENT ORCHESTRATION NETWORK · 300 MCP SKILLS</span>
+                    </div>
+
+                    <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                      VTR&apos;s Agentic Company — 8-Layer Swarm Architecture
+                    </h2>
+
+                    <p className="text-zinc-300 max-measure text-xs sm:text-sm leading-relaxed">
+                      Multi-agent operations network where 90 autonomous subagents divide and conquer
+                      software engineering, SDR research, security audits, and data synthesis with zero-trust tenant isolation.
+                    </p>
+
+                    {/* 8-Layer Architecture Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {[
+                        { num: "01", name: "UI & Canvas", desc: "Tailwind, Framer & obsidian glass" },
+                        { num: "02", name: "Orchestration", desc: "LangGraph DAG & multi-agent router" },
+                        { num: "03", name: "Knowledge RAG", desc: "Dense MIPS & Cross-Encoder NLI" },
+                        { num: "04", name: "Model Router", desc: "Claude, Gemini, Grok & Qwen" },
+                        { num: "05", name: "Tools & MCP", desc: "300+ Model Context Protocol skills" },
+                        { num: "06", name: "Data Layer", desc: "Zero-trust tenant data & caching" },
+                        { num: "07", name: "Observability", desc: "GRPO reward loops & error telemetry" },
+                        { num: "08", name: "Telephony Infra", desc: "LiveKit WebRTC & Indian SIP trunks" },
+                      ].map((layer, idx) => (
+                        <div key={idx} className="p-3 rounded-xl bg-[#121824] border border-white/[0.07] space-y-1">
+                          <span className="font-mono text-[10px] text-violet-400 font-bold block">LAYER {layer.num}</span>
+                          <span className="text-xs font-bold text-white block">{layer.name}</span>
+                          <span className="text-[10px] text-zinc-400 block">{layer.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-zinc-400 border-t border-white/[0.07]">
+                      <span className="text-violet-300">Continuous Evaluation: OpenPipe ART / Unsloth GRPO</span>
+                      <span className="text-zinc-500">Zero Placeholders · 100% Runnable</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ------------------------------------------------------------- */}
+                {/* CHAPTER 4: SECTOR SOLVER & ML/DL LAB                          */}
+                {/* ------------------------------------------------------------- */}
+                {activeChapter === 3 && (
+                  <motion.div
+                    key="chap-3"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full space-y-5"
+                  >
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
+                      <Code2 className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>ALGORITHMIC DOMAIN SOLVERS &amp; PYTORCH LABS</span>
+                    </div>
+
+                    <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                      Sector Solver &amp; Neural Benchmarks
+                    </h2>
+
+                    <p className="text-zinc-300 max-measure text-xs sm:text-sm leading-relaxed">
+                      Quantitative optimization and high-accuracy deep learning benchmarks across meteorological forecasting,
+                      maritime satellite computer vision, and kinematics motion estimation.
+                    </p>
+
+                    {/* 4 Core Lab Cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {[
+                        {
+                          title: "Sector Solver Suite",
+                          tag: "Combinatorial Optimization",
+                          desc: "Combinatorial heuristic engine for sector-specific scheduling and asset routing bottlenecks.",
+                          metric: "O(n log n) · <12ms Solve",
+                          link: "https://github.com/viswatejam702-tech",
+                        },
+                        {
+                          title: "Weather Forecasting (GBDT vs LSTM)",
+                          tag: "Deep Learning Benchmark",
+                          desc: "Gradient Boosting (R² = 0.930, MAE 1.53°C) vs Multi-Layer LSTM (R² = 0.914) over 10K records.",
+                          metric: "R² = 0.930 · MAE 1.53°C",
+                          link: "https://github.com/viswatejam702-tech/Weather-Prediction-with-ML-and-Dl",
+                        },
+                        {
+                          title: "Maritime Classification CNN",
+                          tag: "Computer Vision",
+                          desc: "15-stage PyTorch maritime satellite vessel detection with residual feature extraction.",
+                          metric: "15 Analytical Stages",
+                          link: "https://github.com/viswatejam702-tech/game-of-dl-in-ships",
+                        },
+                        {
+                          title: "Verified RAG Engine",
+                          tag: "Evidence & NLI",
+                          desc: "Dense MIPS retrieval + Cross-Encoder reranking + DeBERTa-v3 claim-level NLI verification.",
+                          metric: "Lewis et al. Grounding",
+                          link: "https://verified-rag.onrender.com",
+                        },
+                      ].map((lab, i) => (
+                        <a
+                          key={i}
+                          href={lab.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="tactile-btn p-3.5 rounded-xl bg-[#121824] hover:bg-[#1A2234] border border-white/[0.08] hover:border-cyan-400/40 transition block space-y-1.5 group"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-white group-hover:text-cyan-300 transition">
+                              {lab.title}
+                            </span>
+                            <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-cyan-400 transition" />
+                          </div>
+                          <p className="text-[11px] text-zinc-400 leading-snug">{lab.desc}</p>
+                          <span className="inline-block text-[10px] font-mono font-medium text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20 tabular-nums">
+                            {lab.metric}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom Stage Footer: Chapter Scrubbing Bar */}
+            <div className="border-t border-white/[0.07] pt-3 flex items-center justify-between text-[11px] font-mono text-zinc-500 z-20">
+              <span className="hidden sm:inline">Scroll scrub or click chapter pills above to morph stage</span>
+              <span className="text-zinc-400 font-medium">Stage Viewport: Sticky 100vh · Dynamic Morph</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* 4. VEXARO AI SPOTLIGHT + GITHUB REPOSITORIES */}
-      {/* ========================================== */}
-      <section id="projects" className="py-28 max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={headerFadeIn}
-          className="text-center max-w-3xl mx-auto mb-12"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em] mb-3">
-            <Compass className="w-3.5 h-3.5" />
-            VEXARO AI &amp; REPOSITORIES
+      {/* ========================================================================= */}
+      {/* 2. TECHNICAL MASTERY & SKILLS                                             */}
+      {/* ========================================================================= */}
+      <section id="skills" className="py-24 max-w-7xl mx-auto px-6 relative z-10 border-t border-white/[0.07]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="lg:col-span-5 space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono uppercase tracking-wider">
+              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+              <span>CORE ARCHITECTURAL MASTERY</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+              Calibrated Engineering Competencies
+            </h2>
+
+            <p className="text-zinc-400 max-measure text-sm sm:text-base leading-relaxed">
+              Synthesizing rigorous machine learning theory with production execution: multi-agent state machines,
+              real-time telephony VAD, and claim-level NLI verification.
+            </p>
+
+            {/* Education Box */}
+            <div className="p-5 rounded-2xl bg-[#0C1018] border border-white/[0.08] space-y-3">
+              <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase">
+                <GraduationCap className="w-4 h-4" />
+                <span>Formal Background</span>
+              </div>
+              <p className="text-sm font-semibold text-white">
+                B.Tech in Computer Science Engineering
+              </p>
+              <p className="text-xs text-zinc-400 leading-relaxed">
+                Specialized in deep learning architectures, time-series forecasting, and autonomous multi-agent systems.
+              </p>
+            </div>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-3 tracking-tight">
-            Autonomous Systems &amp; Live Repositories
+
+          {/* Animated Skills Progress Bars */}
+          <div className="lg:col-span-7 space-y-4 p-6 sm:p-8 rounded-2xl bg-[#0C1018] border border-white/[0.08] shadow-2xl">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.07]">
+              <div className="flex items-center gap-2 text-cyan-400 font-semibold text-xs font-mono">
+                <Sparkles className="w-4 h-4" />
+                <span>BENCHMARKED PROFICIENCY</span>
+              </div>
+              <span className="text-[11px] text-zinc-500 font-mono">VERIFIED %</span>
+            </div>
+
+            <div className="space-y-4">
+              {SKILLS.map((sk, idx) => (
+                <div key={idx} className="space-y-1.5">
+                  <div className="flex justify-between text-xs sm:text-sm">
+                    <span className="text-zinc-200 font-medium">{sk.name}</span>
+                    <span className="text-cyan-400 font-mono font-bold tabular-nums">{sk.percent}%</span>
+                  </div>
+                  <div className="h-2 w-full bg-[#121824] rounded-full overflow-hidden border border-white/[0.04]">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${sk.percent}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, delay: idx * 0.08, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-violet-500 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. REPOSITORY CATALOG (LIVE GITHUB FEED WITH SKELETON LOADERS)            */}
+      {/* ========================================================================= */}
+      <section id="projects-grid" className="py-24 max-w-7xl mx-auto px-6 relative z-10 border-t border-white/[0.07]">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+            <GitBranch className="w-3.5 h-3.5 text-cyan-400" />
+            <span>PRODUCTION CODEBASE ARCHIVES</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+            Curated Systems &amp; Live Repositories
           </h2>
           <p className="text-sm text-zinc-400">
-            Featuring <strong>Vexaro AI</strong> alongside repositories synchronized live with{" "}
+            Real-time feed synchronized with{" "}
             <a
               href={`https://github.com/${SITE_CONFIG.githubUsername}`}
               target="_blank"
               rel="noreferrer"
-              className="text-amber-400 hover:underline font-mono"
+              className="text-cyan-400 hover:underline font-mono"
             >
               @{SITE_CONFIG.githubUsername}
             </a>
-            . Any new repository pushed to GitHub appears here automatically.
+            . Any pushed repository appears here automatically.
           </p>
 
           {/* Search + Category Tabs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <div className="relative w-full sm:w-80">
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search projects & platforms..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white/5 border border-white/10 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
+                placeholder="Filter repositories..."
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#0C1018] border border-white/[0.08] text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 transition"
               />
             </div>
 
             <div className="flex flex-wrap justify-center gap-2">
-              {["All", "Startups & AI", "AI Research & Systems", "Deep Learning & ML", "Live GitHub Feed"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveCategory(tab)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
-                    activeCategory === tab
-                      ? "bg-amber-400 text-black shadow-[0_0_15px_rgba(245,158,11,0.4)]"
-                      : "bg-white/5 text-zinc-300 hover:bg-white/10 border border-white/10"
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Project Cards Grid with Buttery Smooth Scroll Reveals */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.15 }}
-          variants={containerStagger}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
-        >
-          {filteredProjects.slice(0, 15).map((project) => (
-            <motion.a
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              variants={cardScrollFadeUp}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className={`group rounded-2xl overflow-hidden bg-[#111116] border transition duration-300 flex flex-col shadow-xl relative ${
-                project.isSpotlight
-                  ? "border-amber-400/60 shadow-[0_0_30px_rgba(245,158,11,0.25)] md:col-span-2 lg:col-span-3"
-                  : "border-white/10 hover:border-amber-400/60"
-              }`}
-            >
-              <div
-                className={`relative overflow-hidden bg-[#0a0a0e] ${
-                  project.isSpotlight ? "h-64 sm:h-80" : "h-52"
-                }`}
-              >
-                {project.id === "vexaro-ai" ? (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-[#0e0e14] via-[#09090c] to-[#111116] relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.22),transparent_70%)]" />
-                    <div className="absolute inset-0 opacity-[0.08] bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:18px_18px]" />
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="relative z-10 w-44 h-44 sm:w-56 sm:h-56 object-contain drop-shadow-[0_0_35px_rgba(245,158,11,0.55)] group-hover:scale-110 transition duration-700"
-                    />
-                  </div>
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700 filter brightness-90 group-hover:brightness-100"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111116] via-[#111116]/40 to-transparent pointer-events-none" />
-
-                {/* Badge */}
-                <span
-                  className={`absolute top-4 left-4 px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md border ${
-                    project.isSpotlight
-                      ? "bg-amber-400 text-black border-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.5)]"
-                      : "bg-black/80 text-amber-400 border-amber-400/30"
-                  }`}
-                >
-                  {project.badge}
-                </span>
-
-                {project.isSpotlight && (
-                  <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 backdrop-blur-md flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    OMNI-SECTOR PLATFORM
-                  </span>
-                )}
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <h3
-                      className={`font-bold text-white group-hover:text-amber-400 transition ${
-                        project.isSpotlight ? "text-2xl sm:text-3xl" : "text-lg"
-                      }`}
-                    >
-                      {project.name}
-                    </h3>
-                    <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 shrink-0 transition" />
-                  </div>
-                  <p
-                    className={`text-zinc-400 leading-relaxed ${
-                      project.isSpotlight ? "text-sm sm:text-base" : "text-xs line-clamp-3"
+              {["All", "Autonomous Systems", "Algorithms & Optimization", "Deep Learning & ML", "Live GitHub Feed"].map(
+                (tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveCategory(tab)}
+                    className={`tactile-btn px-3.5 py-2 rounded-xl text-xs font-mono transition ${
+                      activeCategory === tab
+                        ? "bg-blue-600 text-white font-semibold shadow-[0_0_15px_rgba(59,130,246,0.35)]"
+                        : "bg-[#0C1018] text-zinc-400 hover:text-white border border-white/[0.08]"
                     }`}
                   >
+                    {tab}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Live Loading Skeleton */}
+        {repoLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((sk) => (
+              <div key={sk} className="h-64 rounded-2xl bg-[#0C1018] border border-white/[0.06] p-6 space-y-4 animate-pulse">
+                <div className="h-4 w-28 bg-[#121824] rounded" />
+                <div className="h-6 w-3/4 bg-[#121824] rounded" />
+                <div className="h-16 w-full bg-[#121824] rounded" />
+                <div className="h-4 w-1/2 bg-[#121824] rounded" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Inline Error Notice */}
+        {repoError && (
+          <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-mono flex items-center justify-between max-w-xl mx-auto my-4">
+            <span>Notice: {repoError}. Displaying curated production systems.</span>
+            <button
+              onClick={fetchGithubRepos}
+              className="tactile-btn px-3 py-1 rounded-md bg-red-500/20 hover:bg-red-500/30 text-white flex items-center gap-1"
+            >
+              <RefreshCw className="w-3 h-3" />
+              <span>Retry</span>
+            </button>
+          </div>
+        )}
+
+        {/* Repositories Grid */}
+        {!repoLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project) => (
+              <a
+                key={project.id}
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn glass-obsidian-card p-6 rounded-2xl flex flex-col justify-between space-y-4 group"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-white/[0.08] bg-[#121824] text-cyan-300">
+                      {project.badge}
+                    </span>
+                    <ExternalLink className="w-4 h-4 text-zinc-500 group-hover:text-cyan-400 transition" />
+                  </div>
+
+                  <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition">
+                    {project.name}
+                  </h3>
+
+                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
                 </div>
 
-                {project.highlights && (
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {project.highlights.map((h: string, idx: number) => (
-                      <span
-                        key={idx}
-                        className={`text-[10px] px-2.5 py-1 rounded-full border font-mono ${
-                          project.isSpotlight
-                            ? "bg-amber-400/10 border-amber-400/30 text-amber-300"
-                            : "bg-white/5 border-white/10 text-zinc-300"
-                        }`}
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
-                  <span className="text-amber-400/90 font-medium">{project.language}</span>
-                  {project.id === "vexaro-ai" || project.url.includes("vexaro-app.web.app") ? (
-                    <span className="flex items-center gap-1.5 text-amber-400 font-semibold group-hover:underline">
-                      <ExternalLink className="w-3.5 h-3.5" /> Visit Live Website
-                    </span>
-                  ) : project.url.includes("onrender.com") ? (
-                    <span className="flex items-center gap-1.5 text-emerald-400 font-semibold group-hover:underline">
-                      <ExternalLink className="w-3.5 h-3.5" /> Launch on Render
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1 text-zinc-300 group-hover:text-amber-400 transition">
-                      <Github className="w-3.5 h-3.5" /> View on GitHub
-                    </span>
+                <div className="space-y-3 pt-3 border-t border-white/[0.07]">
+                  {project.metrics && (
+                    <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                      {project.metrics.slice(0, 2).map((m: any, i: number) => (
+                        <div key={i} className="p-1.5 rounded bg-[#121824] text-zinc-300">
+                          <span className="text-zinc-500 block">{m.label}</span>
+                          <span className="text-cyan-400 font-bold tabular-nums">{m.val}</span>
+                        </div>
+                      ))}
+                    </div>
                   )}
+
+                  <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
+                    <span className="text-blue-400">{project.language}</span>
+                    <span className="flex items-center gap-1 text-zinc-300 group-hover:text-cyan-400 transition">
+                      <Github className="w-3.5 h-3.5" />
+                      <span>Inspect Code</span>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </motion.a>
-          ))}
-        </motion.div>
+              </a>
+            ))}
+          </div>
+        )}
       </section>
 
-      {/* ========================================== */}
-      {/* 5. CONTACT & OMNICHANNEL CONNECT SECTION   */}
-      {/* ========================================== */}
-      <section id="contact" className="py-28 bg-[#0a0a0e] border-t border-white/10 pb-36 relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={headerFadeIn}
-          className="max-w-4xl mx-auto px-6 text-center space-y-8"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-semibold uppercase tracking-[0.25em]">
-            <Zap className="w-3.5 h-3.5" />
-            CONNECT &amp; COLLABORATE
+      {/* ========================================================================= */}
+      {/* 4. CONNECT & COLLABORATE FOOTER SECTION                                   */}
+      {/* ========================================================================= */}
+      <section id="contact" className="py-24 bg-[#0A0D14] border-t border-white/[0.07] pb-36 relative z-10">
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+            <Zap className="w-3.5 h-3.5 text-cyan-400" />
+            <span>DIRECT CHANNELS &amp; RECRUITING</span>
           </div>
+
           <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            Let&apos;s Build the Future of AI Together
+            Connect &amp; Collaborate
           </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
-            Interested in <strong>Vexaro AI</strong>, seeking an AI Research Engineer, or looking to collaborate
-            on autonomous multi-agent systems and deep learning architectures? Connect directly via WhatsApp, Instagram, or live chat.
+
+          <p className="text-zinc-400 max-measure mx-auto text-sm sm:text-base leading-relaxed">
+            Discussing <strong>Vexaro AI</strong> systems, AI Research Engineer roles, or autonomous multi-agent
+            engineering? Reach out directly via WhatsApp, Instagram, or the verified concierge drawer.
           </p>
 
-          {/* 3 Contact Cards */}
-          <motion.div
-            variants={containerStagger}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6"
-          >
-            <motion.div
-              variants={cardScrollFadeUp}
-              whileHover={{ y: -6 }}
-              className="p-6 rounded-2xl bg-[#111116] border border-white/10 flex flex-col items-center gap-2 shadow-lg"
-            >
-              <MapPin className="w-6 h-6 text-amber-400" />
-              <h4 className="font-bold text-sm text-white">Location</h4>
-              <p className="text-xs text-zinc-400">{SITE_CONFIG.location}</p>
-            </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div className="p-5 rounded-2xl bg-[#0C1018] border border-white/[0.08] flex flex-col items-center gap-2 shadow">
+              <MapPin className="w-5 h-5 text-cyan-400" />
+              <span className="font-bold text-xs text-white">Location</span>
+              <span className="text-xs text-zinc-400 font-mono">{SITE_CONFIG.location}</span>
+            </div>
 
-            <motion.a
-              variants={cardScrollFadeUp}
-              whileHover={{ y: -6 }}
+            <a
               href={`mailto:${SITE_CONFIG.email}`}
-              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2 shadow-lg"
+              className="tactile-btn p-5 rounded-2xl bg-[#0C1018] border border-white/[0.08] hover:border-cyan-400/40 transition flex flex-col items-center gap-2 shadow"
             >
-              <Mail className="w-6 h-6 text-amber-400" />
-              <h4 className="font-bold text-sm text-white">Email</h4>
-              <p className="text-xs text-zinc-400">{SITE_CONFIG.email}</p>
-            </motion.a>
+              <Mail className="w-5 h-5 text-cyan-400" />
+              <span className="font-bold text-xs text-white">Email</span>
+              <span className="text-xs text-zinc-400 font-mono">{SITE_CONFIG.email}</span>
+            </a>
 
-            <motion.a
-              variants={cardScrollFadeUp}
-              whileHover={{ y: -6 }}
+            <a
               href={`https://instagram.com/${SITE_CONFIG.instagramHandle}`}
               target="_blank"
               rel="noreferrer"
-              className="p-6 rounded-2xl bg-[#111116] border border-white/10 hover:border-amber-400/50 transition flex flex-col items-center gap-2 shadow-lg"
+              className="tactile-btn p-5 rounded-2xl bg-[#0C1018] border border-white/[0.08] hover:border-cyan-400/40 transition flex flex-col items-center gap-2 shadow"
             >
-              <Instagram className="w-6 h-6 text-amber-400" />
-              <h4 className="font-bold text-sm text-white">Instagram</h4>
-              <p className="text-xs text-zinc-400">@{SITE_CONFIG.instagramHandle}</p>
-            </motion.a>
-          </motion.div>
+              <Instagram className="w-5 h-5 text-cyan-400" />
+              <span className="font-bold text-xs text-white">Instagram</span>
+              <span className="text-xs text-zinc-400 font-mono">@{SITE_CONFIG.instagramHandle}</span>
+            </a>
+          </div>
 
           {/* Primary Action Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 pt-6">
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
             <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20your%20VTR369%20portfolio%20regarding%20Vexaro%20AI.`}
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=Hi%20Viswa!%20Connecting%20from%20VTR369%20portfolio.`}
               target="_blank"
               rel="noreferrer"
               onClick={() => triggerConfetti()}
-              className="px-8 py-4 rounded-full bg-amber-400 text-black font-bold text-sm hover:bg-amber-300 transition shadow-[0_0_35px_rgba(245,158,11,0.45)] flex items-center gap-2"
+              className="tactile-btn px-7 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 shadow-[0_0_25px_rgba(59,130,246,0.35)]"
             >
               <MessageCircle className="w-4 h-4" />
-              Connect on Official WhatsApp
+              <span>Connect on Official WhatsApp</span>
             </a>
 
             <button
@@ -1430,72 +1361,66 @@ export default function VTR369Portfolio() {
                 triggerConfetti();
                 setChatOpen(true);
               }}
-              className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold text-sm transition flex items-center gap-2 backdrop-blur-md"
+              className="tactile-btn px-7 py-3.5 rounded-full bg-[#0C1018] hover:bg-[#121824] border border-white/[0.1] text-white font-medium text-xs sm:text-sm transition flex items-center gap-2"
             >
-              <Bot className="w-4 h-4 text-amber-400" />
-              Open Live Connect Drawer
+              <Bot className="w-4 h-4 text-cyan-400" />
+              <span>Open Concierge Drawer</span>
             </button>
           </div>
 
-          {/* Secondary Social Ecosystem Links */}
+          {/* Social Links Bar */}
           <div className="flex justify-center gap-6 pt-4 text-zinc-400">
-            <a
-              href={`https://github.com/${SITE_CONFIG.githubUsername}`}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-amber-400 transition"
-              title="GitHub"
-            >
+            <a href={`https://github.com/${SITE_CONFIG.githubUsername}`} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition">
               <Github className="w-5 h-5" />
             </a>
-            <a
-              href={SITE_CONFIG.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-amber-400 transition"
-              title="LinkedIn"
-            >
+            <a href={SITE_CONFIG.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a
-              href={SITE_CONFIG.twitterUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-amber-400 transition"
-              title="X / Twitter"
-            >
+            <a href={SITE_CONFIG.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition">
               <Twitter className="w-5 h-5" />
             </a>
+            <a href={`https://instagram.com/${SITE_CONFIG.instagramAltHandle}`} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition font-mono text-xs pt-0.5">
+              @{SITE_CONFIG.instagramAltHandle}
+            </a>
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* ========================================== */}
-      {/* 6. FLOATING VOICE + TEXT AI AUTOPILOT DOCK */}
-      {/* ========================================== */}
-      <div className="fixed bottom-4 inset-x-0 z-50 px-4 flex justify-center pointer-events-none">
+      {/* ========================================================================= */}
+      {/* 5. POLISHED AUTOPILOT COMMAND BAR (VOICE + TEXT)                          */}
+      {/* ========================================================================= */}
+      <div className="fixed bottom-5 inset-x-0 z-50 px-4 flex justify-center pointer-events-none">
         <motion.div
-          initial={{ y: 60, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="pointer-events-auto w-full max-w-2xl rounded-2xl bg-[#111116]/95 backdrop-blur-2xl border border-amber-400/35 shadow-[0_10px_40px_rgba(0,0,0,0.85)] p-3 space-y-2"
+          transition={{ type: "spring", stiffness: 120, damping: 22 }}
+          className="pointer-events-auto w-full max-w-2xl rounded-2xl glass-obsidian p-3 space-y-2 border border-white/[0.09]"
         >
           <div className="flex items-center justify-between px-2 text-[11px] text-zinc-400">
             <div className="flex items-center gap-2">
-              <span className="flex items-center gap-1.5 text-amber-400 font-semibold font-mono">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                VTR369 AI AUTOPILOT
+              <span className="flex items-center gap-1.5 text-cyan-400 font-semibold font-mono">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                VTR369 AUTOPILOT
               </span>
+              {isListening && (
+                <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30">
+                  <span className="w-1 bg-cyan-400 rounded-full animate-wave-1" />
+                  <span className="w-1 bg-cyan-400 rounded-full animate-wave-2" />
+                  <span className="w-1 bg-cyan-400 rounded-full animate-wave-3" />
+                  <span className="w-1 bg-cyan-400 rounded-full animate-wave-4" />
+                  <span className="text-[10px] text-cyan-300 font-mono ml-1">Live Wave</span>
+                </div>
+              )}
               {isPlayingAudio && (
                 <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 animate-pulse">
                   <Radio className="w-3 h-3" />
-                  <span>ElevenLabs Audio</span>
+                  <span>ElevenLabs Active</span>
                 </span>
               )}
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="truncate max-w-xs sm:max-w-sm text-zinc-300 font-medium hidden sm:inline">
+              <span className="truncate max-w-xs text-zinc-300 font-medium hidden sm:inline">
                 {autopilotStatus}
               </span>
               <button
@@ -1503,30 +1428,26 @@ export default function VTR369Portfolio() {
                   setLorModalOpen(true);
                   verifyLorId("LOR-VTR-2024-AI01");
                 }}
-                className="text-zinc-400 hover:text-amber-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-md bg-white/5"
-                title="Verify LOR / Credentials"
+                className="tactile-btn text-zinc-400 hover:text-cyan-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/[0.08] px-2 py-0.5 rounded bg-[#121824]"
+                title="Verify LOR"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <ShieldCheck className="w-3 h-3 text-cyan-400" />
                 <span>LOR</span>
               </button>
               <button
                 onClick={() => setSettingsModalOpen(true)}
-                className="text-zinc-400 hover:text-amber-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/10 px-2 py-0.5 rounded-md bg-white/5"
-                title="API Settings (ElevenLabs & Gemini)"
+                className="tactile-btn text-zinc-400 hover:text-cyan-400 transition flex items-center gap-1 text-[10px] font-mono border border-white/[0.08] px-2 py-0.5 rounded bg-[#121824]"
+                title="API Settings"
               >
-                <Sliders className="w-3.5 h-3.5" />
+                <Sliders className="w-3 h-3 text-cyan-400" />
                 <span>APIs</span>
               </button>
               <button
                 onClick={() => setVoiceEnabled(!voiceEnabled)}
-                className="text-zinc-400 hover:text-white transition"
-                title="Toggle Voice Output"
+                className="tactile-btn text-zinc-400 hover:text-white transition p-1"
+                title="Toggle Voice"
               >
-                {voiceEnabled ? (
-                  <Volume2 className="w-4 h-4 text-amber-400" />
-                ) : (
-                  <VolumeX className="w-4 h-4 text-zinc-600" />
-                )}
+                {voiceEnabled ? <Volume2 className="w-3.5 h-3.5 text-cyan-400" /> : <VolumeX className="w-3.5 h-3.5 text-zinc-600" />}
               </button>
             </div>
           </div>
@@ -1541,10 +1462,10 @@ export default function VTR369Portfolio() {
             <button
               type="button"
               onClick={toggleVoiceListening}
-              className={`p-3 rounded-xl font-semibold transition flex items-center justify-center ${
+              className={`tactile-btn p-2.5 rounded-xl transition flex items-center justify-center ${
                 isListening
                   ? "bg-red-500 text-white animate-pulse"
-                  : "bg-amber-400/15 text-amber-400 hover:bg-amber-400/25 border border-amber-400/30"
+                  : "bg-blue-600/20 text-cyan-400 hover:bg-blue-600/30 border border-cyan-500/30"
               }`}
               title="Speak Command"
             >
@@ -1556,24 +1477,24 @@ export default function VTR369Portfolio() {
               type="text"
               value={commandText}
               onChange={(e) => setCommandText(e.target.value)}
-              placeholder="Speak or type: 'Tell me about Vexaro', 'Verify LOR', 'Verified RAG', 'WhatsApp'..."
-              className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
+              placeholder="Speak or type: 'Vexaro AI', 'Sector Solver', 'Agentic Co', 'Verify LOR', 'WhatsApp' (Press '/' or Cmd+K)..."
+              className="flex-1 bg-black/50 border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 font-mono transition"
             />
 
             <button
               type="submit"
-              className="px-4 py-2.5 rounded-xl bg-amber-400 text-black font-bold text-xs sm:text-sm hover:bg-amber-300 transition flex items-center gap-1.5 shadow"
+              className="tactile-btn px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow"
             >
               <span>Run</span>
-              <Send className="w-3.5 h-3.5" />
+              <Send className="w-3 h-3" />
             </button>
           </form>
         </motion.div>
       </div>
 
-      {/* ========================================== */}
-      {/* 7. ON-SITE INSTANT LIVE CHAT DRAWER        */}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* 6. INSTANT ON-SITE CHAT DRAWER                                            */}
+      {/* ========================================================================= */}
       <AnimatePresence>
         {chatOpen && (
           <motion.div
@@ -1581,81 +1502,76 @@ export default function VTR369Portfolio() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 120, damping: 20 }}
-            className="fixed bottom-28 right-6 z-50 w-80 sm:w-96 rounded-2xl bg-[#14141b] border border-amber-400/40 shadow-2xl overflow-hidden backdrop-blur-2xl"
+            className="fixed bottom-28 right-6 z-50 w-80 sm:w-96 rounded-2xl bg-[#0C1018] border border-cyan-500/40 shadow-2xl overflow-hidden backdrop-blur-2xl"
           >
-            <div className="p-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black flex items-center justify-between font-bold text-sm">
+            <div className="p-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white flex items-center justify-between font-bold text-xs font-mono">
               <div className="flex items-center gap-2">
-                <Bot className="w-4 h-4 text-black" />
-                <span>Direct Chat — M. Viswa Teja Reddy</span>
+                <Bot className="w-4 h-4" />
+                <span>Concierge — M. Viswa Teja Reddy</span>
               </div>
-              <button
-                onClick={() => setChatOpen(false)}
-                className="p-1 hover:bg-black/10 rounded-md transition"
-              >
+              <button onClick={() => setChatOpen(false)} className="p-1 hover:bg-black/10 rounded transition">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="p-4 h-64 overflow-y-auto space-y-3 text-xs">
+            <div className="p-4 h-64 overflow-y-auto space-y-3 text-xs font-sans">
               {chatMessages.map((m, i) => (
                 <div
                   key={i}
                   className={`p-3 rounded-xl max-w-[85%] leading-relaxed ${
-                    m.sender === "user"
-                      ? "bg-amber-400 text-black ml-auto font-medium"
-                      : "bg-white/10 text-zinc-200"
+                    m.sender === "user" ? "bg-blue-600 text-white ml-auto font-medium" : "bg-[#121824] text-zinc-200 border border-white/[0.06]"
                   }`}
                 >
                   {m.text}
                 </div>
               ))}
               {chatLoading && (
-                <div className="p-3 rounded-xl max-w-[85%] bg-white/10 text-amber-400 flex items-center gap-2 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-                  <span>Thinking...</span>
+                <div className="p-3 rounded-xl max-w-[85%] bg-[#121824] text-cyan-400 flex items-center gap-2 font-mono">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                  <span>Synthesizing response...</span>
                 </div>
               )}
             </div>
 
-            <form onSubmit={handleChatSend} className="p-3 border-t border-white/10 space-y-2">
+            <form onSubmit={handleChatSend} className="p-3 border-t border-white/[0.08] space-y-2">
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Write a message to Viswa..."
-                  className="flex-1 bg-black/50 border border-white/15 rounded-lg px-3 py-2 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 transition"
+                  placeholder="Message Viswa..."
+                  className="flex-1 bg-black/60 border border-white/[0.1] rounded-lg px-3 py-2 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 transition"
                 />
                 <button
                   type="submit"
                   disabled={chatLoading}
-                  className="px-3.5 py-2 rounded-lg bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition disabled:opacity-50"
+                  className="tactile-btn px-3.5 py-2 rounded-lg bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition disabled:opacity-50"
                 >
                   Send
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-[10px]">
                 <a
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                    chatInput || "Hi Viswa! Reaching out from your VTR369 website regarding Vexaro AI."
+                    chatInput || "Hi Viswa! Reaching out from VTR369 regarding Vexaro AI."
                   )}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => triggerConfetti()}
-                  className="text-center py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-semibold hover:bg-emerald-500/30 transition flex items-center justify-center gap-1 font-mono"
+                  className="tactile-btn text-center py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-semibold hover:bg-emerald-500/30 transition flex items-center justify-center gap-1"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  Bridge to WhatsApp
+                  <MessageCircle className="w-3 h-3" />
+                  <span>WhatsApp</span>
                 </a>
                 <a
                   href={`https://instagram.com/${SITE_CONFIG.instagramHandle}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-center py-2 rounded-lg bg-pink-500/20 border border-pink-500/40 text-pink-300 text-[11px] font-semibold hover:bg-pink-500/30 transition flex items-center justify-center gap-1 font-mono"
+                  className="tactile-btn text-center py-2 rounded-lg bg-violet-500/20 border border-violet-500/40 text-violet-300 font-semibold hover:bg-violet-500/30 transition flex items-center justify-center gap-1"
                 >
-                  <Instagram className="w-3.5 h-3.5" />
-                  DM on Instagram
+                  <Instagram className="w-3 h-3" />
+                  <span>Instagram</span>
                 </a>
               </div>
             </form>
@@ -1663,23 +1579,21 @@ export default function VTR369Portfolio() {
         )}
       </AnimatePresence>
 
-      {/* ========================================== */}
-      {/* 8. CRYPTOGRAPHIC LOR & CREDENTIAL PROOF MODAL */}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* 7. CRYPTOGRAPHIC LOR & CREDENTIAL PROOF MODAL                             */}
+      {/* ========================================================================= */}
       <AnimatePresence>
         {lorModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 20 }}
-              transition={{ type: "spring", stiffness: 120, damping: 20 }}
-              className="w-full max-w-2xl rounded-2xl bg-[#111116] border border-amber-400/40 shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col max-h-[90vh]"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-2xl rounded-2xl bg-[#0C1018] border border-cyan-500/40 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             >
-              {/* Header */}
-              <div className="p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
+              <div className="p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-cyan-400">
                     <Award className="w-5 h-5" />
                   </div>
                   <div>
@@ -1696,18 +1610,16 @@ export default function VTR369Portfolio() {
                 </div>
                 <button
                   onClick={() => setLorModalOpen(false)}
-                  className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/5 transition"
+                  className="tactile-btn p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/5 transition"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Body */}
               <div className="p-6 overflow-y-auto space-y-6">
-                {/* ID Search Input & Quick Select Pills */}
                 <div className="space-y-3">
                   <label className="text-xs font-mono text-zinc-300 uppercase tracking-wider block">
-                    Verify Credential / LOR ID:
+                    Verify Credential ID:
                   </label>
                   <div className="flex gap-2">
                     <input
@@ -1715,33 +1627,32 @@ export default function VTR369Portfolio() {
                       value={lorInputId}
                       onChange={(e) => setLorInputId(e.target.value)}
                       placeholder="e.g. LOR-VTR-2024-AI01"
-                      className="flex-1 bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-amber-400 font-mono uppercase"
+                      className="flex-1 bg-black/60 border border-white/[0.1] rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 font-mono uppercase"
                     />
                     <button
                       onClick={() => verifyLorId(lorInputId)}
                       disabled={lorLoading}
-                      className="px-5 py-2.5 rounded-xl bg-amber-400 text-black font-bold text-xs hover:bg-amber-300 transition disabled:opacity-50 font-mono flex items-center gap-1.5"
+                      className="tactile-btn px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-500 transition disabled:opacity-50 font-mono flex items-center gap-1.5"
                     >
-                      <ShieldCheck className="w-4 h-4" />
+                      <ShieldCheck className="w-4 h-4 text-cyan-400" />
                       <span>{lorLoading ? "Verifying..." : "Verify"}</span>
                     </button>
                   </div>
 
-                  {/* Preset Pills */}
-                  <div className="flex flex-wrap gap-2 pt-1">
+                  <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px]">
                     {[
                       { id: "LOR-VTR-2024-AI01", label: "Academic AI LOR" },
                       { id: "LOR-VTR-2024-SYS02", label: "Vexaro AI Endorsement" },
-                      { id: "LOR-VTR-2025-QUANT369", label: "Quantum Exploration" },
+                      { id: "LOR-VTR-2025-QUANT369", label: "Quantum Foundations" },
                       { id: "LOR-VTR-2025-DP04", label: "Verified RAG & DP" },
                     ].map((item) => (
                       <button
                         key={item.id}
                         onClick={() => verifyLorId(item.id)}
-                        className={`text-[11px] font-mono px-3 py-1 rounded-full border transition flex items-center gap-1.5 ${
+                        className={`tactile-btn px-3 py-1 rounded-full border transition flex items-center gap-1.5 ${
                           lorInputId === item.id
-                            ? "bg-amber-400 text-black border-amber-400 font-semibold shadow-[0_0_12px_rgba(245,158,11,0.3)]"
-                            : "bg-white/5 text-zinc-300 border-white/10 hover:border-amber-400/50"
+                            ? "bg-blue-600 text-white border-cyan-400 font-semibold shadow"
+                            : "bg-[#121824] text-zinc-300 border-white/[0.08] hover:border-cyan-400/40"
                         }`}
                       >
                         <span>{item.id}</span>
@@ -1751,14 +1662,13 @@ export default function VTR369Portfolio() {
                   </div>
                 </div>
 
-                {/* Verification Result Card */}
                 {lorData && !lorData.error ? (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-5 rounded-2xl bg-black/40 border border-emerald-500/40 space-y-4 relative overflow-hidden"
+                    className="p-5 rounded-2xl bg-[#07090E] border border-emerald-500/40 space-y-4"
                   >
-                    <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                         <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
@@ -1770,19 +1680,16 @@ export default function VTR369Portfolio() {
 
                     <div>
                       <h4 className="text-base font-bold text-white">{lorData.title}</h4>
-                      <p className="text-xs text-amber-400/90 font-mono mt-0.5">
-                        Candidate: {lorData.candidate}
-                      </p>
+                      <p className="text-xs text-cyan-400 font-mono mt-0.5">Candidate: {lorData.candidate}</p>
                       <p className="text-xs text-zinc-400 mt-1">
                         Issuer: <strong>{lorData.issuer}</strong> ({lorData.role} · {lorData.organization})
                       </p>
                     </div>
 
-                    <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 text-xs text-zinc-300 leading-relaxed italic">
+                    <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-xs text-zinc-300 leading-relaxed italic">
                       &ldquo;{lorData.endorsement}&rdquo;
                     </div>
 
-                    {/* Verified Competencies */}
                     {lorData.verifiedCompetencies && (
                       <div className="space-y-1.5">
                         <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">
@@ -1790,10 +1697,7 @@ export default function VTR369Portfolio() {
                         </span>
                         <div className="flex flex-wrap gap-1.5">
                           {lorData.verifiedCompetencies.map((comp: string, i: number) => (
-                            <span
-                              key={i}
-                              className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-zinc-200"
-                            >
+                            <span key={i} className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-[#121824] border border-white/[0.08] text-zinc-200">
                               ✓ {comp}
                             </span>
                           ))}
@@ -1801,8 +1705,7 @@ export default function VTR369Portfolio() {
                       </div>
                     )}
 
-                    {/* Cryptographic SHA-256 Proof */}
-                    <div className="p-3 rounded-xl bg-black/80 border border-white/10 space-y-1">
+                    <div className="p-3 rounded-xl bg-[#0C1018] border border-white/[0.08] space-y-1">
                       <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
                         <span>SHA-256 Cryptographic Verification Fingerprint:</span>
                         <button
@@ -1811,10 +1714,10 @@ export default function VTR369Portfolio() {
                             setCopiedHash(true);
                             setTimeout(() => setCopiedHash(false), 2000);
                           }}
-                          className="text-amber-400 hover:underline flex items-center gap-1"
+                          className="text-cyan-400 hover:underline flex items-center gap-1"
                         >
                           {copiedHash ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                          <span>{copiedHash ? "Copied Proof" : "Copy Proof"}</span>
+                          <span>{copiedHash ? "Copied" : "Copy Proof"}</span>
                         </button>
                       </div>
                       <p className="font-mono text-[11px] text-emerald-400 break-all select-all">
@@ -1829,12 +1732,11 @@ export default function VTR369Portfolio() {
                 ) : null}
               </div>
 
-              {/* Footer */}
-              <div className="p-4 border-t border-white/10 bg-white/[0.02] flex items-center justify-between text-xs text-zinc-400">
+              <div className="p-4 border-t border-white/[0.08] bg-white/[0.02] flex items-center justify-between text-xs text-zinc-400">
                 <span className="font-mono text-[11px]">VTR369 Credential Verification Engine</span>
                 <button
                   onClick={() => setLorModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition"
+                  className="tactile-btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium transition"
                 >
                   Close
                 </button>
@@ -1844,95 +1746,81 @@ export default function VTR369Portfolio() {
         )}
       </AnimatePresence>
 
-      {/* ========================================== */}
-      {/* 9. LIVE API SETTINGS MODAL (ELEVENLABS + GEMINI) */}
-      {/* ========================================== */}
+      {/* ========================================================================= */}
+      {/* 8. API SETTINGS MODAL (ELEVENLABS & GEMINI)                                */}
+      {/* ========================================================================= */}
       <AnimatePresence>
         {settingsModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 20 }}
-              transition={{ type: "spring", stiffness: 120, damping: 20 }}
-              className="w-full max-w-lg rounded-2xl bg-[#111116] border border-amber-400/40 shadow-2xl overflow-hidden p-6 space-y-5"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="w-full max-w-lg rounded-2xl bg-[#0C1018] border border-cyan-500/40 shadow-2xl overflow-hidden p-6 space-y-5"
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
                 <div className="flex items-center gap-2.5">
-                  <Sliders className="w-5 h-5 text-amber-400" />
+                  <Sliders className="w-5 h-5 text-cyan-400" />
                   <h3 className="text-base font-bold text-white">Live API Gateway Settings</h3>
                 </div>
                 <button
                   onClick={() => setSettingsModalOpen(false)}
-                  className="p-1.5 text-zinc-400 hover:text-white rounded-lg transition"
+                  className="tactile-btn p-1.5 text-zinc-400 hover:text-white rounded-lg transition"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="space-y-4 text-xs">
-                {/* ElevenLabs API Key */}
+              <div className="space-y-4 text-xs font-mono">
                 <div className="space-y-1.5">
-                  <label className="font-mono text-zinc-300 font-semibold block flex items-center justify-between">
-                    <span>ElevenLabs Voice API Key (Optional Client Override):</span>
-                    <span className="text-[10px] text-amber-400">xi-...</span>
+                  <label className="text-zinc-300 font-semibold block flex items-center justify-between">
+                    <span>ElevenLabs Voice API Key:</span>
+                    <span className="text-[10px] text-cyan-400">xi-...</span>
                   </label>
                   <input
                     type="password"
                     value={elevenLabsApiKey}
                     onChange={(e) => setElevenLabsApiKey(e.target.value)}
-                    placeholder="Enter your ElevenLabs API Key (or leave empty to use server/browser TTS)"
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400 font-mono"
+                    placeholder="Enter ElevenLabs API Key"
+                    className="w-full bg-black/60 border border-white/[0.1] rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-cyan-400 font-mono"
                   />
-                  <p className="text-[10px] text-zinc-500">
-                    Enables ultra-realistic studio speech in the Autopilot dock and Chat Concierge.
-                  </p>
                 </div>
 
-                {/* ElevenLabs Voice Selector */}
                 <div className="space-y-1.5">
-                  <label className="font-mono text-zinc-300 font-semibold block">
-                    ElevenLabs Studio Voice:
-                  </label>
+                  <label className="text-zinc-300 font-semibold block">ElevenLabs Studio Voice:</label>
                   <select
                     value={elevenLabsVoiceId}
                     onChange={(e) => setElevenLabsVoiceId(e.target.value)}
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 font-mono"
+                    className="w-full bg-black/60 border border-white/[0.1] rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400 font-mono"
                   >
-                    <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Warm Studio-Grade (Default)</option>
+                    <option value="21m00Tcm4TlvDq8ikWAM">Rachel — Studio Natural (Default)</option>
                     <option value="pNInz6obpgDQGcFmaJgB">Adam — Deep Authoritative</option>
                     <option value="ErXwobaYiN019PkySvjV">Antoni — Technical Executive</option>
-                    <option value="custom">Custom Voice ID...</option>
                   </select>
                 </div>
 
-                {/* Gemini API Key */}
                 <div className="space-y-1.5">
-                  <label className="font-mono text-zinc-300 font-semibold block flex items-center justify-between">
-                    <span>Google Gemini API Key (Optional Client Override):</span>
-                    <span className="text-[10px] text-amber-400">AIza...</span>
+                  <label className="text-zinc-300 font-semibold block flex items-center justify-between">
+                    <span>Google Gemini API Key:</span>
+                    <span className="text-[10px] text-cyan-400">AIza...</span>
                   </label>
                   <input
                     type="password"
                     value={geminiApiKey}
                     onChange={(e) => setGeminiApiKey(e.target.value)}
-                    placeholder="Enter free Gemini API Key from aistudio.google.com"
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-400 font-mono"
+                    placeholder="Enter free Gemini API Key"
+                    className="w-full bg-black/60 border border-white/[0.1] rounded-xl px-4 py-2.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-cyan-400 font-mono"
                   />
-                  <p className="text-[10px] text-zinc-500">
-                    Powers dynamic generative chat turns. Zero downtime fallback active if empty.
-                  </p>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-3 border-t border-white/10">
+              <div className="flex items-center justify-between pt-3 border-t border-white/[0.08]">
                 <button
                   type="button"
                   onClick={() => speakResponse("Testing ElevenLabs studio voice output.")}
-                  className="px-4 py-2 rounded-xl border border-white/15 hover:border-amber-400/50 text-zinc-300 hover:text-white transition font-mono text-xs flex items-center gap-1.5"
+                  className="tactile-btn px-4 py-2 rounded-xl border border-white/[0.1] hover:border-cyan-400/50 text-zinc-300 hover:text-white transition font-mono text-xs flex items-center gap-1.5"
                 >
-                  <Volume2 className="w-3.5 h-3.5 text-amber-400" />
+                  <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
                   <span>Test Audio</span>
                 </button>
 
@@ -1940,14 +1828,23 @@ export default function VTR369Portfolio() {
                   <button
                     type="button"
                     onClick={() => setSettingsModalOpen(false)}
-                    className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white transition font-medium text-xs"
+                    className="tactile-btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white transition text-xs"
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
-                    onClick={() => saveApiSettings(elevenLabsApiKey, elevenLabsVoiceId, geminiApiKey)}
-                    className="px-5 py-2 rounded-xl bg-amber-400 text-black hover:bg-amber-300 transition font-bold text-xs shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                    onClick={() => {
+                      if (typeof window !== "undefined") {
+                        localStorage.setItem("vtr_elevenlabs_key", elevenLabsApiKey);
+                        localStorage.setItem("vtr_elevenlabs_voice", elevenLabsVoiceId);
+                        localStorage.setItem("vtr_gemini_key", geminiApiKey);
+                      }
+                      setSettingsModalOpen(false);
+                      triggerConfetti();
+                      speakResponse("Settings saved. ElevenLabs Studio Voice active.");
+                    }}
+                    className="tactile-btn px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow"
                   >
                     Save &amp; Activate
                   </button>

@@ -1,5 +1,5 @@
 // ==========================================
-// CENTRALIZED OWNER & SOCIAL CONFIGURATION
+// CENTRALIZED OWNER & TECHNICAL CONFIGURATION
 // ==========================================
 
 export interface SiteConfig {
@@ -17,6 +17,7 @@ export interface SiteConfig {
   email: string;
   whatsappNumber: string;
   instagramHandle: string;
+  instagramAltHandle: string;
   linkedinUrl: string;
   twitterUrl: string;
   status: string;
@@ -24,7 +25,7 @@ export interface SiteConfig {
     repos: string;
     flagship: string;
     focus: string;
-    availability: string;
+    gates: string;
   };
 }
 
@@ -32,28 +33,29 @@ export const SITE_CONFIG: SiteConfig = {
   name: "M. Viswa Teja Reddy",
   brand: "VTR369",
   monogram: "VTR.369",
-  role: "AI Research Engineer",
+  role: "AI Research Engineer & Systems Architect",
   mission:
-    "Building Vexaro AI — Autonomous Agentic Platform (Specialized Agents Across Every Category & Sector · Launching Very Soon)",
+    "Building Vexaro AI (9 specialized agents · 101 verified gates) & VTR's Agentic Company (90 subagents · 300 MCP skills)",
   tagline:
-    "AI Research Engineer pioneering autonomous multi-agent systems, evaluation harnesses, deep learning architectures, and quantum computing foundations. Currently building Vexaro AI — the omni-sector autonomous agentic platform launching very soon.",
+    "AI Research Engineer architecting autonomous multi-agent operating systems, low-latency telephony pipelines, and verified neural architectures. Creator of Vexaro AI, VTR's Agentic Company, and Sector Solver.",
   headline:
-    "AI Research Engineer · Building Vexaro AI Autonomous Agentic Platform",
-  location: "Hyderabad / Andhra Pradesh, India",
+    "AI Research Engineer · Architect of Vexaro AI & Autonomous Multi-Agent Systems",
+  location: "Hyderabad, India",
   githubUsername: "viswatejam702-tech",
   heroPortraitUrl: "/viswa-portrait.png",
   fallbackPortraitUrl: "https://github.com/viswatejam702-tech.png",
   email: "viswatejam702@gmail.com",
-  whatsappNumber: "918978237578", // Viswa's official WhatsApp
-  instagramHandle: "vtr_.369", // Viswa's official Instagram handle
+  whatsappNumber: "918978237578",
+  instagramHandle: "vtr_.369",
+  instagramAltHandle: "vexaro.ai.in",
   linkedinUrl: "https://www.linkedin.com/in/m-viswa-teja-reddy-1234g",
   twitterUrl: "https://x.com/MViswateja1",
-  status: "Building Vexaro AI · Launching Very Soon",
+  status: "Operating Vexaro AI Platform & Agentic Swarms",
   stats: {
-    repos: "33+ Public AI & Deep Tech Repositories",
-    flagship: "Vexaro AI & Nexus V",
-    focus: "Autonomous Agents, LLMs & Quantum Mechanics",
-    availability: "Building Vexaro AI (Launching Very Soon)",
+    repos: "35+ Production Repositories",
+    flagship: "Vexaro AI (9 Agents · 101 Gates)",
+    focus: "Multi-Agent OS, Low-Latency Voice & DL",
+    gates: "101 Automated Gates Passed",
   },
 };
 
