@@ -63,7 +63,7 @@ function generateContextualFallbackReply(userQuery: string): string {
     return "Viswa is deeply interested in quantum mechanics and quantum computing foundations, investigating qubit state representations, superposition operators, and how quantum uncertainty frameworks can inform distributed AI agent coordination.";
   }
 
-  return `M. Viswa Teja Reddy is an AI Research Engineer based in Hyderabad/AP, India, currently building **Vexaro AI** (Autonomous Multi-Agent Platform, launching very soon) and engineering research systems like **Verified RAG** and **Aegis Safety Harness**. Feel free to ask about his architectures, verify his LOR credentials, or reach him directly on WhatsApp at [wa.me/${socials.whatsapp.replace("+", "")}](https://wa.me/${socials.whatsapp.replace("+", "")})!`;
+  return `M. Viswa Teja Reddy is an AI Research Engineer based in Bangalore, India, currently building **Vexaro AI** (Autonomous Multi-Agent Platform, launching very soon) and engineering research systems like **Verified RAG** and **Aegis Safety Harness**. Feel free to ask about his architectures, verify his LOR credentials, or reach him directly on WhatsApp at [wa.me/${socials.whatsapp.replace("+", "")}](https://wa.me/${socials.whatsapp.replace("+", "")})!`;
 }
 
 export async function POST(req: NextRequest) {

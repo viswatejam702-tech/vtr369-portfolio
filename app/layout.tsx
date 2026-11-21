@@ -26,7 +26,8 @@ export const metadata: Metadata = {
     "Veylithra",
     "Deep Learning Systems",
     "LiveKit Voice Calling OS",
-    "Hyderabad",
+    "Bangalore",
+    "Bengaluru",
   ],
   authors: [
     {

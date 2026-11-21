@@ -40,7 +40,7 @@ export const SITE_CONFIG: SiteConfig = {
     "AI Research Engineer architecting autonomous multi-agent operating systems, low-latency telephony pipelines, and verified neural architectures. Creator of Vexaro AI, VTR's Agentic Company, and Sector Solver.",
   headline:
     "AI Research Engineer · Architect of Vexaro AI & Autonomous Multi-Agent Systems",
-  location: "Hyderabad, India",
+  location: "Bangalore, India",
   githubUsername: "viswatejam702-tech",
   heroPortraitUrl: "/viswa-portrait.png",
   fallbackPortraitUrl: "https://github.com/viswatejam702-tech.png",

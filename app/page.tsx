@@ -46,6 +46,7 @@ import {
   RefreshCw,
   Workflow,
   Key,
+  Globe,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import { triggerConfetti } from "@/lib/utils";
@@ -674,7 +675,7 @@ export default function VTR369Portfolio() {
             </span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-7 text-xs font-mono uppercase tracking-wider text-zinc-400">
+          <nav className="hidden md:flex items-center gap-6 text-xs font-mono uppercase tracking-wider text-zinc-400">
             <button onClick={() => jumpToChapter(0)} className="hover:text-cyan-400 transition">
               01 Identity
             </button>
@@ -687,6 +688,10 @@ export default function VTR369Portfolio() {
             <button onClick={() => jumpToChapter(3)} className="hover:text-cyan-400 transition">
               04 ML/DL Lab
             </button>
+            <a href="#research-results" className="text-cyan-400 hover:text-cyan-300 font-semibold transition flex items-center gap-1">
+              <span>Research &amp; Platforms</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            </a>
             <a href="#projects-grid" className="hover:text-cyan-400 transition">
               All Repos
             </a>
@@ -728,12 +733,12 @@ export default function VTR369Portfolio() {
 
       {/* ========================================================================= */}
       {/* 1. FAST WRKR.DEV-STYLE STICKY STATE-MORPHING SCROLLYTELLING STAGE         */}
-      {/* Track: min-h-[280vh] | Viewport: sticky top-0 h-screen                     */}
+      {/* Track: min-h-[175vh] | Viewport: sticky top-0 h-screen                     */}
       {/* ========================================================================= */}
       <section
         id="showcase"
         ref={scrollyTrackRef}
-        className="relative min-h-[280vh] w-full"
+        className="relative min-h-[175vh] w-full"
       >
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-4 sm:px-6 z-10 pt-16">
           {/* Central Architectural Glass Container */}
@@ -827,7 +832,7 @@ export default function VTR369Portfolio() {
                         </div>
                         <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.07]">
                           <span className="block text-[10px] font-mono text-zinc-400 uppercase">Location</span>
-                          <span className="text-lg font-bold text-zinc-200 font-mono">Hyderabad</span>
+                          <span className="text-lg font-bold text-zinc-200 font-mono">Bangalore</span>
                         </div>
                       </div>
 
@@ -863,7 +868,7 @@ export default function VTR369Portfolio() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0C1018] via-transparent to-transparent opacity-60" />
                         <div className="absolute bottom-3 inset-x-3 p-2.5 rounded-xl bg-[#0C1018]/80 border border-white/[0.08] backdrop-blur-md flex items-center justify-between">
-                          <span className="font-mono text-[11px] text-zinc-300">Hyderabad, IN</span>
+                          <span className="font-mono text-[11px] text-zinc-300">Bangalore, IN</span>
                           <span className="flex items-center gap-1 font-mono text-[11px] text-emerald-400">
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                             Active On-Duty
@@ -884,15 +889,15 @@ export default function VTR369Portfolio() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full space-y-5"
+                    className="w-full space-y-4"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono mb-2">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono mb-1.5">
                           <Rocket className="w-3.5 h-3.5 text-cyan-400" />
                           <span>FLAGSHIP OPERATING SYSTEM · 101 AUTOMATED GATES</span>
                         </div>
-                        <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                           Vexaro AI — Evidence-Grounded Multi-Agent Engine
                         </h2>
                       </div>
@@ -908,37 +913,72 @@ export default function VTR369Portfolio() {
                       </a>
                     </div>
 
-                    <p className="text-zinc-300 max-measure text-xs sm:text-sm leading-relaxed">
-                      Enterprise multi-agent OS deploying 9 specialized autonomous agents with mathematical
-                      reasoning loops, 101 pass-fail verification gates, and Indian telephony compliance.
-                    </p>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                      {/* Left: Key Metrics & 6 Core Agents */}
+                      <div className="lg:col-span-6 space-y-3">
+                        <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                          Enterprise multi-agent OS deploying 9 specialized autonomous agents with mathematical
+                          reasoning loops, 101 pass-fail verification gates, and sub-second (0.86s p50) Tenglish voice telephony.
+                        </p>
 
-                    {/* 9 Autonomous Agent Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {[
-                        { title: "Outreach SDR Agent", desc: "Autonomous B2B buying signals & outbound qualification" },
-                        { title: "Meetlyzer Rooms", desc: "Isolated meetings workspace & 50+ participant live rooms" },
-                        { title: "Hirifir Career Ops", desc: "Automated candidate sourcing & verification pipeline" },
-                        { title: "CashPilot Finance", desc: "Ledger intelligence & financial scenario modeling" },
-                        { title: "Veylithra Ecosystem", desc: "Cross-agent collaborative orchestration & DAG loops" },
-                        { title: "Tenglish Voice Agent OS", desc: "LiveKit + Sarvam Saaras/Bulbul (0.86s p50 latency)" },
-                        { title: "Research-Orchestra", desc: "Autonomous decomposition & paper synthesis pack" },
-                        { title: "Ralph Loop Quality Gate", desc: "Unbreakable completion interceptor (zero exit on test fail)" },
-                        { title: "DPDP & TRAI Guard", desc: "Verhoeff Aadhaar + Luhn card PII redaction & 09:00-21:00 IST gate" },
-                      ].map((ag, i) => (
-                        <div key={i} className="p-3 rounded-xl bg-[#121824] border border-white/[0.07] space-y-1">
-                          <span className="text-xs font-bold text-cyan-300 font-mono block">{ag.title}</span>
-                          <span className="text-[11px] text-zinc-400 leading-snug block">{ag.desc}</span>
+                        <div className="grid grid-cols-2 gap-2">
+                          {[
+                            { title: "Outreach SDR Agent", desc: "Autonomous B2B buying signals & outbound qualification" },
+                            { title: "Tenglish Voice OS", desc: "LiveKit + Sarvam streaming telephony (0.86s p50)" },
+                            { title: "Meetlyzer Rooms", desc: "Isolated meeting workspace & 50+ live participant rooms" },
+                            { title: "Hirifir Career Ops", desc: "Automated candidate sourcing & multi-agent vetting" },
+                            { title: "Veylithra Ecosystem", desc: "Collaborative agent orchestration & LangGraph DAGs" },
+                            { title: "DPDP & TRAI Guard", desc: "Verhoeff Aadhaar + Luhn PII redaction & 09:00-21:00 IST gate" },
+                          ].map((ag, i) => (
+                            <div key={i} className="p-2 rounded-xl bg-[#121824] border border-white/[0.07] space-y-0.5">
+                              <span className="text-[11px] font-bold text-cyan-300 font-mono block">{ag.title}</span>
+                              <span className="text-[10px] text-zinc-400 leading-tight block">{ag.desc}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
 
-                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-zinc-400 border-t border-white/[0.07]">
-                      <span className="text-emerald-400 flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        101 Automated Verification Gates Passed (100% Green)
-                      </span>
-                      <span className="text-zinc-500">Live on Google Firebase Hosting</span>
+                        <div className="flex items-center justify-between text-xs font-mono pt-1">
+                          <span className="text-emerald-400 flex items-center gap-1 text-[11px]">
+                            <CheckCircle2 className="w-3 h-3" />
+                            101 Automated Gates Passed (100% Green)
+                          </span>
+                          <span className="text-zinc-500 text-[11px]">Live on Google Firebase</span>
+                        </div>
+                      </div>
+
+                      {/* Right: Live Platform UI Preview Frame */}
+                      <div className="lg:col-span-6">
+                        <a
+                          href="https://vexaro-app.web.app/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block group relative rounded-2xl overflow-hidden border border-white/[0.1] bg-[#121824] shadow-2xl hover:border-cyan-400/50 transition duration-300"
+                        >
+                          <div className="bg-[#0C1018] px-3.5 py-2 border-b border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                              <span className="text-white font-medium">vexaro-app.web.app</span>
+                            </div>
+                            <span className="text-cyan-400 group-hover:underline flex items-center gap-1 text-[10px]">
+                              <span>Live Platform</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </span>
+                          </div>
+
+                          <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-black/60">
+                            <img
+                              src="/images/platforms/vexaro-platform-hero.png"
+                              alt="Vexaro AI Platform Cockpit"
+                              className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0C1018] via-transparent to-transparent opacity-50" />
+                            <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/[0.1] text-[10px] font-mono text-cyan-300 flex items-center gap-1.5">
+                              <Activity className="w-3 h-3 text-cyan-400" />
+                              <span>0.86s p50 Telephony Voice Latency</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -953,45 +993,74 @@ export default function VTR369Portfolio() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full space-y-5"
+                    className="w-full space-y-4"
                   >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-mono">
-                      <Network className="w-3.5 h-3.5 text-violet-400" />
-                      <span>90-AGENT ORCHESTRATION NETWORK · 300 MCP SKILLS</span>
-                    </div>
-
-                    <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-                      VTR&apos;s Agentic Company — 8-Layer Swarm Architecture
-                    </h2>
-
-                    <p className="text-zinc-300 max-measure text-xs sm:text-sm leading-relaxed">
-                      Multi-agent operations network where 90 autonomous subagents divide and conquer
-                      software engineering, SDR research, security audits, and data synthesis with zero-trust tenant isolation.
-                    </p>
-
-                    {/* 8-Layer Architecture Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {[
-                        { num: "01", name: "UI & Canvas", desc: "Tailwind, Framer & obsidian glass" },
-                        { num: "02", name: "Orchestration", desc: "LangGraph DAG & multi-agent router" },
-                        { num: "03", name: "Knowledge RAG", desc: "Dense MIPS & Cross-Encoder NLI" },
-                        { num: "04", name: "Model Router", desc: "Claude, Gemini, Grok & Qwen" },
-                        { num: "05", name: "Tools & MCP", desc: "300+ Model Context Protocol skills" },
-                        { num: "06", name: "Data Layer", desc: "Zero-trust tenant data & caching" },
-                        { num: "07", name: "Observability", desc: "GRPO reward loops & error telemetry" },
-                        { num: "08", name: "Telephony Infra", desc: "LiveKit WebRTC & Indian SIP trunks" },
-                      ].map((layer, idx) => (
-                        <div key={idx} className="p-3 rounded-xl bg-[#121824] border border-white/[0.07] space-y-1">
-                          <span className="font-mono text-[10px] text-violet-400 font-bold block">LAYER {layer.num}</span>
-                          <span className="text-xs font-bold text-white block">{layer.name}</span>
-                          <span className="text-[10px] text-zinc-400 block">{layer.desc}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-xs font-mono mb-1.5">
+                          <Network className="w-3.5 h-3.5 text-violet-400" />
+                          <span>90-AGENT ORCHESTRATION NETWORK · 300 MCP SKILLS</span>
                         </div>
-                      ))}
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                          VTR&apos;s Agentic Company — 8-Layer Swarm Architecture
+                        </h2>
+                      </div>
+
+                      <a
+                        href="https://github.com/viswatejam702-tech/vtr-humanoid-agentic-company"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="tactile-btn px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        <span>Inspect Swarm Repo</span>
+                      </a>
                     </div>
 
-                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-zinc-400 border-t border-white/[0.07]">
-                      <span className="text-violet-300">Continuous Evaluation: OpenPipe ART / Unsloth GRPO</span>
-                      <span className="text-zinc-500">Zero Placeholders · 100% Runnable</span>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                      <div className="lg:col-span-6 space-y-3">
+                        <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                          Enterprise autonomous operations network where 90 autonomous subagents divide and conquer
+                          software engineering, SDR research, security audits, and data synthesis with zero-trust tenant isolation.
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-2">
+                          {[
+                            { num: "01", name: "UI & Canvas", desc: "Tailwind, Framer & obsidian glass" },
+                            { num: "02", name: "Orchestration", desc: "LangGraph DAG & multi-agent router" },
+                            { num: "03", name: "Knowledge RAG", desc: "Dense MIPS & Cross-Encoder NLI" },
+                            { num: "05", name: "Tools & MCP", desc: "300+ Model Context Protocol skills" },
+                          ].map((layer, idx) => (
+                            <div key={idx} className="p-2.5 rounded-xl bg-[#121824] border border-white/[0.07] space-y-0.5">
+                              <span className="font-mono text-[9px] text-violet-400 font-bold block">LAYER {layer.num}</span>
+                              <span className="text-[11px] font-bold text-white block">{layer.name}</span>
+                              <span className="text-[10px] text-zinc-400 block">{layer.desc}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center justify-between text-xs font-mono text-zinc-400 pt-1">
+                          <span className="text-violet-300 text-[11px]">OpenPipe ART / Unsloth GRPO Evaluation</span>
+                          <span className="text-zinc-500 text-[11px]">90 Swarm Agents</span>
+                        </div>
+                      </div>
+
+                      <div className="lg:col-span-6">
+                        <div className="rounded-2xl overflow-hidden border border-white/[0.1] bg-[#121824] shadow-2xl">
+                          <div className="bg-[#0C1018] px-3.5 py-2 border-b border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                            <span className="text-violet-300 font-medium">Multi-Agent Swarm Cockpit</span>
+                            <span className="text-[10px] text-zinc-500">Autonomous DAG</span>
+                          </div>
+                          <div className="relative h-44 sm:h-52 w-full overflow-hidden bg-black/60">
+                            <img
+                              src="/images/platforms/vexaro-agent-cockpit.png"
+                              alt="Agent Swarm Cockpit"
+                              className="w-full h-full object-cover object-top hover:scale-105 transition duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0C1018] via-transparent to-transparent opacity-50" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -1083,6 +1152,494 @@ export default function VTR369Portfolio() {
             <div className="border-t border-white/[0.07] pt-3 flex items-center justify-between text-[11px] font-mono text-zinc-500 z-20">
               <span className="hidden sm:inline">Scroll scrub or click chapter pills above to morph stage</span>
               <span className="text-zinc-400 font-medium">Stage Viewport: Sticky 100vh · Dynamic Morph</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 2. EMPIRICAL RESEARCH RESULTS & LIVE PLATFORMS SHOWCASE                   */}
+      {/* ========================================================================= */}
+      <section id="research-results" className="py-20 max-w-7xl mx-auto px-6 relative z-10 border-t border-white/[0.07]">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono uppercase tracking-wider">
+            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+            <span>EMPIRICAL RESEARCH RESULTS &amp; LIVE PLATFORMS</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Research-Based Platforms &amp; Verified Results
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-300 max-measure mx-auto leading-relaxed">
+            Direct access to production systems, satellite neural networks, time-series forecasting benchmarks,
+            and real interface results engineered by <strong>M. Viswa Teja Reddy</strong>.
+          </p>
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* PLATFORM 1: VEXARO AI — MULTI-AGENT OS HERO CARD                      */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="glass-obsidian-card p-6 sm:p-10 rounded-3xl border border-blue-500/30 hover:border-cyan-400/50 transition duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.8)] mb-12 space-y-8 group">
+          {/* Top Bar with Live Badges and Action */}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
+                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                  FLAGSHIP LIVE PLATFORM · 101/101 AUTOMATED GATES PASSED
+                </span>
+              </div>
+              <h3 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                Vexaro AI — Autonomous B2B Multi-Agent Operating System
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="https://vexaro-app.web.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+              >
+                <span>Launch Live Platform</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* 2-Column Content: Telemetry & Results on Left, 4-Screenshot Grid on Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: Architecture, Agent Workforces & Verification Gates */}
+            <div className="lg:col-span-5 space-y-5">
+              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                Evidence-grounded enterprise multi-agent operating system coordinating 9 specialized autonomous agents.
+                Features mathematical reasoning loops, complete Indian DPDP Act 2023 compliance gates, and sub-second
+                (0.86s p50) Tenglish telephony voice calling.
+              </p>
+
+              {/* 4 Quantitative Telemetry Badges */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08]">
+                  <span className="block text-[10px] font-mono text-zinc-400 uppercase">Automated Gates</span>
+                  <span className="text-lg font-bold text-emerald-400 font-mono tabular-nums">101/101 Passed</span>
+                  <span className="text-[10px] text-zinc-500 block pt-0.5">100% Automated Green</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08]">
+                  <span className="block text-[10px] font-mono text-zinc-400 uppercase">Voice OS Latency</span>
+                  <span className="text-lg font-bold text-cyan-400 font-mono tabular-nums">0.86s p50</span>
+                  <span className="text-[10px] text-zinc-500 block pt-0.5">LiveKit + Sarvam Saaras</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08]">
+                  <span className="block text-[10px] font-mono text-zinc-400 uppercase">Workforces</span>
+                  <span className="text-lg font-bold text-violet-400 font-mono">9 Agents</span>
+                  <span className="text-[10px] text-zinc-500 block pt-0.5">SDR, Meetlyzer, Hirifir</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08]">
+                  <span className="block text-[10px] font-mono text-zinc-400 uppercase">Hosting</span>
+                  <span className="text-lg font-bold text-zinc-200 font-mono">Firebase</span>
+                  <span className="text-[10px] text-zinc-500 block pt-0.5">vexaro-app.web.app</span>
+                </div>
+              </div>
+
+              {/* 5 Key Capabilities */}
+              <div className="space-y-2 pt-1">
+                {[
+                  "Outreach SDR Agent: Real-time B2B buying signals & automated lead scoring",
+                  "VoxCloser Telephony OS: 8kHz Silero VAD with sentence-level streaming TTS",
+                  "Meetlyzer Rooms: Isolated video workspace supporting 50+ live participants",
+                  "Hirifir Career Ops: Automated candidate sourcing & credential vetting pipeline",
+                  "DPDP & TRAI Guard: Verhoeff Aadhaar + Luhn card PII redaction & 09:00-21:00 gate",
+                ].map((cap, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs text-zinc-300">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <span>{cap}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-2 flex flex-wrap gap-3">
+                <a
+                  href="https://vexaro-app.web.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="tactile-btn px-4 py-2 rounded-xl bg-[#121824] hover:bg-[#1A2234] border border-white/[0.09] text-zinc-200 text-xs font-mono flex items-center gap-2"
+                >
+                  <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>vexaro-app.web.app</span>
+                </a>
+                <button
+                  onClick={() => speakResponse("Vexaro AI is Viswa's flagship platform with 9 specialized agents and 101 automated evaluation gates.")}
+                  className="tactile-btn px-4 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-mono flex items-center gap-2"
+                >
+                  <Volume2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Listen to Overview</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: 4 Real Platform Screenshots Grid */}
+            <div className="lg:col-span-7 space-y-3">
+              {/* Primary Large Screenshot: Vexaro Platform Hero Cockpit */}
+              <div className="rounded-2xl overflow-hidden border border-white/[0.1] bg-[#121824] shadow-2xl relative group/img">
+                <div className="bg-[#0C1018] px-4 py-2 border-b border-white/[0.08] flex items-center justify-between text-[11px] font-mono text-zinc-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="text-zinc-200 font-semibold">Vexaro AI — Production System Cockpit</span>
+                  </div>
+                  <span className="text-cyan-400 text-[10px]">Live Web App</span>
+                </div>
+                <div className="relative h-60 sm:h-72 w-full overflow-hidden bg-black/60">
+                  <img
+                    src="/images/platforms/vexaro-platform-hero.png"
+                    alt="Vexaro AI Live Platform Cockpit"
+                    className="w-full h-full object-cover object-top group-hover/img:scale-105 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C1018]/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 px-3 py-1 rounded-lg bg-black/80 backdrop-blur-md border border-white/[0.1] text-xs font-mono text-cyan-300 flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Real-time B2B Buying Signals &amp; Multi-Agent Cockpit</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Supporting Platform Screenshots: Voice Calling OS, SDR Radar & Deliverability */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#121824] group/sub">
+                  <div className="p-1.5 bg-[#0C1018] text-[10px] font-mono text-zinc-400 border-b border-white/[0.06] flex items-center justify-between">
+                    <span>VoxCloser Voice OS</span>
+                    <span className="text-emerald-400">0.86s</span>
+                  </div>
+                  <div className="relative h-28 w-full overflow-hidden bg-black/40">
+                    <img
+                      src="/images/platforms/voxcloser-voice-live.png"
+                      alt="VoxCloser Voice Calling OS"
+                      className="w-full h-full object-cover object-top group-hover/sub:scale-105 transition duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#121824] group/sub">
+                  <div className="p-1.5 bg-[#0C1018] text-[10px] font-mono text-zinc-400 border-b border-white/[0.06] flex items-center justify-between">
+                    <span>AI SDR Radar</span>
+                    <span className="text-cyan-400">Signals</span>
+                  </div>
+                  <div className="relative h-28 w-full overflow-hidden bg-black/40">
+                    <img
+                      src="/images/platforms/vexaro-sdr-radar.png"
+                      alt="AI SDR Workflow Radar"
+                      className="w-full h-full object-cover object-top group-hover/sub:scale-105 transition duration-300"
+                    />
+                  </div>
+                </div>
+
+                <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#121824] group/sub">
+                  <div className="p-1.5 bg-[#0C1018] text-[10px] font-mono text-zinc-400 border-b border-white/[0.06] flex items-center justify-between">
+                    <span>Deliverability Shield</span>
+                    <span className="text-emerald-400">100% Health</span>
+                  </div>
+                  <div className="relative h-28 w-full overflow-hidden bg-black/40">
+                    <img
+                      src="/images/platforms/vexaro-deliverability-shield.png"
+                      alt="Deliverability Health Shield"
+                      className="w-full h-full object-cover object-top group-hover/sub:scale-105 transition duration-300"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* RESEARCH PROJECTS & BENCHMARKS: 3-COLUMN RESEARCH RESULTS GRID        */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* Research Result 1: Verified RAG */}
+          <div className="glass-obsidian-card p-6 rounded-2xl flex flex-col justify-between space-y-5 border border-white/[0.08] hover:border-cyan-400/40 transition duration-300 group">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300">
+                  NEURIPS 2020 GROUNDING · LIVE ON RENDER
+                </span>
+                <a
+                  href="https://verified-rag.onrender.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-zinc-500 group-hover:text-cyan-400 transition"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition">
+                Verified RAG — Zero Hallucination NLI Engine
+              </h3>
+
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                Production retrieval-augmented generation engine based on Lewis et al. (2020). Combines dense MIPS
+                vector search with BM25 sparse hybrid retrieval via Reciprocal Rank Fusion, MS-MARCO joint-attention
+                Cross-Encoder reranking, and DeBERTa-v3 Natural Language Inference to eliminate hallucinations.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-3 border-t border-white/[0.07]">
+              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">Reranker Model</span>
+                  <span className="text-cyan-400 font-bold">MS-MARCO Cross-Encoder</span>
+                </div>
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">NLI Verifier</span>
+                  <span className="text-emerald-400 font-bold">DeBERTa-v3 Claims</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] font-mono text-zinc-400">Framework: Lewis et al.</span>
+                <a
+                  href="https://verified-rag.onrender.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="tactile-btn text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-semibold"
+                >
+                  <span>Open Live Platform</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Research Result 2: Meteorological Forecasting Benchmark */}
+          <div className="glass-obsidian-card p-6 rounded-2xl flex flex-col justify-between space-y-5 border border-white/[0.08] hover:border-cyan-400/40 transition duration-300 group">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300">
+                  TIME-SERIES DL · 10,000+ RECORDS
+                </span>
+                <a
+                  href="https://github.com/viswatejam702-tech/Weather-Prediction-with-ML-and-Dl"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-zinc-500 group-hover:text-cyan-400 transition"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition">
+                Weather Prediction — GBDT vs Bidirectional LSTM
+              </h3>
+
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                Empirical comparative evaluation of non-linear Gradient Boosted Decision Trees against multi-layer
+                Bidirectional LSTMs over 10,000+ hourly meteorological telemetry records. Utilizes cyclical trigonometric
+                transforms (sine/cosine of day/year) and rolling lag statistics.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-3 border-t border-white/[0.07]">
+              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">GBDT Accuracy</span>
+                  <span className="text-emerald-400 font-bold tabular-nums">R² = 0.930 (MAE 1.53°C)</span>
+                </div>
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">Bi-LSTM Accuracy</span>
+                  <span className="text-cyan-400 font-bold tabular-nums">R² = 0.914 (MAE 1.72°C)</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] font-mono text-zinc-400">Dataset: 10K Telemetry</span>
+                <a
+                  href="https://github.com/viswatejam702-tech/Weather-Prediction-with-ML-and-Dl"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="tactile-btn text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-semibold"
+                >
+                  <span>Inspect GitHub Repo</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Research Result 3: Maritime Satellite Classification CNN */}
+          <div className="glass-obsidian-card p-6 rounded-2xl flex flex-col justify-between space-y-5 border border-white/[0.08] hover:border-cyan-400/40 transition duration-300 group">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300">
+                  PYTORCH SATELLITE COMPUTER VISION
+                </span>
+                <a
+                  href="https://github.com/viswatejam702-tech/game-of-dl-in-ships"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-zinc-500 group-hover:text-cyan-400 transition"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+
+              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition">
+                Maritime Vessel Classification — 15-Stage PyTorch CNN
+              </h3>
+
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                15-stage computer vision deep learning pipeline for multi-class maritime vessel identification in satellite
+                imagery. Integrates deep residual connections with adaptive pooling layers to extract robust features under
+                severe ocean wave clutter and illumination variance.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-3 border-t border-white/[0.07]">
+              <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">Architecture</span>
+                  <span className="text-violet-400 font-bold">15-Stage Residual CNN</span>
+                </div>
+                <div className="p-2 rounded bg-[#121824] text-zinc-300">
+                  <span className="text-zinc-500 block">Framework</span>
+                  <span className="text-cyan-400 font-bold">PyTorch + Transfer Learning</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] font-mono text-zinc-400">Domain: Satellite Vision</span>
+                <a
+                  href="https://github.com/viswatejam702-tech/game-of-dl-in-ships"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="tactile-btn text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-semibold"
+                >
+                  <span>Inspect PyTorch Repo</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --------------------------------------------------------------------- */}
+        {/* PLATFORM 2: 90-AGENT SWARM & SAFETY HARNESS (2-COLUMN CARDS)          */}
+        {/* --------------------------------------------------------------------- */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Card 1: VTR's Agentic Company */}
+          <div className="glass-obsidian-card p-6 sm:p-8 rounded-2xl border border-white/[0.08] hover:border-violet-500/40 transition duration-300 space-y-5">
+            <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+              <div>
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300">
+                  8-LAYER MULTI-AGENT SWARM
+                </span>
+                <h3 className="text-xl font-bold text-white pt-2">
+                  VTR&apos;s Agentic Company — 90 Autonomous Subagents
+                </h3>
+              </div>
+              <a
+                href="https://github.com/viswatejam702-tech/vtr-humanoid-agentic-company"
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn px-3 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-mono flex items-center gap-1"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>Repo</span>
+              </a>
+            </div>
+
+            <p className="text-xs text-zinc-300 leading-relaxed">
+              Coordinated multi-agent workforce dividing SDR lead qualification, full-stack code synthesis, security auditing,
+              and synthetic data generation across an 8-layer architecture with 300+ Model Context Protocol (MCP) skills.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#121824]">
+                <div className="p-1.5 bg-[#0C1018] text-[10px] font-mono text-zinc-400 border-b border-white/[0.06]">
+                  Agent Swarm Cockpit
+                </div>
+                <img
+                  src="/images/platforms/vexaro-agent-cockpit.png"
+                  alt="Agent Swarm Cockpit"
+                  className="w-full h-24 object-cover object-top"
+                />
+              </div>
+
+              <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-[#121824]">
+                <div className="p-1.5 bg-[#0C1018] text-[10px] font-mono text-zinc-400 border-b border-white/[0.06]">
+                  Hirifir Career Ops
+                </div>
+                <img
+                  src="/images/platforms/hirifir-career-ops.png"
+                  alt="Hirifir Career Ops"
+                  className="w-full h-24 object-cover object-top"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs font-mono text-zinc-400 pt-2 border-t border-white/[0.07]">
+              <span className="text-violet-300">300+ Live MCP Tools Orchestrated</span>
+              <span className="text-zinc-500">Zero-Trust Tenant Isolation</span>
+            </div>
+          </div>
+
+          {/* Card 2: Aegis Safety Harness & VastCare Clinical LLM */}
+          <div className="glass-obsidian-card p-6 sm:p-8 rounded-2xl border border-white/[0.08] hover:border-cyan-400/40 transition duration-300 space-y-5">
+            <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+              <div>
+                <span className="text-[10px] font-mono px-2.5 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-cyan-300">
+                  ADVERSARIAL EVALUATION &amp; HEALTHCARE LLM
+                </span>
+                <h3 className="text-xl font-bold text-white pt-2">
+                  Aegis Safety Harness &amp; VastCare Clinical AI
+                </h3>
+              </div>
+              <a
+                href="https://llm-eval-harness.onrender.com"
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono flex items-center gap-1"
+              >
+                <span>Live Suite</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            <p className="text-xs text-zinc-300 leading-relaxed">
+              Frontier safety evaluation harness testing production LLMs across 1,000+ jailbreak and prompt-injection vectors,
+              paired with VastCare Vernacular LLM—a regional multilingual clinical model fine-tuned for healthcare triage.
+            </p>
+
+            <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+              <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08] space-y-1">
+                <span className="text-zinc-400 text-[10px] uppercase block">Aegis Vectors</span>
+                <span className="text-cyan-400 font-bold block tabular-nums">1,000+ Vectors</span>
+                <span className="text-zinc-500 text-[10px] block">Jailbreak &amp; Injection Evals</span>
+              </div>
+              <div className="p-3.5 rounded-xl bg-[#121824] border border-white/[0.08] space-y-1">
+                <span className="text-zinc-400 text-[10px] uppercase block">Clinical Languages</span>
+                <span className="text-emerald-400 font-bold block">Telugu + English</span>
+                <span className="text-zinc-500 text-[10px] block">Regional Indian Triage</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3 pt-2 border-t border-white/[0.07]">
+              <a
+                href="https://llm-eval-harness.onrender.com"
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn px-3.5 py-1.5 rounded-lg bg-[#121824] hover:bg-[#1A2234] border border-white/[0.08] text-xs font-mono text-zinc-200 flex items-center gap-1.5"
+              >
+                <span>Aegis Harness Live</span>
+                <ArrowUpRight className="w-3 h-3 text-cyan-400" />
+              </a>
+              <a
+                href="https://vastcare-vernacular-llm.onrender.com"
+                target="_blank"
+                rel="noreferrer"
+                className="tactile-btn px-3.5 py-1.5 rounded-lg bg-[#121824] hover:bg-[#1A2234] border border-white/[0.08] text-xs font-mono text-zinc-200 flex items-center gap-1.5"
+              >
+                <span>VastCare LLM Live</span>
+                <ArrowUpRight className="w-3 h-3 text-emerald-400" />
+              </a>
             </div>
           </div>
         </div>

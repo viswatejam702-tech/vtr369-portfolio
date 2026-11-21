@@ -17,7 +17,7 @@ export const profile = {
     "I created Vexaro AI, an enterprise operating system powered by 9 specialized agents (Outreach SDR, Meetlyzer, Hirifir, CashPilot, Veylithra, Voice OS) verified across 101 automated evaluation gates.",
     "Beyond applied enterprise systems, I run machine learning and deep learning benchmarks in time-series forecasting (R² = 0.930), computer vision CNNs, and quantum computing foundations.",
   ],
-  designation: "B.Tech, Computer Science Engineering · Hyderabad, India",
+  designation: "B.Tech, Computer Science Engineering · Bangalore, India",
   focusAreas: [
     "Autonomous Multi-Agent Operating Systems",
     "Real-Time Telephony & Voice Agent OS (LiveKit + Sarvam)",
